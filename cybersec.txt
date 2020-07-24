@@ -1,0 +1,11 @@
+https://hackable.ca/
+https://hacking-lab.com/index.html
+https://overthewire.org/wargames/
+https://www.cscg.de/cscg/challenge/
+https://w3challs.com/
+https://ringzer0ctf.com/
+https://ctfs.github.io/resources/
+https://github.com/jumezurike/backend-master-lokdonSKI/blob/master/README.md
+https://gamedetectives.net/academy/
+shodan.io
+https://archive.ooo/
