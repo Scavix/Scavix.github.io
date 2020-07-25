@@ -1,0 +1,13 @@
+https://www.cs.waikato.ac.nz/~ml/weka/index.html
+https://www.tensorflow.org/
+https://scikit-learn.org/stable/
+https://pytorch.org/
+https://mimicproject.com/about
+http://www.wekinator.org/
+https://developers.google.com/ml-kit
+https://keras.io/
+https://pypi.org/project/Theano/
+https://www.doc.gold.ac.uk/eavi/rapidmixapi.com/index.php/getting-started/
+http://annaridler.com/mosaic-virus
+http://annaridler.com/fall-of-the-house-of-usher-ii
+http://annaridler.com/drawing-with-sound
