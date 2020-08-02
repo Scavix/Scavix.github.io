@@ -1,4 +1,4 @@
-let rows_cols = 40;
+let rows_cols = 80;
 let dim = 800;
 let height = dim;
 let weight = dim;
