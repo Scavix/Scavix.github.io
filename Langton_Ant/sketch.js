@@ -1,10 +1,10 @@
-let rows_cols = 41;
+let rows_cols = 81;
 let dim = 800;
 let height = dim;
 let weight = dim;
 let arr = [];
-let posx = 20;
-let posy = 20;
+let posx = 40;
+let posy = 40;
 let dir = 0;
 //0=dx
 //1=nt
