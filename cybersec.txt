@@ -9,3 +9,5 @@ https://github.com/jumezurike/backend-master-lokdonSKI/blob/master/README.md
 https://gamedetectives.net/academy/
 shodan.io
 https://archive.ooo/
+https://www.hacker101.com/
+https://www.netacad.com/courses/packet-tracer/introduction-packet-tracer
