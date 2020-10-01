@@ -1,6 +1,6 @@
-let lines = 32;
-let width = 640;
-let height = 640;
+let lines = 64;
+let width = 1024;
+let height = 1024;
 let arr = [];
 function setup() {
   createCanvas(width, height);
