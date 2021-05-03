@@ -2,9 +2,27 @@
 <html>
 <head>
 	<title>Links</title>
-	 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<script type = "text/javascript">
+        function clickHandler() {
+            var btn = document.createElement("BUTTON");
+            btn.innerHTML = "MORE";
+            btn.onclick = function(){clickHandler();};
+            document.getElementById("section").appendChild(btn);
+        }
+    </script>
+	<script type = "text/javascript">
+		console.log("                        __ ");
+		console.log(" __    __     _ _ _    |__|");
+		console.log("|  |  |  |   |  _ _|    __ ");
+		console.log("|  |__|  |   | |_ _    |  |");
+		console.log("|   __   |   |  _ _|   |  |");
+		console.log("|  |  |  |   | |_ _    |  |");
+		console.log("|__|  |__|   |_ _ _|   |__|");
+		console.log("                           ");
+	</script>
 </head>
-<body>
+<body onload="clickHandler()">
 	<h1>Main Page</h1>
 	<ul>
 		<li><a href = "aggregator.html">News Aggregator</a></li>
@@ -26,16 +44,9 @@
 		<li><a href = "Tesi.html">Props for Tesi</a></li>
 		<li><a href = "PostThesis.html">Post Tesi</a></li>
 		<li><a href = "kaspersky.html"><b>cyb</b></a></li>
+		<li><a href = "more.html">more</a></li>
 	</ul>
-	<script type = "text/javascript">
-		console.log("                        __ ");
-		console.log(" __    __     _ _ _    |__|");
-		console.log("|  |  |  |   |  _ _|    __ ");
-		console.log("|  |__|  |   | |_ _    |  |");
-		console.log("|   __   |   |  _ _|   |  |");
-		console.log("|  |  |  |   | |_ _    |  |");
-		console.log("|__|  |__|   |_ _ _|   |__|");
-		console.log("                           ");
-	</script>
+	<div id="section">
+    </div>  
 </body>
 </html>

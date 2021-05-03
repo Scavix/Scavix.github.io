@@ -1,0 +1,17 @@
+<html>
+<head>
+    <script>
+        function clickHandler() {
+            var btn = document.createElement("BUTTON");
+            btn.innerHTML = "MORE";
+            btn.onclick = function(){clickHandler();};
+            document.getElementById("section").appendChild(btn);
+        }
+    </script>
+</head>
+<body onload="clickHandler()">
+    <div id="section">
+    </div>  
+</body>
+</html>
+    
