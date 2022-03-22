@@ -38,7 +38,7 @@ function preload() {
 }
 
 function initMe() {
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 15; i++) {
     tmp=Math.floor(Math.random() * 3);
     aliens[i] = new Alien(
       tmp,
