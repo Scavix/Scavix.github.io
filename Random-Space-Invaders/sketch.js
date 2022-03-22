@@ -165,13 +165,13 @@ function finish() {
 } 
 
 function upgrade(){
-  if(ship.crediti>=60 && ship.crediti<120 && sentinel1==true){
+  if(ship.score>=1000 && ship.score<2000 && sentinel1==true){
     ship.projectileSpeed=12;
     ship.projectileColor='blue';
     console.log('upgrade');
     sentinel1=false;
   }
-  if(ship.crediti>=120 && ship.crediti<=180 && sentinel2==true){
+  if(ship.score>=2000 && ship.score<=3000 && sentinel2==true){
     ship.projectileSize=45;
     ship.projectileColor='red';
     console.log('upgrade');
