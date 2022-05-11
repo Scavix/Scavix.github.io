@@ -1,0 +1,76 @@
+{
+	"cities" : [{
+		"city": "Bergamo",
+		"x": 3,
+		"y": 2
+	},{
+		"city": "Rome",
+		"x": 5,
+		"y": 5
+	},{
+		"city": "Bologna",
+		"x": 4,
+		"y": 3
+	},{
+		"city": "Naples",
+		"x": 6,
+		"y": 6
+	},{
+		"city": "Bari",
+		"x": 8,
+		"y": 6
+	},{
+		"city": "Cagliari",
+		"x": 3,
+		"y": 7
+	},{
+		"city": "Agrigento",
+		"x": 6,
+		"y": 9
+	},{
+		"city": "Trieste",
+		"x": 5,
+		"y": 2
+	}],
+	"planes" : [{
+		"name" : "A1",
+		"model" : "a",
+		"city" : "Bologna"
+	},{
+		"name" : "B1",
+		"model" : "b",
+		"city" : "Rome"
+	},{
+		"name" : "C1",
+		"model" : "c",
+		"city" : "Naples"
+	}],
+	"nodes" : [{
+		"a" : "Bologna",
+		"b" : "Rome"
+	},{
+		"a" : "Rome",
+		"b" : "Naples"
+	},{
+		"a" : "Cagliari",
+		"b" : "Bari"
+	},{
+		"a" : "Agrigento",
+		"b" : "Bari"
+	},{
+		"a" : "Bergamo",
+		"b" : "Bologna"
+	},{
+		"a" : "Naples",
+		"b" : "Agrigento"
+	},{
+		"a" : "Bergamo",
+		"b" : "Cagliari"
+	},{
+		"a" : "Bari",
+		"b" : "Trieste"
+	},{
+		"a" : "Trieste",
+		"b" : "Bergamo"
+	}]
+}
