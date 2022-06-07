@@ -1,7 +1,7 @@
 let angolo = 0;
 
 function setup() {
-  createCanvas(displayWidth,displayHeight);
+  createCanvas(500,500);
   pixelDensity(1);
 }
 
