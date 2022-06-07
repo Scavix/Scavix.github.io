@@ -2,6 +2,7 @@ let angolo = 0;
 
 function setup() {
   createCanvas(displayWidth,displayHeight);
+  pixelDensity(1);
 }
 
 function draw() {
@@ -12,7 +13,7 @@ function draw() {
 }
 
 function branch(len) {
-  frameRate(60);
+  //frameRate(60);
   angolo+=0.00002;
   line(0, 0, 0, -len);
   translate(0, -len);
