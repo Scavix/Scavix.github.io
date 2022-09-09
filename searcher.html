@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hello, news!</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script>
+  function load (url) {
+    return new Promise(async function (resolve, reject) {
+      const res = await fetch(url)
+      resolve(res.json())
+    })
+  }
+  </script>
+</head>
+<body>
+  <fieldset>
+      <legend>Enter your query</legend>
+      <input type="text" id="queryGet" />
+      <button type = "button" id="btnGet" onclick="getNews()">Submit</button>
+  </fieldset>
+  <div>
+    <h1>News</h1>
+    <div id="news"></div>
+  </div>
+  <script>
+    function getNews(){
+      const query = document.getElementById("queryGet").value;
+	    const endpoint = new URL('https://newsapi.org/v2/everything?apiKey=2b42481d74ea4da18de741cbf8f9f04a&q='+query+'}');
+      const data = load(endpoint);
+      data.then((myData) => {
+        let string,sentence='<ol>';
+        const news = document.getElementById("news");
+        for(const entry of myData.articles){
+          sentence += '<li>';
+          string = entry.title.split(' ').map((word)=>{
+            if(word.toLowerCase().includes(query.toLowerCase())){
+              return '<b>'+word.trim()+'</b>';
+            }
+            return word;
+          });
+          for(let i in string){
+            sentence+=(string[i].trim()+' ');
+          }
+          sentence+='</li>';
+        }
+        sentence+='</ol>';
+        news.innerHTML+=sentence;
+      });
+    }
+  </script>
+</body>
+</html>
