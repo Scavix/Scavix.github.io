@@ -26,7 +26,8 @@
   <script>
     function getNews(){
       const query = document.getElementById("queryGet").value;
-	    const endpoint = new URL('https://newsapi.org/v2/everything?apiKey=2b42481d74ea4da18de741cbf8f9f04a&q='+query+'}');
+      const apiKey = '';
+	    const endpoint = new URL('https://newsapi.org/v2/everything?apiKey='+apiKey+'&q='+query+'}');
       const data = load(endpoint);
       data.then((myData) => {
         let string,sentence='<ol>';
