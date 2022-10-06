@@ -61,7 +61,7 @@ function drawClass(classObj) {
     text(classObj.attributes[i], classObj.v.x, classObj.v.y + i * fontsize-fontsize/2);
   }
   for (i = classObj.attributes.length; i < classObj.methods.length+classObj.attributes.length; i++) {
-    text(classObj.methods[j-classObj.attributes.length], classObj.v.x, classObj.v.y + i * fontsize-fontsize/2);
+    text(classObj.methods[i-classObj.attributes.length], classObj.v.x, classObj.v.y + i * fontsize-fontsize/2);
   }
 }
 
