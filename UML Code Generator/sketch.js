@@ -1,11 +1,15 @@
 let arr = [];
 let i, j;
-let fontsize = 16;
+let fontsize;
 let mode = "default";
 let currentSelectedClass, oldSelectedClass, sizeOfClass;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(
+    windowWidth < windowHeight ? windowWidth : windowHeight,
+    windowWidth < windowHeight ? windowWidth : windowHeight
+  );
+  fontsize = width / 30;
   sizeOfClass = width / 5;
   textSize(fontsize);
   textAlign(CENTER, CENTER);
@@ -28,6 +32,12 @@ function drawBackground() {
     case "bind":
       background("green");
       break;
+    case "attributes":
+      background("gray");
+      break;
+    case "methods":
+      background("gray");
+      break;
     default:
       background("cyan");
       break;
@@ -43,6 +53,16 @@ function drawClass(classObj) {
   );
   fill("black");
   text(classObj.name, classObj.v.x, classObj.v.y - 2 * fontsize);
+  if(classObj.attributes.length!=0){
+    line(classObj.v.x-sizeOfClass/2, classObj.v.y-fontsize, classObj.v.x+sizeOfClass/2, classObj.v.y-fontsize);
+    line(classObj.v.x-sizeOfClass/2, classObj.v.y+(classObj.attributes.length-1)*fontsize, classObj.v.x+sizeOfClass/2, classObj.v.y+(classObj.attributes.length-1)*fontsize);
+  }
+  for (i = 0; i < classObj.attributes.length; i++) {
+    text(classObj.attributes[i], classObj.v.x, classObj.v.y + i * fontsize-fontsize/2);
+  }
+  for (i = classObj.attributes.length; i < classObj.methods.length+classObj.attributes.length; i++) {
+    text(classObj.methods[j-classObj.attributes.length], classObj.v.x, classObj.v.y + i * fontsize-fontsize/2);
+  }
 }
 
 function drawBind(classObj) {
@@ -73,19 +93,3 @@ function printClasses() {
   }
   return str;
 }
-
-/*
-class/struct Identifier<T>
-{
-    T varIdentifier;
-
-    T genericMethod(T genericParameter)
-    {
-        // method body
-
-        return genericParameter;
-    }
-
-    T genericProperty { get; set; }
-}
-*/

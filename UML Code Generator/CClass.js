@@ -7,5 +7,7 @@ class CClass {
     this.inheritsFrom;
     this.implements = false;
     this.implementsFrom = [];
+    this.attributes = [];
+    this.methods = [];
   }
 }
