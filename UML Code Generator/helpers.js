@@ -1,6 +1,6 @@
 function mouseClicked() {
   if (mode == "create") {
-    let val;
+    let val = null;
     while (val == null || val.trim() == "") {
       val = prompt("Insert Class Name [Empty not accepted]");
     }
@@ -38,38 +38,98 @@ function mouseClicked() {
   } else if (mode == "attributes") {
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
-        let name, type, visibility, val;
+        let name=null, type=null, visibility=null, val=null;
         while (name == null || name.trim()=="") {
           name = prompt("Insert Attribute Name [Empty not accepted]");
         }
         while (type == null) {
           type = prompt("Insert Attribute Type [1 int - 2 string - 3 bool - 4 float]");
+          switch (type) {
+            case "1":
+              type = "int";
+              break;
+            case "2":
+              type = "string";
+              break;
+            case "3":
+              type = "bool";
+              break;
+            case "4":
+              type = "float";
+              break;
+            default:
+              type = null;
+              break;
+          }
         }
         while (visibility == null) {
           visibility = prompt("Insert Method Visibility [1 public - 2 private - 3 protected]");
+          switch (visibility) {
+            case "1":
+              visibility = "public";
+              break;
+            case "2":
+              visibility = "private";
+              break;
+            case "3":
+              visibility = "protected";
+              break;
+            default:
+              visibility = null;
+              break;
+          }
         }
-        while (val == null) {
-          val = prompt("Insert Attribute Value [Empty accepted]");
-        }
+        val = prompt("Insert Attribute Value [Empty accepted]");
+        val = val==null?"":val;
         arr[j].attributes.push(new AAttribute(name, type, visibility, val));
       }
     }
   } else if(mode == "methods"){
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
-        let name, returnType, visibility, args;
+        let name=null, returnType=null, visibility=null, args=null;
         while (name == null || name.trim()=="") {
           name = prompt("Insert Method Name [Empty not accepted]");
         }
         while (returnType == null) {
           returnType = prompt("Insert Method Return Type [1 int - 2 string - 3 bool - 4 float]");
+          switch (returnType) {
+            case "1":
+              returnType = "int";
+              break;
+            case "2":
+              returnType = "string";
+              break;
+            case "3":
+              returnType = "bool";
+              break;
+            case "4":
+              returnType = "float";
+              break;
+            default:
+              returnType = null;
+              break;
+          }
         }
         while (visibility == null) {
           visibility = prompt("Insert Method Visibility [1 public - 2 private - 3 protected]");
+          switch (visibility) {
+            case "1":
+              visibility = "public";
+              break;
+            case "2":
+              visibility = "private";
+              break;
+            case "3":
+              visibility = "protected";
+              break;
+            default:
+              visibility = null;
+              break;
+          }
         }
-        while (args == null) {
-          args = prompt("Insert Method Arguments [Empty accepted]");
-        }
+        args = prompt("Insert Method Arguments [Empty accepted]");
+        args = args==null?"":args;
         arr[j].methods.push(new MMethod(name, returnType, visibility, args));
       }
     }
