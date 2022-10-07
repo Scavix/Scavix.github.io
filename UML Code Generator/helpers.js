@@ -1,7 +1,7 @@
 function mouseClicked() {
   if (mode == "create") {
     let val;
-    while (val == null) {
+    while (val == null || val.trim() == "") {
       val = prompt("Insert Class Name [Empty not accepted]");
     }
     arr.push(new CClass(val, createVector(mouseX, mouseY)));
@@ -38,21 +38,39 @@ function mouseClicked() {
   } else if (mode == "attributes") {
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
-        let val;
-        while (val == null) {
-          val = prompt("Insert Attribute Name [Empty not accepted]");
+        let name, type, visibility, val;
+        while (name == null || name.trim()=="") {
+          name = prompt("Insert Attribute Name [Empty not accepted]");
         }
-        arr[j].attributes.push(val);
+        while (type == null) {
+          type = prompt("Insert Attribute Type [1 int - 2 string - 3 bool - 4 float]");
+        }
+        while (visibility == null) {
+          visibility = prompt("Insert Method Visibility [1 public - 2 private - 3 protected]");
+        }
+        while (val == null) {
+          val = prompt("Insert Attribute Value [Empty accepted]");
+        }
+        arr[j].attributes.push(new AAttribute(name, type, visibility, val));
       }
     }
   } else if(mode == "methods"){
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
-        let val;
-        while (val == null) {
-          val = prompt("Insert Method Name [Empty not accepted]");
+        let name, returnType, visibility, args;
+        while (name == null || name.trim()=="") {
+          name = prompt("Insert Method Name [Empty not accepted]");
         }
-        arr[j].methods.push(val);
+        while (returnType == null) {
+          returnType = prompt("Insert Method Return Type [1 int - 2 string - 3 bool - 4 float]");
+        }
+        while (visibility == null) {
+          visibility = prompt("Insert Method Visibility [1 public - 2 private - 3 protected]");
+        }
+        while (args == null) {
+          args = prompt("Insert Method Arguments [Empty accepted]");
+        }
+        arr[j].methods.push(new MMethod(name, returnType, visibility, args));
       }
     }
   }
