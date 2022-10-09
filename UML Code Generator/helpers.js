@@ -38,8 +38,8 @@ function mouseClicked() {
   } else if (mode == "attributes") {
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
-        let name=null, type=null, visibility=null, val=null;
-        while (name == null || name.trim()=="") {
+        let name = null, type = null, visibility = null, val = null;
+        while (name == null || name.trim() == "") {
           name = prompt("Insert Attribute Name [Empty not accepted]");
         }
         while (type == null) {
@@ -80,15 +80,15 @@ function mouseClicked() {
           }
         }
         val = prompt("Insert Attribute Value [Empty accepted]");
-        val = val==null?"":val;
+        val = val == null ? "" : val;
         arr[j].attributes.push(new AAttribute(name, type, visibility, val));
       }
     }
-  } else if(mode == "methods"){
+  } else if (mode == "methods") {
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
-        let name=null, returnType=null, visibility=null, args=null;
-        while (name == null || name.trim()=="") {
+        let name = null, returnType = null, visibility = null, args = null;
+        while (name == null || name.trim() == "") {
           name = prompt("Insert Method Name [Empty not accepted]");
         }
         while (returnType == null) {
@@ -129,7 +129,7 @@ function mouseClicked() {
           }
         }
         args = prompt("Insert Method Arguments [Empty accepted]");
-        args = args==null?"":args;
+        args = args == null ? "" : args;
         arr[j].methods.push(new MMethod(name, returnType, visibility, args));
       }
     }
@@ -181,13 +181,32 @@ function keyPressed() {
       printRules();
       break;
     case "p":
+      mode = "default";
+      console.log("default");
       alert(printClasses());
+      break;
+    case "g":
+      mode = "default";
+      console.log("generate");
+      arr.forEach(download);
       break;
     default:
       mode = "default";
       console.log("default");
       break;
   }
+}
+
+function download(el) {
+  file = new File([printClass(el)], arr[i].name + '.cs', { type: 'text/plain', })
+  link = document.createElement('a')
+  url = URL.createObjectURL(file)
+  link.href = url
+  link.download = file.name
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  window.URL.revokeObjectURL(url)
 }
 
 function resetAll() {
@@ -208,6 +227,6 @@ function resetSelectedClasses() {
 
 function printRules() {
   alert(
-    "Rules:\nClick 1 to enter create mode\nClick 2 to enter drag mode\nClick 3 to enter inherit bind mode\nClick 4 to add attributes\nClick 5 to add methods\nClick 6 to print rules\nClick p to print the classes\nClick a random key to enter view mode."
+    "Rules:\nClick 1 to enter create mode\nClick 2 to enter drag mode\nClick 3 to enter inherit bind mode\nClick 4 to add attributes\nClick 5 to add methods\nClick 6 to print rules\nClick p to print the classes\nClick g to generate the classes\nClick a random key to enter view mode."
   );
 }

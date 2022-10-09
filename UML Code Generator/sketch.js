@@ -1,8 +1,9 @@
 let arr = [];
-let i, j;
+let i, j, k;
 let fontsize;
 let mode = "default";
 let currentSelectedClass, oldSelectedClass, sizeOfClass;
+let ulr, file, link;
 
 function setup() {
   createCanvas(
@@ -72,10 +73,10 @@ function drawClass(classObj) {
       (classObj.attributes[i].visibility == "public"
         ? "+"
         : classObj.attributes[i].visibility == "private"
-        ? "-"
-        : "#") +
-        " " +
-        classObj.attributes[i].name,
+          ? "-"
+          : "#") +
+      " " +
+      classObj.attributes[i].name,
       classObj.v.x,
       classObj.v.y + i * fontsize - fontsize / 2
     );
@@ -86,13 +87,13 @@ function drawClass(classObj) {
     i++
   ) {
     text(
-      (classObj.methods[i- classObj.attributes.length].visibility == "public"
+      (classObj.methods[i - classObj.attributes.length].visibility == "public"
         ? "+"
-        : classObj.methods[i- classObj.attributes.length].visibility == "private"
-        ? "-"
-        : "#") +
-        " " +
-        classObj.methods[i - classObj.attributes.length].name,
+        : classObj.methods[i - classObj.attributes.length].visibility == "private"
+          ? "-"
+          : "#") +
+      " " +
+      classObj.methods[i - classObj.attributes.length].name,
       classObj.v.x,
       classObj.v.y + i * fontsize - fontsize / 2
     );
@@ -112,41 +113,110 @@ function drawBind(classObj) {
   );
 }
 
-function printClasses() {
-  let str = "";
-  for (i = 0; i < arr.length; i++) {
-    str += "public class " + arr[i].name;
-    str += arr[i].inherits
-      ? " : " + arr[i].inheritsFrom.name + " {\n\t"
-      : " {\n";
-    for (j = 0; j < arr[i].attributes.length; j++) {
-      str +=
-        "\t" +
-        arr[i].attributes[j].visibility +
-        " " +
-        arr[i].attributes[j].type +
-        " " +
-        arr[i].attributes[j].name +
-        (arr[i].attributes[j].value == null ||
-        arr[i].attributes[j].value == undefined
-          ? ""
-          : arr[i].attributes[j].value) +
-        ";\n\t";
-    }
-    str += "public " + arr[i].name + "() {\n\n\t}\n";
-    for (j = 0; j < arr[i].methods.length; j++) {
-      str +=
-        "\t" +
-        arr[i].methods[j].visibility +
-        " " +
-        arr[i].methods[j].returnType +
-        " " +
-        arr[i].methods[j].name +
-        "(" +
-        (arr[i].methods[j].args.length != 0 ? arr[i].methods[j].args : "") +
-        "){\n\n\t}\n";
-    }
-    str += "}\n\n";
+function printClass(classObj) {
+  let myStr = "";
+  myStr +=
+    classObj.visibility == "public"
+      ? "+"
+      : classObj.visibility == "private"
+        ? "-"
+        : "#";
+  myStr += " class " + classObj.name;
+  if (classObj.inherits) {
+    myStr += " : " + classObj.inheritsFrom.name;
   }
-  return str;
+  if (classObj.implements) {
+    myStr += " implements ";
+    for (i = 0; i < classObj.implementsFrom.length; i++) {
+      myStr += classObj.implementsFrom[i].name;
+      if (i != classObj.implementsFrom.length - 1) {
+        myStr += ", ";
+      }
+    }
+  }
+  myStr += " {\n";
+  for (i = 0; i < classObj.attributes.length; i++) {
+    myStr += printAttribute(classObj.attributes[i]);
+  }
+  for (i = 0; i < classObj.methods.length; i++) {
+    myStr += printMethod(classObj.methods[i]);
+  }
+  myStr += "}";
+  return myStr;
 }
+
+function printClasses() {
+  let myStr = "";
+  for (k = 0; k < arr.length; k++) {
+    myStr += printClass(arr[k]) + "\n\n";
+  }
+  return myStr;
+}
+
+function printAttribute(attributeObj) {
+  return (
+    "\t" +
+    attributeObj.visibility +
+    " " +
+    attributeObj.type +
+    " " +
+    attributeObj.name +
+    (attributeObj.value == null ||
+      attributeObj.value == undefined
+      ? ""
+      : " "+attributeObj.value) +
+    ";\n\t");
+}
+
+function printMethod(methodObj) {
+  return (
+    "\t" +
+    methodObj.visibility +
+    " " +
+    methodObj.returnType +
+    " " +
+    methodObj.name +
+    "(" +
+    (methodObj.args.length != 0 ? methodObj.args : "") +
+    "){\n\n\t}\n");
+}
+
+/*let str = "";
+for (i = 0; i < arr.length; i++) {
+str += "public class " + arr[i].name;
+str += arr[i].inherits
+  ? " : " + arr[i].inheritsFrom.name + " {\n\t"
+  : " {\n";
+for (j = 0; j < arr[i].attributes.length; j++) {
+  str +=
+    "\t" +
+    arr[i].attributes[j].visibility +
+    " " +
+    arr[i].attributes[j].type +
+    " " +
+    arr[i].attributes[j].name +
+    (arr[i].attributes[j].value == null ||
+    arr[i].attributes[j].value == undefined
+      ? ""
+      : arr[i].attributes[j].value) +
+    ";\n\t";
+}
+str += "public " + arr[i].name + "() {\n\n\t}\n";
+for (j = 0; j < arr[i].methods.length; j++) {
+  str +=
+    "\t" +
+    arr[i].methods[j].visibility +
+    " " +
+    arr[i].methods[j].returnType +
+    " " +
+    arr[i].methods[j].name +
+    "(" +
+    (arr[i].methods[j].args.length != 0 ? arr[i].methods[j].args : "") +
+    "){\n\n\t}\n";
+}
+str += "}\n\n";
+}
+return str;
+}
+*/
+
