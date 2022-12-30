@@ -1,0 +1,308 @@
+{
+	"cities": [
+		{
+			"city": "Spain",
+			"x": 1,
+			"y": 7.5
+		},
+		{
+			"city": "France",
+			"x": 2.5,
+			"y": 6.5
+		},
+		{
+			"city": "Germany",
+			"x": 3.5,
+			"y": 6
+		},
+		{
+			"city": "Italy",
+			"x": 3.5,
+			"y": 7
+		},
+		{
+			"city": "Norway",
+			"x": 3.5,
+			"y": 4
+		},
+		{
+			"city": "Sweden",
+			"x": 4.5,
+			"y": 4
+		},
+		{
+			"city": "Finland",
+			"x": 5.5,
+			"y": 3.5
+		},
+		{
+			"city": "Russia",
+			"x": 7,
+			"y": 5
+		},
+		{
+			"city": "Greece",
+			"x": 5.5,
+			"y": 8
+		},
+		{
+			"city": "United Kingdom",
+			"x": 2,
+			"y": 5
+		},
+		{
+			"city": "Iceland",
+			"x": 1.5,
+			"y": 2.5
+		},
+		{
+			"city": "Poland",
+			"x": 5,
+			"y": 5.5
+		},
+		{
+			"city": "Ukraine",
+			"x": 6.5,
+			"y": 6
+		},
+		{
+			"city": "Belarus",
+			"x": 6,
+			"y": 5.5
+		},
+		{
+			"city": "Romania",
+			"x": 5.5,
+			"y": 7
+		},
+		{
+			"city": "Portugal",
+			"x": 0.5,
+			"y": 7
+		},
+		{
+			"city": "Switzerland",
+			"x": 3,
+			"y": 6.5
+		},{
+			"city": "Ireland",
+			"x": 1.5,
+			"y": 4.5
+		}
+	],
+	"planes": [
+		{
+			"name": "A1",
+			"model": "a",
+			"city": "Spain"
+		},
+		{
+			"name": "B2",
+			"model": "b",
+			"city": "France"
+		},
+		{
+			"name": "C3",
+			"model": "c",
+			"city": "Germany"
+		},
+		{
+			"name": "D4",
+			"model": "d",
+			"city": "Italy"
+		},
+		{
+			"name": "E5",
+			"model": "e",
+			"city": "Norway"
+		},
+		{
+			"name": "F6",
+			"model": "f",
+			"city": "Finland"
+		},
+		{
+			"name": "G7",
+			"model": "g",
+			"city": "Sweden"
+		},
+		{
+			"name": "H8",
+			"model": "h",
+			"city": "Russia"
+		},
+		{
+			"name": "I9",
+			"model": "i",
+			"city": "Greece"
+		},
+		{
+			"name": "J10",
+			"model": "j",
+			"city": "United Kingdom"
+		},
+		{
+			"name": "K11",
+			"model": "k",
+			"city": "Iceland"
+		},
+		{
+			"name": "L12",
+			"model": "l",
+			"city": "Poland"
+		},
+		{
+			"name": "M13",
+			"model": "m",
+			"city": "Ukraine"
+		},
+		{
+			"name": "O14",
+			"model": "o",
+			"city": "Belarus"
+		},
+		{
+			"name": "N15",
+			"model": "n",
+			"city": "Romania"
+		},
+		{
+			"name": "P16",
+			"model": "p",
+			"city": "Portugal"
+		},
+		{
+			"name": "Q17",
+			"model": "q",
+			"city": "Switzerland"
+		},
+		{
+			"name": "R18",
+			"model": "r",
+			"city": "Ireland"
+		}
+	],
+	"nodes": [
+		{
+			"a": "Ireland",
+			"b": "Iceland"
+		},{
+			"a": "Ireland",
+			"b": "United Kingdom"
+		},{
+			"a": "Ireland",
+			"b": "Portugal"
+		},
+		{
+			"a": "Ukraine",
+			"b": "Poland"
+		},{
+			"a": "Spain",
+			"b": "United Kingdom"
+		},
+		{
+			"a": "France",
+			"b": "Switzerland"
+		},
+		{
+			"a": "Poland",
+			"b": "Belarus"
+		},
+		{
+			"a": "Romania",
+			"b": "Greece"
+		},
+		{
+			"a": "Russia",
+			"b": "Ukraine"
+		},
+		{
+			"a": "Germany",
+			"b": "Norway"
+		},
+		{
+			"a": "Italy",
+			"b": "Switzerland"
+		},
+		{
+			"a": "Norway",
+			"b": "Russia"
+		},
+		{
+			"a": "Finland",
+			"b": "Russia"
+		},
+		{
+			"a": "Spain",
+			"b": "Portugal"
+		},
+		{
+			"a": "Russia",
+			"b": "Belarus"
+		},
+		{
+			"a": "Germany",
+			"b": "Poland"
+		},
+		{
+			"a": "Italy",
+			"b": "Germany"
+		},
+		{
+			"a": "United Kingdom",
+			"b": "Germany"
+		},
+		{
+			"a": "Germany",
+			"b": "Romania"	
+		},
+		{
+			"a": "Switzerland",
+			"b": "Germany"
+		},
+		{
+			"a": "United Kingdom",
+			"b": "France"
+		},
+		{
+			"a": "Norway",
+			"b": "Iceland"
+		},
+		{
+			"a": "Greece",
+			"b": "Italy"
+		},
+		{
+			"a": "Greece",
+			"b": "Spain"
+		},
+		{
+			"a": "Sweden",
+			"b": "Finland"
+		},
+		{
+			"a": "Sweden",
+			"b": "Norway"
+		},
+		{
+			"a": "Norway",
+			"b": "United Kingdom"
+		},
+		{
+			"a": "Iceland",
+			"b": "United Kingdom"
+		},
+		{
+			"a": "Finland",
+			"b": "Iceland"
+		},
+		{
+			"a": "Romania",
+			"b": "Ukraine"
+		},
+		{
+			"a": "France",
+			"b": "Spain"
+		}
+	]
+}
