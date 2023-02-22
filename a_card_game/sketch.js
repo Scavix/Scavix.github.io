@@ -4,6 +4,9 @@ let cards = [];
 let game;
 let emptyCard;
 let lvlPerCard = 3;
+let moving = false;
+let movingCard;
+let movingToField;
 
 function preload() {
   fruits = loadJSON("fruits.json");
@@ -31,6 +34,7 @@ function setup() {
   }
   game = new Game();
   game.start();
+  game.printSituation();
 }
 
 function draw() {
@@ -97,8 +101,8 @@ class Hand {
   addCard(card) {
     this.cards.push(card);
   }
-  removeCard(card) {
-    this.cards.splice(this.cards.indexOf(card), 1);
+  removeCard(cardIndex) {
+    this.cards.splice(cardIndex, 1);
   }
 }
 
@@ -121,6 +125,9 @@ class Field {
   }
   addCard(card) {
     this.cards.push(card);
+  }
+  addCardToIndex(card, index) {
+    this.cards.splice(index, 0, card);
   }
   removeCard(card) {
     this.cards.splice(this.cards.indexOf(card), 1);
@@ -174,25 +181,40 @@ class Game {
       line(dim * i, 0, dim * i, height);
       if (i == 0) {
         for (let j = 0; j < this.players[1].hand.cards.length; j++) {
-          image(this.players[1].hand.cards[j].image, dim * (j+1), dim * i, dim, dim);
+          image(this.players[1].hand.cards[j].image, dim * (j + 1), dim * i, dim, dim);
         }
       }
       if (i == 1) {
         for (let j = 0; j < this.players[1].field.fieldSize; j++) {
-          image(this.players[1].field.cards[j].image, dim * (j+1), dim * i, dim, dim);
+          image(this.players[1].field.cards[j].image, dim * (j + 1), dim * i, dim, dim);
         }
       }
       if (i == 3) {
         for (let j = 0; j < this.players[0].field.fieldSize; j++) {
-          image(this.players[0].field.cards[j].image, dim * (j+1), dim * i, dim, dim);
+          image(this.players[0].field.cards[j].image, dim * (j + 1), dim * i, dim, dim);
         }
       }
       if (i == 4) {
         for (let j = 0; j < this.players[0].hand.cards.length; j++) {
-          image(this.players[0].hand.cards[j].image, dim * (j+1), dim * i, dim, dim);
+          image(this.players[0].hand.cards[j].image, dim * (j + 1), dim * i, dim, dim);
         }
       }
     }
+  }
+  printSituation() {
+    console.log("------Player 1------");
+    console.log("Hand: ");
+    console.log(this.players[0].hand.cards);
+    console.log("Field: ");
+    console.log(this.players[0].field.cards);
+    console.log("------Player 2------");
+    console.log("Hand: ");
+    console.log(this.players[1].hand.cards);
+    console.log("Field: ");
+    console.log(this.players[1].field.cards);
+  }
+  nextTurn() {
+    this.turn = !this.turn;
   }
 }
 
@@ -213,4 +235,129 @@ class FlowerTypes {
   static Iris = 1;
   static Orchid = 2;
   static Daffodil = 3;
+}
+
+function mouseClicked() {
+  if (moving) {
+    if (spotfield()) {
+      moveCard();
+      moving = false;
+      game.printSituation();
+      game.nextTurn();
+      console.log("------Selecting------");
+    }
+  }
+  else {
+    if (spotcard()) {
+      moving = true;
+      console.log("------Moving------");
+    }
+  }
+}
+
+function spotcard() {
+  if (game.turn) {
+    if (mouseX >= width / 5 &&
+      mouseY >= height / 5 * 4 &&
+      mouseX <= width / 5 * 4 &&
+      mouseY <= height / 5 * 5) {
+      if (mouseX <= width / 5 * 2) {
+        console.log("Card index " + 0);
+        movingCard = 0;
+        return true;
+      }
+      else if (mouseX <= width / 5 * 3) {
+        console.log("Card index " + 1);
+        movingCard = 1;
+        return true;
+      }
+      else {
+        console.log("Card index " + 2);
+        movingCard = 2;
+        return true;
+      }
+    }
+  }
+  else {
+    if (mouseX >= width / 5 &&
+      mouseY >= height / 5 * 0 &&
+      mouseX <= width / 5 * 4 &&
+      mouseY <= height / 5 * 1) {
+      if (mouseX <= width / 5 * 2) {
+        console.log("Card index " + 0);
+        movingCard = 0;
+        return true;
+      }
+      else if (mouseX <= width / 5 * 3) {
+        console.log("Card index " + 1);
+        movingCard = 1;
+        return true;
+      }
+      else {
+        console.log("Card index " + 2);
+        movingCard = 2;
+        return true;
+      }
+    }
+  }
+}
+
+function spotfield() {
+  if (game.turn) {
+    if (mouseX >= width / 5 &&
+      mouseY >= height / 5 * 3 &&
+      mouseX <= width / 5 * 4 &&
+      mouseY <= height / 5 * 4) {
+      if (mouseX <= width / 5 * 2) {
+        console.log("Field index " + 0);
+        movingToField = 0;
+        return true;
+      }
+      else if (mouseX <= width / 5 * 3) {
+        console.log("Field index " + 1);
+        movingToField = 1;
+        return true;
+      }
+      else {
+        console.log("Field index " + 2);
+        movingToField = 2;
+        return true;
+      }
+    }
+  }
+  else {
+    if (mouseX >= width / 5 &&
+      mouseY >= height / 5 * 1 &&
+      mouseX <= width / 5 * 4 &&
+      mouseY <= height / 5 * 2) {
+      if (mouseX <= width / 5 * 2) {
+        console.log("Field index " + 0);
+        movingToField = 0;
+        return true;
+      }
+      else if (mouseX <= width / 5 * 3) {
+        console.log("Field index " + 1);
+        movingToField = 1;
+        return true;
+      }
+      else {
+        console.log("Field index " + 2);
+        movingToField = 2;
+        return true;
+      }
+    }
+  }
+}
+
+function moveCard() {
+  if (game.turn) {
+    console.log("Moving card " + movingCard + "[" + game.players[0].hand.cards[movingCard].name + "]" + " to field " + movingToField);
+    game.players[0].field.addCardToIndex(game.players[0].hand.cards[movingCard], movingToField);
+    game.players[0].hand.removeCard(movingCard);
+  }
+  else {
+    console.log("Moving card " + movingCard + "[" + game.players[0].hand.cards[movingCard].name + "]" + " to field " + movingToField);
+    game.players[1].field.addCardToIndex(game.players[1].hand.cards[movingCard], movingToField);
+    game.players[1].hand.removeCard(movingCard);
+  }
 }
