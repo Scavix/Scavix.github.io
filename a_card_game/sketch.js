@@ -168,11 +168,11 @@ class Game {
         this.players[j].deck.addCard(cards[Math.floor(Math.random() * cards.length)]);
       }
     }
-    for (let i = 0; i < this.players[0].field.fieldSize; i++) {
+    /*for (let i = 0; i < this.players[0].field.fieldSize; i++) {
       for (let j = 0; j < 2; j++) {
         this.players[j].field.addCard(new Card("empty", -1, emptyCard));
       }
-    }
+    }*/
   }
   show() {
     let dim = width / (this.players[0].field.fieldSize + 2);
@@ -186,12 +186,22 @@ class Game {
       }
       if (i == 1) {
         for (let j = 0; j < this.players[1].field.fieldSize; j++) {
-          image(this.players[1].field.cards[j].image, dim * (j + 1), dim * i, dim, dim);
+          if(this.players[1].field.cards[j]!=null){
+            image(this.players[1].field.cards[j].image, dim * (j + 1), dim * i, dim, dim);
+          }
+          else{
+            image(emptyCard, dim * (j + 1), dim * i, dim, dim);
+          }
         }
       }
       if (i == 3) {
         for (let j = 0; j < this.players[0].field.fieldSize; j++) {
-          image(this.players[0].field.cards[j].image, dim * (j + 1), dim * i, dim, dim);
+          if(this.players[0].field.cards[j]!=null){
+            image(this.players[0].field.cards[j].image, dim * (j + 1), dim * i, dim, dim);
+          }
+          else{
+            image(emptyCard, dim * (j + 1), dim * i, dim, dim);
+          }
         }
       }
       if (i == 4) {
@@ -351,12 +361,12 @@ function spotfield() {
 
 function moveCard() {
   if (game.turn) {
-    console.log("Moving card " + movingCard + "[" + game.players[0].hand.cards[movingCard].name + "]" + " to field " + movingToField);
+    //console.log("Moving card " + movingCard + "[" + game.players[0].hand.cards[movingCard].name + "]" + " to field " + movingToField);
     game.players[0].field.addCardToIndex(game.players[0].hand.cards[movingCard], movingToField);
     game.players[0].hand.removeCard(movingCard);
   }
   else {
-    console.log("Moving card " + movingCard + "[" + game.players[0].hand.cards[movingCard].name + "]" + " to field " + movingToField);
+    //console.log("Moving card " + movingCard + "[" + game.players[0].hand.cards[movingCard].name + "]" + " to field " + movingToField);
     game.players[1].field.addCardToIndex(game.players[1].hand.cards[movingCard], movingToField);
     game.players[1].hand.removeCard(movingCard);
   }
