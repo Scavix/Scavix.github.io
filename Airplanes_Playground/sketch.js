@@ -297,7 +297,10 @@ class RoutesManager {
     }
     for (let i = 0; i < foundCitiesList.length - 1; i++) {
       for (let j = 0; j < this.routes.length; j++) {
-        if (this.routes[j].city1.name == foundCitiesList[i] && this.routes[j].city2.name == foundCitiesList[i + 1]) {
+        if (
+          (this.routes[j].city1.name == foundCitiesList[i] && this.routes[j].city2.name == foundCitiesList[i + 1])
+          ||
+          (this.routes[j].city2.name == foundCitiesList[i] && this.routes[j].city1.name == foundCitiesList[i + 1])) {
           console.log("Found route from", this.routes[j].city1.name, "to", this.routes[j].city2.name);
           this.routes[j].found();
         }
@@ -450,7 +453,7 @@ function search(from, to) {
         return result;
       }
     }
-  }
+  }/*
   for (let i = 0; i < routes.routes.length; i++) {
     for (let j = 0; j < routes.routes.length; j++) {
       for (let k = 0; k < routes.routes.length; k++) {
@@ -470,5 +473,6 @@ function search(from, to) {
         }
       }
     }
-  }
+  }*/
+  return result;
 }
