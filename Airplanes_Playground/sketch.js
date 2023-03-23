@@ -236,13 +236,21 @@ class Route {
   constructor(city1, city2) {
     this.city1 = city1;
     this.city2 = city2;
+    this.showColor = 'black';
+    strokeWeight(3);
   }
   show() {
-    fill('black');
+    stroke(this.showColor);
     line(this.city1.x * varSize, this.city1.y * varSize, this.city2.x * varSize, this.city2.y * varSize);
   }
   getAngle() {
     return atan2(this.city2.y - this.city1.y, this.city2.x - this.city1.x);
+  }
+  found() {
+    this.showColor = 'yellow';
+  }
+  unfound() {
+    this.showColor = 'black';
   }
 }
 
@@ -258,13 +266,17 @@ class RoutesManager {
       this.routes[i].show();
     }
   }
-  getRandomFrom(cityName) {
+  getFromList(cityName) {
     let routesFromCity = [];
     for (let i = 0; i < this.routes.length; i++) {
       if (this.routes[i].city1.name == cityName) {
         routesFromCity.push(this.routes[i]);
       }
     }
+    return routesFromCity;
+  }
+  getRandomFrom(cityName) {
+    let routesFromCity = this.getFromList(cityName);
     let result = routesFromCity[Math.floor(Math.random() * routesFromCity.length)]
     console.log("Going from", result.city1.name, "to", result.city2.name, "with orientation", (result.getAngle() * 180 / Math.PI).toFixed(2), "°");
     return result;
@@ -278,6 +290,19 @@ class RoutesManager {
       }
     }
     return false;
+  }
+  highlight(foundCitiesList) {
+    for (let i = 0; i < this.routes.length; i++) {
+      this.routes[i].unfound();
+    }
+    for (let i = 0; i < foundCitiesList.length - 1; i++) {
+      for (let j = 0; j < this.routes.length; j++) {
+        if (this.routes[j].city1.name == foundCitiesList[i] && this.routes[j].city2.name == foundCitiesList[i + 1]) {
+          console.log("Found route from", this.routes[j].city1.name, "to", this.routes[j].city2.name);
+          this.routes[j].found();
+        }
+      }
+    }
   }
 }
 
@@ -350,27 +375,100 @@ function onClickDecreaseSpeed() {
 }
 
 function populateDropDownList() {
-  var from = document.getElementById("from");
-  var to = document.getElementById("to");
+  var addFrom = document.getElementById("addFrom");
+  var addTo = document.getElementById("addTo");
+  var searchFrom = document.getElementById("searchFrom");
+  var searchTo = document.getElementById("searchTo");
   var options = cities.getNames();
 
   for (var i = 0; i < options.length; i++) {
     var opt = options[i];
+
     var el1 = document.createElement("option");
     el1.textContent = opt;
     el1.value = opt;
+
     var el2 = document.createElement("option");
     el2.textContent = opt;
     el2.value = opt;
-    from.appendChild(el1);
-    to.appendChild(el2);
+
+    var el3 = document.createElement("option");
+    el3.textContent = opt;
+    el3.value = opt;
+
+    var el4 = document.createElement("option");
+    el4.textContent = opt;
+    el4.value = opt;
+
+    addFrom.appendChild(el1);
+    addTo.appendChild(el2);
+    searchFrom.appendChild(el3);
+    searchTo.appendChild(el4);
   }
 }
 
 function onClickAddRoute() {
-  var from = document.getElementById("from");
-  var to = document.getElementById("to");
+  var from = document.getElementById("addFrom");
+  var to = document.getElementById("addTo");
   if ((!routes.contains(from.value, to.value)) && (from.value != to.value)) {
     routes.addRoute(new Route(cities.getFromName(from.value), cities.getFromName(to.value)));
+  }
+}
+
+function onClickFindPath() {
+  var from = document.getElementById("searchFrom");
+  var to = document.getElementById("searchTo");
+  if (from.value == to.value) {
+    return;
+  }
+  routes.highlight(search(from.value, to.value));
+}
+
+function search(from, to) {
+  let result = [];
+  for (let i = 0; i < routes.routes.length; i++) {
+    if (
+      (routes.routes[i].city1.name == from)
+      &&
+      (routes.routes[i].city2.name == to)) {
+      result.push(routes.routes[i].city1.name);
+      result.push(routes.routes[i].city2.name);
+      return result;
+    }
+  }
+  for (let i = 0; i < routes.routes.length; i++) {
+    for (let j = 0; j < routes.routes.length; j++) {
+      if (
+        (routes.routes[i].city1.name == from)
+        &&
+        (routes.routes[i].city2.name == routes.routes[j].city1.name)
+        &&
+        (routes.routes[j].city2.name == to)) {
+        result.push(routes.routes[i].city1.name);
+        result.push(routes.routes[i].city2.name);
+        result.push(routes.routes[j].city2.name);
+        return result;
+      }
+    }
+  }
+  for (let i = 0; i < routes.routes.length; i++) {
+    for (let j = 0; j < routes.routes.length; j++) {
+      for (let k = 0; k < routes.routes.length; k++) {
+        if (
+          (routes.routes[i].city1.name == from)
+          &&
+          (routes.routes[i].city2.name == routes.routes[j].city1.name)
+          &&
+          (routes.routes[j].city2.name == routes.routes[k].city1.name)
+          &&
+          (routes.routes[k].city2.name == to)) {
+          result.push(routes.routes[i].city1);
+          result.push(routes.routes[i].city2);
+          result.push(routes.routes[j].city2);
+          result.push(routes.routes[k].city2);
+          return result;
+        }
+      }
+    }
   }
 }
