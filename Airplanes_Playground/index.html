@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+  <!--Plane icons created by Google - Flaticon at https://www.flaticon.com/free-icons/plane-->
+</head>
+
+<body>
+  <main>
+  </main>
+  <script src="sketch.js"></script>
+  <br />
+  <div>
+    <button onclick="onClickAddPlane()">Add Plane</button>
+    <button onclick="onClickRemovePlane()">Remove Plane</button>
+    <button onclick="onClickIncreaseSpeed()">Increase Speed</button>
+    <button onclick="onClickDecreaseSpeed()">Decrease Speed</button>
+  </div>
+  <br />
+  <div>
+    <b>Add Route</b><br>
+    <select id="from"></select>
+    <select id="to"></select>
+    <button onclick="onClickAddRoute()">AddRoute</button>
+  </div>
+</body>
+
+</html>
