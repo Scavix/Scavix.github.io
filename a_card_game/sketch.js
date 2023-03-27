@@ -11,18 +11,18 @@ let movingToField;
 function preload() {
   fruits = loadJSON("fruits.json");
   flowers = loadJSON("flowers.json");
-  emptyCard = loadImage("/asset/empty.png");
+  emptyCard = loadImage("asset/empty.png");
 }
 
 function setup() {
   createCanvas(min(windowWidth, windowHeight), min(windowWidth, windowHeight));
   for (let i = 0; i < fruits.l.length; i++) {
     for (let j = 1; j <= lvlPerCard; j++) {
-      images.push(loadImage("/asset/" + fruits.l[i].name + j + ".png"));
+      images.push(loadImage("asset/" + fruits.l[i].name + j + ".png"));
     }
   }
   for (let i = 0; i < flowers.l.length; i++) {
-    images.push(loadImage("/asset/" + flowers.l[i].name + ".png"));
+    images.push(loadImage("asset/" + flowers.l[i].name + ".png"));
   }
   for (let i = 0; i < fruits.l.length; i++) {
     for (let j = 1; j <= lvlPerCard; j++) {
