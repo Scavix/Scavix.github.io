@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>URL List</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            padding: 5px;
+            margin-bottom: 5px;
+            background-color: #f5f5f5;
+            border: 2px solid grey;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        li:hover {
+            background-color: #e0e0e0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            color: green;
+            text-decoration: underline;
+        }
+
+        #buttons {
+            text-align: center;
+        }
+
+        #buttons button {
+            margin: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        #buttons button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="pageTitle">URL List</h1>
+
+    <div id="buttons">
+        <button id="button1">Computer Science</button>
+        <button id="button2">Mathematics</button>
+        <button id="button3">Generic</button>
+    </div>
+
+    <ul id="url-list"></ul>
+
+    <script>
+        const urls = [
+            'https://scavix.github.io/cs_resources.html',
+            'https://scavix.github.io/math_resources.html',
+            'https://scavix.github.io/generic_utilities.html'
+        ];
+        const button1 = document.getElementById('button1');
+        const button2 = document.getElementById('button2');
+        const button3 = document.getElementById('button3');
+        button1.addEventListener('click', () => scrapeWebsite(urls[0]));
+        button2.addEventListener('click', () => scrapeWebsite(urls[1]));
+        button3.addEventListener('click', () => scrapeWebsite(urls[2]));
+        function scrapeWebsite(websiteUrl) {
+            fetch(websiteUrl)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const dom = parser.parseFromString(html, 'text/html');
+                    const links = dom.querySelectorAll('a');
+                    const urls = Array.from(links).map(link => {
+                        return {
+                            name: link.textContent,
+                            url: link.href
+                        };
+                    });
+                    const urlList = document.getElementById('url-list');
+                    urlList.innerHTML = '';
+                    urls.forEach(url => {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.textContent = url.name;
+                        a.href = url.url;
+                        li.appendChild(a);
+                        urlList.appendChild(li);
+                    });
+                    const pageTitle = document.getElementById('pageTitle');
+                    pageTitle.textContent = `URL List from ${websiteUrl.split('/').pop().split('.')[0].split('_').join(' ')}`;
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+</body>
+
+</html>
