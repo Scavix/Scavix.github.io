@@ -66,22 +66,30 @@
         <button id="button1">Computer Science</button>
         <button id="button2">Mathematics</button>
         <button id="button3">Generic</button>
+        <button id="button4">Science</button>
+        <button id="button5">All</button>
     </div>
 
     <ul id="url-list"></ul>
 
     <script>
-        const urls = [
+        const myUrls = [
             'https://scavix.github.io/cs_resources.html',
             'https://scavix.github.io/math_resources.html',
-            'https://scavix.github.io/generic_utilities.html'
+            'https://scavix.github.io/generic_utilities.html',
+            'https://scavix.github.io/science_resources.html',
+            'https://scavix.github.io/cs_utilities.html'
         ];
         const button1 = document.getElementById('button1');
         const button2 = document.getElementById('button2');
         const button3 = document.getElementById('button3');
-        button1.addEventListener('click', () => scrapeWebsite(urls[0]));
-        button2.addEventListener('click', () => scrapeWebsite(urls[1]));
-        button3.addEventListener('click', () => scrapeWebsite(urls[2]));
+        const button4 = document.getElementById('button4');
+        const button5 = document.getElementById('button5');
+        button1.addEventListener('click', () => scrapeWebsite(myUrls[0]));
+        button2.addEventListener('click', () => scrapeWebsite(myUrls[1]));
+        button3.addEventListener('click', () => scrapeWebsite(myUrls[2]));
+        button4.addEventListener('click', () => scrapeWebsite(myUrls[3]));
+        button5.addEventListener('click', () => scrapeAllWebsites());
         function scrapeWebsite(websiteUrl) {
             fetch(websiteUrl)
                 .then(response => response.text())
@@ -110,7 +118,59 @@
                 })
                 .catch(error => console.error(error));
         }
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        function scrapeAllWebsites() {
+            const fetchPromises = myUrls.map(websiteUrl => {
+                return fetch(websiteUrl)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const dom = parser.parseFromString(html, 'text/html');
+                        const links = dom.querySelectorAll('a');
+                        const urls = Array.from(links).map(link => {
+                            return {
+                                name: link.textContent,
+                                url: link.href
+                            };
+                        });
+                        return urls;
+                    })
+                    .catch(error => console.error(error));
+            });
+
+            Promise.all(fetchPromises)
+                .then(urlArrays => {
+                    let allUrls = [];
+                    urlArrays.forEach(urls => {
+                        allUrls = allUrls.concat(urls);
+                    });
+                    const urlList = document.getElementById('url-list');
+                    shuffle(allUrls);
+                    urlList.innerHTML = '';
+                    allUrls.forEach(url => {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        if (url.isImportant) {
+                            const b = document.createElement('b');
+                            b.textContent = url.name;
+                            a.appendChild(b);
+                        } else {
+                            a.textContent = url.name;
+                        }
+                        a.href = url.url;
+                        li.appendChild(a);
+                        urlList.appendChild(li);
+                    });
+                    const pageTitle = document.getElementById('pageTitle');
+                    pageTitle.textContent = 'All URLs';
+                });
+        }
     </script>
 </body>
-
 </html>
