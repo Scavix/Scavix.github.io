@@ -12,17 +12,17 @@
                     photos[i].style.display = 'none';
                 }
             }
-            if(folder=='12_04_2023'){
-                document.title = 'My photos from 12 04 2023';
-                document.getElementById("anHeader").innerHTML = 'My photos from 12 04 2023';
+            if (folder == '12_04_2023') {
+                document.title = 'My photos from 12th April 2023';
+                document.getElementById("anHeader").innerHTML = 'My photos from 12th April 2023';
             }
-            if(folder=='14_04_2023'){
-                document.title = 'My photos from 14 04 2023';
-                document.getElementById("anHeader").innerHTML = 'My photos from 14 04 2023';
+            if (folder == '14_04_2023') {
+                document.title = 'My photos from 14th April 2023';
+                document.getElementById("anHeader").innerHTML = 'My photos from 14th April 2023';
             }
-            if(folder=='18_04_2023'){
-                document.title = 'My photos from 18 04 2023';
-                document.getElementById("anHeader").innerHTML = 'My photos from 18 04 2023';
+            if (folder == '18_04_2023') {
+                document.title = 'My photos from 18th April 2023';
+                document.getElementById("anHeader").innerHTML = 'My photos from 18th April 2023';
             }
         }
         function myF() {
@@ -31,12 +31,16 @@
     </script>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-    <body>
+
+<body>
     <!-- <body onload="myF()"> -->
-    <h1 id = "anHeader">My photos from</h1>
-    <button onclick="showPhotos('12_04_2023')" id="myB1">12_04_2023</button>
-    <button onclick="showPhotos('14_04_2023')" id="myB2">14_04_2023</button>
-    <button onclick="showPhotos('18_04_2023')" id="myB3">18_04_2023</button>
+    <div class="one">
+        <h1 id="anHeader">My photos from</h1>
+    </div>
+
+    <button onclick="showPhotos('12_04_2023')" id="myB1">12/04/2023</button>
+    <button onclick="showPhotos('14_04_2023')" id="myB2">14/04/2023</button>
+    <button onclick="showPhotos('18_04_2023')" id="myB3">18/04/2023</button>
     <br />
     <br />
     <section class="photo-gallery">
@@ -120,4 +124,5 @@
         </div>
     </section>
 </body>
+
 </html>

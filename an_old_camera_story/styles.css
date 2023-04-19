@@ -1,0 +1,73 @@
+.photo-gallery {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+.photo-gallery img {
+	margin: 10px;
+	max-width: 100%;
+	height: auto;
+}
+
+button {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	border-radius: 500px;
+	transition-property: background-color, border-color, color, box-shadow, filter;
+	transition-duration: .3s;
+	border: 1px solid transparent;
+	letter-spacing: 2px;
+	min-width: 160px;
+	text-transform: uppercase;
+	white-space: normal;
+	font-weight: 700;
+	text-align: center;
+	padding: 17px 48px;
+	color: #fff;
+	background-color: #1ED760;
+	height: 48px;
+	width: 33%;
+}
+
+button:hover {
+	transform: scale(1.04);
+	background-color: #21e065;
+}
+
+/* === HEADING STYLE #1 === */
+/* source https://codepen.io/vedadesigns/pen/GPxYZg */
+.one h1 {
+	text-align: center;
+	text-transform: uppercase;
+	padding-bottom: 5px;
+}
+
+.one h1:before {
+	width: 28px;
+	height: 5px;
+	display: block;
+	content: "";
+	position: absolute;
+	bottom: 3px;
+	left: 50%;
+	margin-left: -14px;
+	background-color: #b80000;
+}
+
+.one h1:after {
+	width: 100px;
+	height: 1px;
+	display: block;
+	content: "";
+	position: relative;
+	margin-top: 25px;
+	left: 50%;
+	margin-left: -50px;
+	background-color: #b80000;
+}
