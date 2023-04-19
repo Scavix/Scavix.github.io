@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <script>
+        function showPhotos(folder) {
+            document.getElementById('image-container').hidden = false;
+            var photos = document.querySelectorAll('.photo-gallery img');
+            for (var i = 0; i < photos.length; i++) {
+                if (photos[i].src.indexOf(folder) != -1) {
+                    photos[i].style.display = 'block';
+                } else {
+                    photos[i].style.display = 'none';
+                }
+            }
+            if(folder=='12_04_2023'){
+                document.title = 'My photos from 12 04 2023';
+                document.getElementById("anHeader").innerHTML = 'My photos from 12 04 2023';
+            }
+            if(folder=='14_04_2023'){
+                document.title = 'My photos from 14 04 2023';
+                document.getElementById("anHeader").innerHTML = 'My photos from 14 04 2023';
+            }
+            if(folder=='18_04_2023'){
+                document.title = 'My photos from 18 04 2023';
+                document.getElementById("anHeader").innerHTML = 'My photos from 18 04 2023';
+            }
+        }
+        function myF() {
+            document.getElementById("myB1").click();
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+    <body>
+    <!-- <body onload="myF()"> -->
+    <h1 id = "anHeader">My photos from</h1>
+    <button onclick="showPhotos('12_04_2023')" id="myB1">12_04_2023</button>
+    <button onclick="showPhotos('14_04_2023')" id="myB2">14_04_2023</button>
+    <button onclick="showPhotos('18_04_2023')" id="myB3">18_04_2023</button>
+    <br />
+    <br />
+    <section class="photo-gallery">
+        <div id="image-container" hidden=true>
+            <img src="photos/12_04_2023/100_3571.JPG" alt="100_3571">
+            <img src="photos/12_04_2023/100_3572.JPG" alt="100_3572">
+            <img src="photos/12_04_2023/100_3573.JPG" alt="100_3573">
+            <img src="photos/12_04_2023/100_3574.JPG" alt="100_3574">
+            <img src="photos/12_04_2023/100_3575.JPG" alt="100_3575">
+            <img src="photos/12_04_2023/100_3576.JPG" alt="100_3576">
+            <img src="photos/12_04_2023/100_3577.JPG" alt="100_3577">
+            <img src="photos/12_04_2023/100_3578.JPG" alt="100_3578">
+            <img src="photos/12_04_2023/100_3579.JPG" alt="100_3579">
+            <img src="photos/12_04_2023/100_3580.JPG" alt="100_3580">
+            <img src="photos/12_04_2023/100_3581.JPG" alt="100_3581">
+            <img src="photos/12_04_2023/100_3583.JPG" alt="100_3583">
+            <img src="photos/12_04_2023/100_3584.JPG" alt="100_3584">
+            <img src="photos/12_04_2023/100_3585.JPG" alt="100_3585">
+            <img src="photos/12_04_2023/100_3586.JPG" alt="100_3586">
+            <img src="photos/12_04_2023/100_3587.JPG" alt="100_3587">
+            <img src="photos/12_04_2023/100_3588.JPG" alt="100_3588">
+            <img src="photos/12_04_2023/100_3589.JPG" alt="100_3589">
+            <img src="photos/12_04_2023/100_3591.JPG" alt="100_3591">
+            <img src="photos/12_04_2023/100_3593.JPG" alt="100_3593">
+            <img src="photos/12_04_2023/100_3594.JPG" alt="100_3594">
+            <img src="photos/12_04_2023/100_3595.JPG" alt="100_3595">
+            <img src="photos/12_04_2023/100_3596.JPG" alt="100_3596">
+            <img src="photos/12_04_2023/100_3597.JPG" alt="100_3597">
+            <img src="photos/12_04_2023/100_3598.JPG" alt="100_3598">
+            <img src="photos/12_04_2023/100_3599.JPG" alt="100_3599">
+            <img src="photos/12_04_2023/100_3600.JPG" alt="100_3600">
+            <img src="photos/12_04_2023/100_3601.JPG" alt="100_3601">
+            <img src="photos/12_04_2023/100_3602.JPG" alt="100_3602">
+            <img src="photos/12_04_2023/100_3603.JPG" alt="100_3603">
+
+            <img src="photos/14_04_2023/100_3612.JPG" alt="100_3612">
+            <img src="photos/14_04_2023/100_3613.JPG" alt="100_3613">
+            <img src="photos/14_04_2023/100_3614.JPG" alt="100_3614">
+            <img src="photos/14_04_2023/100_3615.JPG" alt="100_3615">
+            <img src="photos/14_04_2023/100_3616.JPG" alt="100_3616">
+            <img src="photos/14_04_2023/100_3617.JPG" alt="100_3617">
+            <img src="photos/14_04_2023/100_3618.JPG" alt="100_3618">
+            <img src="photos/14_04_2023/100_3619.JPG" alt="100_3619">
+            <img src="photos/14_04_2023/100_3620.JPG" alt="100_3620">
+            <img src="photos/14_04_2023/100_3621.JPG" alt="100_3621">
+            <img src="photos/14_04_2023/100_3622.JPG" alt="100_3622">
+            <img src="photos/14_04_2023/100_3623.JPG" alt="100_3623">
+            <img src="photos/14_04_2023/100_3624.JPG" alt="100_3624">
+            <img src="photos/14_04_2023/100_3625.JPG" alt="100_3625">
+            <img src="photos/14_04_2023/100_3626.JPG" alt="100_3626">
+            <img src="photos/14_04_2023/100_3627.JPG" alt="100_3627">
+
+            <img src="photos/18_04_2023/100_3631.JPG" alt="100_3631">
+            <img src="photos/18_04_2023/100_3632.JPG" alt="100_3632">
+            <img src="photos/18_04_2023/100_3633.JPG" alt="100_3633">
+            <img src="photos/18_04_2023/100_3634.JPG" alt="100_3634">
+            <img src="photos/18_04_2023/100_3635.JPG" alt="100_3635">
+            <img src="photos/18_04_2023/100_3636.JPG" alt="100_3636">
+            <img src="photos/18_04_2023/100_3637.JPG" alt="100_3637">
+            <img src="photos/18_04_2023/100_3638.JPG" alt="100_3638">
+            <img src="photos/18_04_2023/100_3639.JPG" alt="100_3639">
+            <img src="photos/18_04_2023/100_3640.JPG" alt="100_3640">
+            <img src="photos/18_04_2023/100_3641.JPG" alt="100_3641">
+            <img src="photos/18_04_2023/100_3642.JPG" alt="100_3642">
+            <img src="photos/18_04_2023/100_3643.JPG" alt="100_3643">
+            <img src="photos/18_04_2023/100_3644.JPG" alt="100_3644">
+            <img src="photos/18_04_2023/100_3645.JPG" alt="100_3645">
+            <img src="photos/18_04_2023/100_3646.JPG" alt="100_3646">
+            <img src="photos/18_04_2023/100_3647.JPG" alt="100_3647">
+            <img src="photos/18_04_2023/100_3648.JPG" alt="100_3648">
+            <img src="photos/18_04_2023/100_3649.JPG" alt="100_3649">
+            <img src="photos/18_04_2023/100_3650.JPG" alt="100_3650">
+            <img src="photos/18_04_2023/100_3651.JPG" alt="100_3651">
+            <img src="photos/18_04_2023/100_3652.JPG" alt="100_3652">
+            <img src="photos/18_04_2023/100_3653.JPG" alt="100_3653">
+            <img src="photos/18_04_2023/100_3654.JPG" alt="100_3654">
+            <img src="photos/18_04_2023/100_3655.JPG" alt="100_3655">
+            <img src="photos/18_04_2023/100_3656.JPG" alt="100_3656">
+            <img src="photos/18_04_2023/100_3657.JPG" alt="100_3657">
+            <img src="photos/18_04_2023/100_3658.JPG" alt="100_3658">
+        </div>
+    </section>
+</body>
+</html>
