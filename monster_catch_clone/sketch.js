@@ -129,9 +129,9 @@ class Monster {
     this.y = y;
     this.img = img;
     this.level = 1;
-    this.life = this.level * 10;
+    this.life = this.level * 10 + random([-1,1])*Math.floor(random(0,5));
     this.fightlife,
-    this.moves = [];
+      this.moves = [];
     for (let i = 0; i < 4; i++) {
       this.moves.push(new Move());
     }
@@ -220,13 +220,13 @@ class Player {
 }
 
 function keyPressed() {
-  if (keyCode === UP_ARROW && player.y > 0) {
+  if (keyCode === UP_ARROW && player.y > 0 && gamemode == "WALK") {
     player.y = player.y - 1;
-  } else if (keyCode === DOWN_ARROW && player.y < bits - 1) {
+  } else if (keyCode === DOWN_ARROW && player.y < bits - 1 && gamemode == "WALK") {
     player.y = player.y + 1;
-  } else if (keyCode === LEFT_ARROW && player.x > 0) {
+  } else if (keyCode === LEFT_ARROW && player.x > 0 && gamemode == "WALK") {
     player.x = player.x - 1;
-  } else if (keyCode === RIGHT_ARROW && player.x < bits - 1) {
+  } else if (keyCode === RIGHT_ARROW && player.x < bits - 1 && gamemode == "WALK") {
     player.x = player.x + 1;
   }
   if (keyCode === 70 && gamemode == "FIGHT") {
@@ -318,6 +318,8 @@ function showFIGHTMenu() {
   collidedBody.fightlife = collidedBody.life;
   showMoves();
   showLifeBars();
+  showLevels();
+  showLifeAmounts();
 }
 
 function showMoves() {
@@ -334,7 +336,7 @@ class Move {
   constructor() {
     this.name = random(["Bite", "Scratch", "Tackle", "Punch", "Kick", "Headbutt", "Slap", "Poke", "Stab", "Shoot"]);
     this.type = "NORMAL";
-    this.power = Math.floor(random(10));
+    this.power = Math.floor(random(10))+random([-1,1])*Math.floor(random(0,2));
     this.accuracy = 1;
   }
 }
@@ -352,17 +354,38 @@ function showLifeBars() {
   fill(0, 255, 0);
   rect(width / 8,
     height / 2,
-    width / 4 * (actualPlayerLife/playerLife),
+    width / 4 * (actualPlayerLife / playerLife),
     height / 20);
   noFill();
   rect(width / 8 * 5,
-  height / 4 + height / 4,
-  width / 4,
-  height / 20);
+    height / 2,
+    width / 4,
+    height / 20);
   fill(0, 0, 255);
   rect(width / 8 * 5,
-    height / 4 + height / 4,
-    width / 4 * (actualMonsterLife/monsterLife),
+    height / 2,
+    width / 4 * (actualMonsterLife / monsterLife),
     height / 20);
-  //lvl and numberlife
+}
+
+function showLevels() {
+  let playerLevel = player.team[currFrontline].level;
+  let monsterLevel = collidedBody.level;
+  fill(255);
+  textSize(32);
+  textAlign(CENTER, BOTTOM);
+  text("Level " + playerLevel, width / 4, height / 4);
+  text("Level " + monsterLevel, width / 4 * 3, height / 4);
+}
+
+function showLifeAmounts() {
+  let playerLife = player.team[currFrontline].life;
+  let actualPlayerLife = player.team[currFrontline].fightlife;
+  let monsterLife = collidedBody.life;
+  let actualMonsterLife = collidedBody.fightlife;
+  fill(255);
+  textSize(32);
+  textAlign(CENTER, BOTTOM);
+  text(actualPlayerLife + "/" + playerLife, width / 4, height / 2 + textOffset);
+  text(actualMonsterLife + "/" + monsterLife, width / 4 * 3, height / 2 + textOffset);
 }
