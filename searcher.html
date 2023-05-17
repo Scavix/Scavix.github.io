@@ -15,8 +15,11 @@
 </head>
 <body>
   <fieldset>
-      <legend>Enter your query</legend>
+      <legend>Enter your data</legend>
+      Query:
       <input type="text" id="queryGet" />
+      NewsApi Key:
+      <input type="text" id="apiKeyGet" />
       <button type = "button" id="btnGet" onclick="getNews()">Submit</button>
   </fieldset>
   <div>
@@ -26,8 +29,8 @@
   <script>
     function getNews(){
       const query = document.getElementById("queryGet").value;
-      const apiKey = '';
-	    const endpoint = new URL('https://newsapi.org/v2/everything?apiKey='+apiKey+'&q='+query+'}');
+      const apiKey = document.getElementById("apiKeyGet").value;
+	    const endpoint = new URL('https://newsapi.org/v2/everything?apiKey='+apiKey+'&q='+query);
       const data = load(endpoint);
       data.then((myData) => {
         let string,sentence='<ol>';
