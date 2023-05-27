@@ -340,6 +340,13 @@ thesis*/
     group: "Other",
   },
   {
+    id: "Applied_Data_Science_Lab",
+    content: "Applied Data Science Lab",
+    start: "2022-09",
+    end: "2023-05",
+    group: "Other",
+  },
+  {
     id: "Toefl",
     content: "Toefl 90",
     start: "2022-01",

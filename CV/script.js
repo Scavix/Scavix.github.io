@@ -60,11 +60,14 @@ var nodes = new vis.DataSet([
   { id: 36, label: "Quantum Computing", group: 10 },
   { id: 37, label: "Haskell", group: 10 },
   { id: 38, label: "Toefl", group: 10 },
+  { id: 39, label: "Applied Data Science Lab", group: 10 },
 
-  { id: 39, label: "B1", group: 10 },
-  { id: 40, label: "B2", group: 10 },
-  { id: 41, label: "Arduino", group: 10 },
-  { id: 42, label: "Highschool thesis", group: 10 },
+  
+  
+  { id: 41, label: "Arduino", group: 11 },
+  { id: 42, label: "Highschool thesis", group: 11 },
+  { id: 43, label: "B1", group: 11 },
+  { id: 44, label: "B2", group: 11 },
   /*
 { id: 35, label: "Introduction to Quantum Computing", group: 10 },
 { id: 37, label: "Quantum Winter", group: 10 },
