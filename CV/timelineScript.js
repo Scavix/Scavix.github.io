@@ -1,4 +1,3 @@
-// DOM element where the Timeline will be attached
 var container = document.getElementById("visualization");
 var groups = new vis.DataSet();
 var names = ["Bologna", "Thessaloniki", "Milan", "Uppsala", "Other"];
@@ -8,10 +7,7 @@ groups.add([
     id: "HighSchool",
     content: "High School Period",
     showNested: false,
-    nestedGroups: [
-      "School",
-      "Courses",
-    ]
+    nestedGroups: ["School", "Courses"],
   },
   {
     id: "Bologna",
@@ -80,20 +76,7 @@ for (var g = 2; g < names.length; g++) {
   groups.add({ id: names[g], content: names[g] });
 }
 
-// Create a DataSet (allows two way data-binding)
 var items = new vis.DataSet([
-  /*{ id: "B1", content: "B1 English", start: "2016-09", end: "2019-03", group: "Semester1"},
-
-
-  { id: "Car_License", content: "Car License", start: "2017-09", end: "2019-03", group: "Semester1"},
-
-  license
-b1
-b2
-90
-ARduino
-thesis*/
-
   {
     id: "Informatic_Fundamentals_I",
     content: "Informatic Fundamentals I",
@@ -388,9 +371,22 @@ thesis*/
     end: "2018-07",
     group: "School",
   },
+  {
+    id: "Quantum_Winter",
+    content: "Quantum Winter",
+    start: "2023-02",
+    end: "2023-03",
+    group: "Other",
+  },
+  {
+    id: "Quantum_Spring_Challenge",
+    content: "Quantum Spring Challenge",
+    start: "2023-05",
+    end: "2023-06",
+    group: "Other",
+  },
 ]);
 
-// Configuration for the Timeline
 var options = {
   start: "2023-01",
   end: "2023-05",
@@ -401,7 +397,7 @@ var options = {
   maxHeight: "100%",
   minHeight: "100%",
 };
-// Create a Timeline
+
 var timeline = new vis.Timeline(container);
 timeline.setOptions(options);
 timeline.setGroups(groups);
