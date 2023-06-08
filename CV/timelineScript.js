@@ -385,6 +385,13 @@ var items = new vis.DataSet([
     end: "2023-06",
     group: "Other",
   },
+  {
+    id: "Hasklell",
+    content: "Haskell",
+    start: "2023-02",
+    end: "2023-12",
+    group: "Other",
+  },
 ]);
 
 var options = {

@@ -45,31 +45,32 @@ var nodes = new vis.DataSet([
   { id: 26, label: "Communication Systems", group: 5 },
   { id: 27, label: "Mobile and Wireless Telecommunications Systems", group: 5 },
 
-  { id: 28, label: "Cyberchallenge", group: 6 },
-
-  { id: 29, label: "Introductionto Video Games Creation", group: 7 },
-
+  { id: 29, label: "Sweden", group: 8 },
   { id: 30, label: "Logic and Argumentation", group: 8 },
   { id: 31, label: "Fundamentals of Industrial Cybersecurity", group: 8 },
   { id: 32, label: "Methods and Tools for Industrial Cybersecurity", group: 8 },
   { id: 33, label: "C# Programming", group: 8 },
-
-  { id: 34, label: "Applied Data Science Lab", group: 9 },
-
-  { id: 35, label: "Trailhead", group: 9 },
+  
+  { id: 45, label: "Courses", group: 10 },
+  { id: 34, label: "Applied Data Science Lab", group: 10 },
   { id: 36, label: "Quantum Computing", group: 10 },
   { id: 37, label: "Haskell", group: 10 },
   { id: 38, label: "Toefl", group: 10 },
   { id: 39, label: "Applied Data Science Lab", group: 10 },
   { id: 40, label: "Quantum Winter", group: 10 },
   { id: 41, label: "Quantum Spring Challenge", group: 10 },
+  { id: 42, label: "Haskell", group: 10 },
+  { id: 43, label: "Introductionto Video Games Creation", group: 10 },
+  
+  { id: 46, label: "Highschool", group: 11 },
+  { id: 47, label: "Arduino", group: 11 },
+  { id: 48, label: "Thesis", group: 11 },
+  { id: 49, label: "B1", group: 11 },
+  { id: 50, label: "B2", group: 11 },
 
-  
-  
-  { id: 42, label: "Arduino", group: 11 },
-  { id: 43, label: "Highschool thesis", group: 11 },
-  { id: 44, label: "B1", group: 11 },
-  { id: 45, label: "B2", group: 11 },
+  { id: 35, label: "Trailhead", group: 6 },
+  { id: 44, label: "Job", group: 6 },
+  { id: 28, label: "Cyberchallenge", group: 6 },
   /*
 { id: 35, label: "Introduction to Quantum Computing", group: 10 },
 { id: 37, label: "Quantum Winter", group: 10 },
@@ -153,6 +154,29 @@ var edges = new vis.DataSet([
   { from: 21, to: 100000 },
   { from: 22, to: 100000 },
   { from: 23, to: 100000 },
+
+  { from: 47, to: 46 },
+  { from: 48, to: 46 },
+  { from: 49, to: 46 },
+  { from: 50, to: 46 },
+
+  { from: 30, to: 29 },
+  { from: 31, to: 29 },
+  { from: 32, to: 29 },
+  { from: 33, to: 29 },
+
+  { from: 35, to: 44 },
+  { from: 28, to: 44 },
+
+  { from: 34, to: 45 },
+  { from: 36, to: 45 },
+  { from: 37, to: 45 },
+  { from: 38, to: 45 },
+  { from: 39, to: 45 },
+  { from: 40, to: 45 },
+  { from: 41, to: 45 },
+  { from: 42, to: 45 },
+  { from: 43, to: 45 },
 ]);
 
 // create a network
