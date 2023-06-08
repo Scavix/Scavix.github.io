@@ -1,10 +1,27 @@
 function mouseClicked() {
   if (mode == "create") {
-    let val = null;
+    let val = null, visibility = null;
     while (val == null || val.trim() == "") {
       val = prompt("Insert Class Name [Empty not accepted]");
     }
-    arr.push(new CClass(val, createVector(mouseX, mouseY)));
+    while (visibility == null) {
+      visibility = prompt("Insert Class Visibility [1 public - 2 private - 3 protected]");
+      switch (visibility) {
+        case "1":
+          visibility = "public";
+          break;
+        case "2":
+          visibility = "private";
+          break;
+        case "3":
+          visibility = "protected";
+          break;
+        default:
+          visibility = null;
+          break;
+      }
+    }
+    arr.push(new CClass(val, createVector(mouseX, mouseY), visibility));
   } else if (mode == "drag") {
     for (j = 0; j < arr.length; j++) {
       if (touchRetriever(arr[j])) {
@@ -63,7 +80,7 @@ function mouseClicked() {
           }
         }
         while (visibility == null) {
-          visibility = prompt("Insert Method Visibility [1 public - 2 private - 3 protected]");
+          visibility = prompt("Insert Attribute Visibility [1 public - 2 private - 3 protected]");
           switch (visibility) {
             case "1":
               visibility = "public";

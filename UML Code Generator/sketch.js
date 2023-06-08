@@ -115,12 +115,7 @@ function drawBind(classObj) {
 
 function printClass(classObj) {
   let myStr = "";
-  myStr +=
-    classObj.visibility == "public"
-      ? "+"
-      : classObj.visibility == "private"
-        ? "-"
-        : "#";
+  myStr += classObj.visibility;
   myStr += " class " + classObj.name;
   if (classObj.inherits) {
     myStr += " : " + classObj.inheritsFrom.name;

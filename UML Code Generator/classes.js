@@ -1,5 +1,5 @@
 class CClass {
-  constructor(name, vector) {
+  constructor(name, vector, visibility) {
     this.name = name;
     this.v = vector;
     this.drag = false;
@@ -9,6 +9,7 @@ class CClass {
     this.implementsFrom = [];
     this.attributes = [];
     this.methods = [];
+    this.visibility = visibility;
   }
 }
 
