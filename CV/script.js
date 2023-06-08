@@ -59,8 +59,7 @@ var nodes = new vis.DataSet([
   { id: 39, label: "Applied Data Science Lab", group: 10 },
   { id: 40, label: "Quantum Winter", group: 10 },
   { id: 41, label: "Quantum Spring Challenge", group: 10 },
-  { id: 42, label: "Haskell", group: 10 },
-  { id: 43, label: "Introductionto Video Games Creation", group: 10 },
+  { id: 42, label: "Introductionto Video Games Creation", group: 10 },
   
   { id: 46, label: "Highschool", group: 11 },
   { id: 47, label: "Arduino", group: 11 },
@@ -176,7 +175,6 @@ var edges = new vis.DataSet([
   { from: 40, to: 45 },
   { from: 41, to: 45 },
   { from: 42, to: 45 },
-  { from: 43, to: 45 },
 ]);
 
 // create a network
