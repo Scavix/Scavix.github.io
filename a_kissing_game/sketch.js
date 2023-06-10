@@ -117,7 +117,7 @@ function draw() {
     kissScore++;
   }
   textSize(min(windowWidth, windowHeight) / 20);
-  text(kissScore, 10, 30);
+  text(kissScore, min(windowWidth, windowHeight) / 100 * 2, min(windowWidth, windowHeight) / 100 + min(windowWidth, windowHeight) / 20);
   if (kissing && looking == "right") {
     trackSound.stop();
     if (playedScream == false) {
