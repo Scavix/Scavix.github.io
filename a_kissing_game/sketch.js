@@ -40,10 +40,9 @@ function setup() {
   createCanvas(min(windowWidth, windowHeight), min(windowWidth, windowHeight));
   faceSizes = min(windowWidth, windowHeight) / 7;
   eyeSizes = min(windowWidth, windowHeight) / 16;
-  trackSound.play();
   button = createButton("Start");
   button.class("button-30");
-  button.position(width /  2 - button.width, height / 4);
+  button.position(windowWidth /  2 - button.width, windowHeight / 4);
   button.mousePressed(() => {
     pressed = true;
     button.hide();
@@ -149,6 +148,7 @@ function draw() {
       startingDelay++;
       if(startingDelay==20){
         started = true;
+        trackSound.play();
       }
     }
   }
