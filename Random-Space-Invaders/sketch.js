@@ -59,6 +59,7 @@ function setup() {
   button.position(width/2-100, height/3*2);
   button.mousePressed(startMe);
   button.size(200);
+  button.class("button-9");
   rickButton = color(25, 23, 200, 50);
   rickButton = createButton('toRick');
   rickButton.position(width/2-25, height/2);
