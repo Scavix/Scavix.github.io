@@ -16,7 +16,11 @@ let i,
   eyeSizes,
   counter = 0,
   kissScore = 0,
-  playedScream = false;
+  playedScream = false,
+  started = false,
+  button,
+  startingDelay = 0,
+  pressed = false;
 
 function preload() {
   backgroundImg = loadImage("assets/background1.png");
@@ -36,7 +40,13 @@ function setup() {
   createCanvas(min(windowWidth, windowHeight), min(windowWidth, windowHeight));
   faceSizes = min(windowWidth, windowHeight) / 7;
   eyeSizes = min(windowWidth, windowHeight) / 16;
-  trackSound.play();
+  button = createButton("Start");
+  button.class("button-30");
+  button.position(windowWidth /  2 - button.width, windowHeight / 4);
+  button.mousePressed(() => {
+    pressed = true;
+    button.hide();
+  });
 }
 
 function draw() {
@@ -102,44 +112,63 @@ function draw() {
     image(eyeImg, (width / 100) * 21, (height / 100) * 41, eyeSizes, eyeSizes);
     image(eyeImg, (width / 100) * 17, (height / 100) * 41, eyeSizes, eyeSizes);
   }
-  counter++;
-  if (counter == 60 * 3) {
-    counter = 0;
-    if (looking == "right") {
-      looking = "center";
-    } else if (looking == "center") {
-      looking = random(["left", "right", "center"]);
-    } else if (looking == "left") {
-      looking = "center";
+  if (started) {
+    counter++;
+    if (counter == 60 * 2) {
+      counter = 0;
+      if (looking == "right") {
+        looking = "center";
+      } else if (looking == "center") {
+        looking = random(["left", "right", "center"]);
+      } else if (looking == "left") {
+        looking = "center";
+      }
     }
-  }
-  if (kissing) {
-    kissScore++;
-  }
-  textSize(min(windowWidth, windowHeight) / 20);
-  text(kissScore, min(windowWidth, windowHeight) / 100 * 2, min(windowWidth, windowHeight) / 100 + min(windowWidth, windowHeight) / 20);
-  if (kissing && looking == "right") {
-    trackSound.stop();
-    if (playedScream == false) {
-      screamSound.play();
-      playedScream = true;
+    if (kissing) {
+      kissScore++;
     }
-  } else {
-    playedScream = false;
+    textSize(min(windowWidth, windowHeight) / 20);
+    text(
+      kissScore,
+      (min(windowWidth, windowHeight) / 100) * 2,
+      min(windowWidth, windowHeight) / 100 + min(windowWidth, windowHeight) / 20
+    );
+    if (kissing && looking == "right") {
+      trackSound.stop();
+      if (playedScream == false) {
+        screamSound.play();
+        playedScream = true;
+      }
+    } else {
+      playedScream = false;
+    }
+  }else{
+    
+    if(pressed){
+      startingDelay++;
+      if(startingDelay==20){
+        started = true;
+        trackSound.play();
+      }
+    }
   }
 }
 function mousePressed() {
-  kissing = true;
-  trackSound.stop();
-  kissSound.loop();
+  if (started) {
+    kissing = true;
+    trackSound.stop();
+    kissSound.loop();
+  }
 }
 function touchStarted() {
   mousePressed();
 }
 function mouseReleased() {
-  kissing = false;
-  trackSound.play();
-  kissSound.stop();
+  if (started) {
+    kissing = false;
+    trackSound.play();
+    kissSound.stop();
+  }
 }
 function touchEnded() {
   mouseReleased();
