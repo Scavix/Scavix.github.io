@@ -1,7 +1,7 @@
-let angolo = 0;
+let angle = 0;
 
 function setup() {
-  createCanvas(1920,1080);
+  createCanvas(windowWidth,windowHeight);
   pixelDensity(1);
 }
 
@@ -13,17 +13,16 @@ function draw() {
 }
 
 function branch(len) {
-  //frameRate(60);
-  angolo+=0.00002;
+  angle+=0.00002;
   line(0, 0, 0, -len);
   translate(0, -len);
   if (len >= PI) {
     push();
-    rotate(-angolo);
+    rotate(-angle);
     branch(len * QUARTER_PI);
     pop();
     push();
-    rotate(+angolo);
+    rotate(+angle);
     branch(len * 0.5*QUARTER_PI);
     pop();
   }
