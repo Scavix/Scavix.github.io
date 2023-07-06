@@ -16,7 +16,7 @@ button {
 	display: inline-block;
 	outline: none;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1;
 	border-radius: 500px;
 	transition-property: background-color, border-color, color, box-shadow, filter;
@@ -38,6 +38,11 @@ button {
 button:hover {
 	transform: scale(1.04);
 	background-color: #21e065;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
 }
 
 /* === HEADING STYLE #1 === */
