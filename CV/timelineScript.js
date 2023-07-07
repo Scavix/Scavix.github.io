@@ -386,6 +386,13 @@ var items = new vis.DataSet([
     group: "Other",
   },
   {
+    id: "Quantum_Explorer",
+    content: "Quantum Explorer",
+    start: "2023-07",
+    end: "2023-12",
+    group: "Other",
+  },
+  {
     id: "Hasklell",
     content: "Haskell",
     start: "2023-02",
