@@ -1,38 +1,47 @@
 [
   {
     "name": "The Strange Thing About The Johnsons",
-    "url": "https://www.youtube.com/watch?v=jXhT9BjYEMA"
+    "url": "https://www.youtube.com/watch?v=jXhT9BjYEMA",
+    "youtubeid": "jXhT9BjYEMA"
   },
   {
     "name": "Make Me a Sandwich",
-    "url": "https://www.youtube.com/watch?v=pfGEdmZyVyY"
+    "url": "https://www.youtube.com/watch?v=pfGEdmZyVyY",
+    "youtubeid": "pfGEdmZyVyY"
   },
   {
     "name": "Other Side of the Box",
-    "url": "https://www.youtube.com/watch?v=OrOYvVf6tIM"
+    "url": "https://www.youtube.com/watch?v=OrOYvVf6tIM",
+    "youtubeid": "OrOYvVf6tIM"
   },
   {
     "name": "Intruders ",
-    "url": "https://www.youtube.com/watch?v=fSWFUFdV5TU"
+    "url": "https://www.youtube.com/watch?v=fSWFUFdV5TU",
+    "youtubeid": "fSWFUFdV5TU"
   },
   {
     "name": "Vicious",
-    "url": "https://www.youtube.com/watch?v=4d0ggz0aibg"
+    "url": "https://www.youtube.com/watch?v=4d0ggz0aibg",
+    "youtubeid": "4d0ggz0aibg"
   },
   {
     "name": "Suspense",
-    "url": "https://www.youtube.com/watch?v=jFGntPQ8H8Y"
+    "url": "https://www.youtube.com/watch?v=jFGntPQ8H8Y",
+    "youtubeid": "jFGntPQ8H8Y"
   },
   {
     "name": "The Ballerina",
-    "url": "https://www.youtube.com/watch?v=sTtmpFIaFqc"
+    "url": "https://www.youtube.com/watch?v=sTtmpFIaFqc",
+    "youtubeid": "sTtmpFIaFqc"
   },
   {
     "name": "Lights Out",
-    "url": "https://www.youtube.com/watch?v=FUQhNGEu2KA"
+    "url": "https://www.youtube.com/watch?v=FUQhNGEu2KA",
+    "youtubeid": "FUQhNGEu2KA"
   },
   {
     "name": "Harpya",
-    "url": "https://www.youtube.com/watch?v=6ytotfJSLp8"
+    "url": "https://www.youtube.com/watch?v=6ytotfJSLp8",
+    "youtubeid": "6ytotfJSLp8"
   }
 ]
