@@ -2,46 +2,73 @@
   {
     "name": "The Strange Thing About The Johnsons",
     "url": "https://www.youtube.com/watch?v=jXhT9BjYEMA",
-    "youtubeid": "jXhT9BjYEMA"
+    "youtubeid": "jXhT9BjYEMA",
+    "director": "Ari Aster",
+    "rate": 7,
+    "description": ""
   },
   {
     "name": "Make Me a Sandwich",
     "url": "https://www.youtube.com/watch?v=pfGEdmZyVyY",
-    "youtubeid": "pfGEdmZyVyY"
+    "youtubeid": "pfGEdmZyVyY",
+    "director": "Denman Hatch, Matt Hamilton",
+    "rate": 7,
+    "description": ""
   },
   {
     "name": "Other Side of the Box",
     "url": "https://www.youtube.com/watch?v=OrOYvVf6tIM",
-    "youtubeid": "OrOYvVf6tIM"
+    "youtubeid": "OrOYvVf6tIM",
+    "director": "Caleb J. Phillips",
+    "rate": 7,
+    "description": ""
   },
   {
-    "name": "Intruders ",
+    "name": "Intruders",
     "url": "https://www.youtube.com/watch?v=fSWFUFdV5TU",
-    "youtubeid": "fSWFUFdV5TU"
+    "youtubeid": "fSWFUFdV5TU",
+    "director": "Santiago Menghini",
+    "rate": 6,
+    "description": ""
   },
   {
     "name": "Vicious",
     "url": "https://www.youtube.com/watch?v=4d0ggz0aibg",
-    "youtubeid": "4d0ggz0aibg"
+    "youtubeid": "4d0ggz0aibg",
+    "director": "Oliver Park",
+    "rate": 7,
+    "description": ""
   },
   {
     "name": "Suspense",
     "url": "https://www.youtube.com/watch?v=jFGntPQ8H8Y",
-    "youtubeid": "jFGntPQ8H8Y"
+    "youtubeid": "jFGntPQ8H8Y",
+    "director": "Ben Burghart, Jacob Burghart",
+    "rate": 6,
+    "description": ""
   },
   {
     "name": "The Ballerina",
     "url": "https://www.youtube.com/watch?v=sTtmpFIaFqc",
-    "youtubeid": "sTtmpFIaFqc"
+    "youtubeid": "sTtmpFIaFqc",
+    "director": "Aaron Fradkin",
+    "rate": 7,
+    "description": ""
   },
   {
     "name": "Lights Out",
     "url": "https://www.youtube.com/watch?v=FUQhNGEu2KA",
-    "youtubeid": "FUQhNGEu2KA"
+    "youtubeid": "FUQhNGEu2KA",
+    "director": "David F. Sandberg",
+    "rate": 8,
+    "description": ""
   },
   {
     "name": "Harpya",
     "url": "https://www.youtube.com/watch?v=6ytotfJSLp8",
-    "youtubeid": "6ytotfJSLp8"
+    "youtubeid": "6ytotfJSLp8",
+    "director": "Raoul Servais",
+    "rate": 7,
+    "description": ""
   }
 ]
