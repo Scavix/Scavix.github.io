@@ -8,7 +8,7 @@
     <meta http-equiv="Expires" content="0" />
     <script>
       function showPhotos(folder) {
-        document.getElementById("image-container").hidden = false;
+        /*document.getElementById("image-container").hidden = false;
         var photos = document.querySelectorAll(".photo-gallery img");
         for (var i = 0; i < photos.length; i++) {
           if (photos[i].src.indexOf(folder) != -1) {
@@ -16,7 +16,7 @@
           } else {
             photos[i].style.display = "none";
           }
-        }
+        }*/
         if (folder == "12_04_2023") {
           document.title = "My photos from 12th April 2023";
           document.getElementById("anHeader").innerHTML =
@@ -36,6 +36,26 @@
           document.title = "My photos from 9th May 2023";
           document.getElementById("anHeader").innerHTML =
             "My photos from 9th May 2023";
+        }
+        if (folder == "23_05_2023") {
+          document.title = "My photos from 23rd May 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 23rd May 2023";
+        }
+        if (folder == "20_06_2023") {
+          document.title = "My photos from 20th June 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 20th June 2023";
+        }
+        if (folder == "04_07_2023") {
+          document.title = "My photos from 4th July 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 4th July 2023";
+        }
+        if (folder == "21_07_2023") {
+          document.title = "My photos from 21st July 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 21st July 2023";
         }
       }
       function myF() {
@@ -59,6 +79,7 @@
       <button id="myB5">23/05/2023</button>
       <button id="myB6">20/06/2023</button>
       <button id="myB7">04/07/2023</button>
+      <button id="myB8">21/07/2023</button>
     </div>
 
     <br />
@@ -258,38 +279,68 @@
                         "photos/04_07_2023/DSCN0185.JPG",
                         "photos/04_07_2023/DSCN0187.JPG",
                         "photos/04_07_2023/DSCN0188.JPG"];
+                    var folder8Images = [
+                        "photos/21_07_2023/DSCN0235.JPG",
+                        "photos/21_07_2023/DSCN0236.JPG",
+                        "photos/21_07_2023/DSCN0237.JPG",
+                        "photos/21_07_2023/DSCN0238.JPG",
+                        "photos/21_07_2023/DSCN0239.JPG",
+                        "photos/21_07_2023/DSCN0240.JPG",
+                        "photos/21_07_2023/DSCN0241.JPG",
+                        "photos/21_07_2023/DSCN0242.JPG",
+                        "photos/21_07_2023/DSCN0243.JPG",
+                        "photos/21_07_2023/DSCN0244.JPG",
+                        "photos/21_07_2023/DSCN0245.JPG",
+                        "photos/21_07_2023/DSCN0246.JPG",
+                        "photos/21_07_2023/DSCN0247.JPG",
+                        "photos/21_07_2023/DSCN0248.JPG",
+                        "photos/21_07_2023/DSCN0249.JPG",
+                        "photos/21_07_2023/DSCN0250.JPG",
+                        "photos/21_07_2023/DSCN0251.JPG",
+                        "photos/21_07_2023/DSCN0252.JPG",
+                        "photos/21_07_2023/DSCN0253.JPG",
+                        "photos/21_07_2023/DSCN0254.JPG",
+                        "photos/21_07_2023/DSCN0255.JPG",
+                        "photos/21_07_2023/DSCN0256.JPG",
+                        "photos/21_07_2023/DSCN0257.JPG",
+                        "photos/21_07_2023/DSCN0258.JPG"]
 
                     var imagesDiv = document.getElementById('images');
 
                     document.getElementById('myB1').addEventListener('click', function () {
-                        loadImages(folder1Images);
+                        loadImages(folder1Images, "12_04_2023");
                     });
 
                     document.getElementById('myB2').addEventListener('click', function () {
-                        loadImages(folder2Images);
+                        loadImages(folder2Images, "14_04_2023");
                     });
 
                     document.getElementById('myB3').addEventListener('click', function () {
-                        loadImages(folder3Images);
+                        loadImages(folder3Images, "18_04_2023");
                     });
 
                     document.getElementById('myB4').addEventListener('click', function () {
-                        loadImages(folder4Images);
+                        loadImages(folder4Images, "09_05_2023");
                     });
 
                     document.getElementById('myB5').addEventListener('click', function () {
-                        loadImages(folder5Images);
+                        loadImages(folder5Images, "23_05_2023");
                     });
 
                     document.getElementById('myB6').addEventListener('click', function () {
-                        loadImages(folder6Images);
+                        loadImages(folder6Images, "20_06_2023");
                     });
 
                     document.getElementById('myB7').addEventListener('click', function () {
-                        loadImages(folder7Images);
+                        loadImages(folder7Images, "04_07_2023");
                     });
 
-                    function loadImages(imageArray) {
+                    document.getElementById('myB8').addEventListener('click', function () {
+                        loadImages(folder8Images, "21_07_2023");
+                    });
+
+                    function loadImages(imageArray,folderName) {
+                      showPhotos(folderName);
                         imagesDiv.innerHTML = '';
                         imageArray.forEach(function (imageSrc) {
                             var img = document.createElement('img');
