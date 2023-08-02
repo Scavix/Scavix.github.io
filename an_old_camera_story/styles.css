@@ -33,6 +33,9 @@ button {
 	background-color: #1ED760;
 	height: 48px;
 	width: 20%;
+	margin-bottom: 0.5%;
+	margin-left: 0.25%;
+	margin-right: 0.25%;
 }
 
 button:hover {

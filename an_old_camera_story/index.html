@@ -57,6 +57,16 @@
           document.getElementById("anHeader").innerHTML =
             "My photos from 21st July 2023";
         }
+        if (folder == "30_07_2023") {
+          document.title = "My photos from 30th July 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 30th July 2023";
+        }
+        if (folder == "01_08_2023") {
+          document.title = "My photos from 1st August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 1st August 2023";
+        }
       }
       function myF() {
         document.getElementById("myB1").click();
@@ -77,9 +87,13 @@
       <button id="myB3">18/04/2023</button>
       <button id="myB4">09/05/2023</button>
       <button id="myB5">23/05/2023</button>
+    </div>
+    <div class="container">
       <button id="myB6">20/06/2023</button>
       <button id="myB7">04/07/2023</button>
       <button id="myB8">21/07/2023</button>
+      <button id="myB9">30/07/2023</button>
+      <button id="myB10">01/08/2023</button>
     </div>
 
     <br />
@@ -303,7 +317,45 @@
                         "photos/21_07_2023/DSCN0255.JPG",
                         "photos/21_07_2023/DSCN0256.JPG",
                         "photos/21_07_2023/DSCN0257.JPG",
-                        "photos/21_07_2023/DSCN0258.JPG"]
+                        "photos/21_07_2023/DSCN0258.JPG"];
+                    var folder9Images = [
+                        "photos/30_07_2023/DSCN0260.JPG",
+                        "photos/30_07_2023/DSCN0261.JPG",
+                        "photos/30_07_2023/DSCN0262.JPG",
+                        "photos/30_07_2023/DSCN0264.JPG",
+                        "photos/30_07_2023/DSCN0265.JPG",
+                        "photos/30_07_2023/DSCN0266.JPG",
+                        "photos/30_07_2023/DSCN0267.JPG",
+                        "photos/30_07_2023/DSCN0268.JPG",
+                        "photos/30_07_2023/DSCN0269.JPG",
+                        "photos/30_07_2023/DSCN0270.JPG",
+                        "photos/30_07_2023/DSCN0271.JPG",
+                        "photos/30_07_2023/DSCN0272.JPG",
+                        "photos/30_07_2023/DSCN0273.JPG",
+                        "photos/30_07_2023/DSCN0274.JPG",
+                        "photos/30_07_2023/DSCN0275.JPG",
+                        "photos/30_07_2023/DSCN0276.JPG"];
+                    var folder10Images = [
+                        "photos/01_08_2023/DSCN0278.JPG",
+                        "photos/01_08_2023/DSCN0279.JPG",
+                        "photos/01_08_2023/DSCN0280.JPG",
+                        "photos/01_08_2023/DSCN0282.JPG",
+                        "photos/01_08_2023/DSCN0283.JPG",
+                        "photos/01_08_2023/DSCN0284.JPG",
+                        "photos/01_08_2023/DSCN0285.JPG",
+                        "photos/01_08_2023/DSCN0286.JPG",
+                        "photos/01_08_2023/DSCN0287.JPG",
+                        "photos/01_08_2023/DSCN0288.JPG",
+                        "photos/01_08_2023/DSCN0289.JPG",
+                        "photos/01_08_2023/DSCN0290.JPG",
+                        "photos/01_08_2023/DSCN0291.JPG",
+                        "photos/01_08_2023/DSCN0292.JPG",
+                        "photos/01_08_2023/DSCN0293.JPG",
+                        "photos/01_08_2023/DSCN0294.JPG",
+                        "photos/01_08_2023/DSCN0295.JPG",
+                        "photos/01_08_2023/DSCN0296.JPG",
+                        "photos/01_08_2023/DSCN0297.JPG",
+                        "photos/01_08_2023/DSCN0298.JPG"];
 
                     var imagesDiv = document.getElementById('images');
 
@@ -337,6 +389,14 @@
 
                     document.getElementById('myB8').addEventListener('click', function () {
                         loadImages(folder8Images, "21_07_2023");
+                    });
+
+                    document.getElementById('myB9').addEventListener('click', function () {
+                        loadImages(folder9Images, "30_07_2023");
+                    });
+
+                    document.getElementById('myB10').addEventListener('click', function () {
+                        loadImages(folder10Images, "01_08_2023");
                     });
 
                     function loadImages(imageArray,folderName) {
