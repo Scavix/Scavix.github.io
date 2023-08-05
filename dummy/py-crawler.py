@@ -23,3 +23,5 @@ print(soup.find_all('h1'))
 found=soup.find_all('a', href=True)
 for a in found:
     gotoandgimme(a['href'],4,[a['href']])
+
+#Generate 3d structure ?
