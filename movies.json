@@ -174,5 +174,37 @@
     "director": "Chris Cunningham, Aphex Twin",
     "rate": 6,
     "description": ""
+  },
+  {
+    "name": "5 Minute Dating",
+    "url": "https://www.youtube.com/watch?v=5P_6Q2Q0NLk",
+    "youtubeid": "5P_6Q2Q0NLk",
+    "director": "Peter Hatch",
+    "rate": 7,
+    "description": ""
+  },
+  {
+    "name": "Lie Detector",
+    "url": "https://www.youtube.com/watch?v=CjVVNuraly8",
+    "youtubeid": "CjVVNuraly8",
+    "director": "Paul Emerson",
+    "rate": 8,
+    "description": ""
+  },
+  {
+    "name": "Lie Detector",
+    "url": "https://www.youtube.com/watch?v=BKorP55Aqvg",
+    "youtubeid": "BKorP55Aqvg",
+    "director": "Lauris Beinerts",
+    "rate": 7,
+    "description": ""
+  },
+  {
+    "name": "Tinglewood",
+    "url": "https://www.youtube.com/watch?v=_sOZcsC27ZE",
+    "youtubeid": "_sOZcsC27ZE",
+    "director": "Alexander von Hofmann",
+    "rate": 6,
+    "description": ""
   }
 ]
