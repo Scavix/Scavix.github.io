@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pillbug Simulation</title>
+    <meta property="og:title" content="Pillbug Simulation with Chart.js" />
+    <meta
+      property="og:description"
+      content="Simulate pillbug behavior and population growth with interactive controls and Chart.js visualization."
+    />
+    <meta property="og:image" content="path/to/og-image.png" />
+    <meta property="og:url" content="https://scavix.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <style>
+      body {
+        background-color: #00ffff;
+        font-family: Arial, sans-serif;
+      }
+      #datas {
+        display: flex;
+        justify-content: center;
+      }
+      #simulation-container {
+        margin: 20px;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        height: 55vh;
+        width: 35vw;
+      }
+      #controls {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+      .pillbug {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+      }
+      #chart-container {
+        margin: 20px;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        width: 55vw;
+        height: 55vh;
+        position: relative;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.3/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div id="controls">
+      <label for="initialPopulationSlider"
+        >Initial Population: <span id="initialPopulationValue">10</span></label
+      >
+      <input
+        type="range"
+        id="initialPopulationSlider"
+        min="2"
+        max="20"
+        value="10"
+      />
+
+      <br />
+
+      <label for="numEggsSlider"
+        >Number of Eggs: <span id="numEggsValue">20</span></label
+      >
+      <input type="range" id="numEggsSlider" min="10" max="100" value="20" />
+
+      <br />
+
+      <label for="numBroodsSlider"
+        >Number of Broods: <span id="numBroodsValue">3</span></label
+      >
+      <input type="range" id="numBroodsSlider" min="1" max="5" value="3" />
+
+      <br />
+
+      <label for="malePercentageSlider"
+        >Male Percentage: <span id="malePercentageValue">0.50</span></label
+      >
+      <input
+        type="range"
+        id="malePercentageSlider"
+        min="0"
+        max="1"
+        step="0.1"
+        value="0.5"
+      />
+
+      <br />
+
+      <label for="yearsSlider"
+        >Number of Years: <span id="yearsValue">10</span></label
+      >
+      <input type="range" id="yearsSlider" min="1" max="20" value="10" />
+    </div>
+
+    <div id="datas">
+      <div id="simulation-container"></div>
+
+      <div id="chart-container">
+        <canvas id="populationChart"></canvas>
+      </div>
+    </div>
+
+    <script>
+      var initialPopulationSlider = document.getElementById(
+        "initialPopulationSlider"
+      );
+      var initialPopulationValue = document.getElementById(
+        "initialPopulationValue"
+      );
+
+      var numEggsSlider = document.getElementById("numEggsSlider");
+      var numEggsValue = document.getElementById("numEggsValue");
+
+      var numBroodsSlider = document.getElementById("numBroodsSlider");
+      var numBroodsValue = document.getElementById("numBroodsValue");
+
+      var malePercentageSlider = document.getElementById(
+        "malePercentageSlider"
+      );
+      var malePercentageValue = document.getElementById("malePercentageValue");
+
+      var yearsSlider = document.getElementById("yearsSlider");
+      var yearsValue = document.getElementById("yearsValue");
+
+      var simulationContainer = document.getElementById("simulation-container");
+
+      initialPopulationSlider.addEventListener("input", function () {
+        initialPopulationValue.textContent = initialPopulationSlider.value;
+        simulatePillbug();
+      });
+
+      numEggsSlider.addEventListener("input", function () {
+        numEggsValue.textContent = numEggsSlider.value;
+        simulatePillbug();
+      });
+
+      numBroodsSlider.addEventListener("input", function () {
+        numBroodsValue.textContent = numBroodsSlider.value;
+        simulatePillbug();
+      });
+
+      malePercentageSlider.addEventListener("input", function () {
+        malePercentageValue.textContent = malePercentageSlider.value;
+        simulatePillbug();
+      });
+
+      yearsSlider.addEventListener("input", function () {
+        yearsValue.textContent = yearsSlider.value;
+        simulatePillbug();
+      });
+
+      var chartData = {
+        labels: [],
+        datasets: [
+          {
+            label: "Pillbug Population",
+            data: [],
+            borderColor: "#3498db",
+            fill: false,
+          },
+        ],
+      };
+
+      var chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Years",
+            },
+            beginAtZero: true,
+            type: "linear",
+            position: "bottom",
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Population",
+            },
+            beginAtZero: true,
+            type: "logarithmic",
+          },
+        },
+      };
+
+      function simulatePillbug() {
+        var initialPopulation = parseInt(initialPopulationSlider.value);
+        var numEggs = parseInt(numEggsSlider.value);
+        var numBroods = parseInt(numBroodsSlider.value);
+        var malePercentage = parseFloat(malePercentageSlider.value);
+        var years = parseInt(yearsSlider.value);
+
+        simulationContainer.innerHTML = "";
+
+        for (var i = 0; i < initialPopulation; i++) {
+          var pillbug = document.createElement("img");
+          pillbug.src = "pillbug.png";
+          pillbug.className = "pillbug";
+          pillbug.style.left =
+            Math.random() * (simulationContainer.offsetWidth - 20) + "px";
+          pillbug.style.top =
+            Math.random() * (simulationContainer.offsetHeight - 20) + "px";
+          simulationContainer.appendChild(pillbug);
+        }
+
+        var populationData = [];
+        var eggsMale_simulation = 0;
+        var eggsFemale_simulation = 0;
+        var youngsMale_simulation = 0;
+        var youngsFemale_simulation = 0;
+        var adultsMale1_simulation = Math.floor(
+          initialPopulation * malePercentage
+        );
+        var adultsFemale1_simulation =
+          initialPopulation - adultsMale1_simulation;
+        var adultsMale2_simulation = 0;
+        var adultsFemale2_simulation = 0;
+        var adultsMale3_simulation = 0;
+        var adultsFemale3_simulation = 0;
+        for (var year = 0; year <= years; year++) {
+          adultsMale3_simulation = adultsMale2_simulation;
+          adultsFemale3_simulation = adultsFemale2_simulation;
+          adultsMale2_simulation = adultsMale1_simulation;
+          adultsFemale2_simulation = adultsFemale1_simulation;
+          adultsMale1_simulation = youngsMale_simulation;
+          adultsFemale1_simulation = youngsFemale_simulation;
+          youngsMale_simulation = eggsMale_simulation;
+          youngsFemale_simulation = eggsFemale_simulation;
+          var males =
+            adultsMale1_simulation +
+            adultsMale2_simulation +
+            adultsMale3_simulation;
+          var females =
+            adultsFemale1_simulation +
+            adultsFemale2_simulation +
+            adultsFemale3_simulation;
+          var newEggs = Math.min(males, females) * numEggs * numBroods;
+          eggsMale_simulation = Math.floor(newEggs * malePercentage);
+          eggsFemale_simulation = newEggs - eggsMale_simulation;
+          var population =
+            youngsMale_simulation +
+            youngsFemale_simulation +
+            adultsMale1_simulation +
+            adultsFemale1_simulation +
+            adultsMale2_simulation +
+            adultsFemale2_simulation +
+            adultsMale3_simulation +
+            adultsFemale3_simulation;
+          populationData.push(population);
+        }
+
+        chartData.labels = Array.from({ length: years + 1 }, (_, i) => i);
+        chartData.datasets[0].data = populationData;
+
+        if (window.populationLineChart) {
+          window.populationLineChart.destroy();
+        }
+
+        window.populationLineChart = new Chart(populationChart, {
+          type: "line",
+          data: chartData,
+          options: chartOptions,
+        });
+      }
+
+      window.onload = function () {
+        simulatePillbug();
+      };
+    </script>
+  </body>
+</html>
