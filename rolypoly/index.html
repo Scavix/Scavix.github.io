@@ -9,7 +9,7 @@
       property="og:description"
       content="Simulate pillbug behavior and population growth with interactive controls and Chart.js visualization."
     />
-    <meta property="og:image" content="path/to/og-image.png" />
+    <meta property="og:image" content="pillbug.png" />
     <meta property="og:url" content="https://scavix.github.io/" />
     <meta property="og:type" content="website" />
     <meta
@@ -67,6 +67,14 @@
         width: 55vw;
         height: 55vh;
         position: relative;
+      }
+      .info-box {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 100%;
+        margin-top: 20px;
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.3/dist/chart.umd.min.js"></script>
@@ -126,6 +134,32 @@
       <div id="chart-container">
         <canvas id="populationChart"></canvas>
       </div>
+    </div>
+
+    <div class="info-box">
+      <h2>ⓘ How Pillbugs Reproduce</h2>
+      <p>
+        Pillbugs reproduce through a process known as "oviparous" reproduction.
+        The female pillbug lays eggs, which are then carried in a special pouch
+        called a marsupium. The eggs hatch into juvenile pillbugs, which look
+        similar to the adults. Pillbugs go through several molting stages as
+        they grow, shedding their exoskeleton to accommodate their increasing
+        size.
+      </p>
+      <p>
+        Male and female pillbugs are usually distinguishable by differences in
+        their last pair of pereopods (legs). Pillbugs typically have a high
+        reproductive capacity, with the ability to produce multiple broods of
+        eggs during their lifetimes.
+      </p>
+      <p>
+        Disclaimer: This simulation provides a simplified model of pillbug
+        population dynamics. It is based on assumptions and may not accurately
+        represent real-world behavior. For instance, the simulation assumes an
+        average lifespan of 3-4 years for pillbugs and allows you to adjust the
+        number of broods and eggs produced per year after reaching maturity (at
+        1 year).
+      </p>
     </div>
 
     <script>
