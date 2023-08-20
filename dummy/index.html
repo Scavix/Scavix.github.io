@@ -1,53 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
 
-    <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-          <title>Redirect me</title>
-          <meta name="viewport" content="width=device-width,initial-scale=1" />
-          <meta name="description" content="" />
-          <link rel="icon" href="favicon.png" />
-          <script>
-            var showing = false;
-            // Function to read the contents of a file
-            function readFile(filePath, callback) {
-              var xhr = new XMLHttpRequest();
-              xhr.open("GET", filePath, true);
-              xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                  callback(xhr.responseText);
-                }
-              };
-              xhr.send();
-            }
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirect me</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png" />
+  <script>
+    var showing = false;
+    // Function to read the contents of a file
+    function readFile(filePath, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", filePath, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          callback(xhr.responseText);
+        }
+      };
+      xhr.send();
+    }
 
-            function showMeTheCode() {
-              // Load the code snippet from a file and display it in the <pre> tag
-              readFile("py-generator.py", function (content) {
-                var preTag = document.getElementById("codeSnippet");
-                var codeTag = document.getElementById("codeBlock");
-                preTag.textContent = content;
-                  if (showing) {
-                      preTag.style.display = "none";
-                      showing = false;
-                      codeTag.innerHTML = 'Show me the <a href="#" onclick="showMeTheCode();return false;">code</a>';
-                  } else {
-                      preTag.style.display = "block";
-                      showing = true;
-                      codeTag.innerHTML = 'Hide the <a href="#" onclick="showMeTheCode();return false;">code</a>';
-                  }
-              });
-            }
-          </script>
-        </head>
-        <body>
-          <h1>Redirect me</h1>
-          <p>Redirect me to the pages <a href="pages/">index</a></p>
-          <p>Redirect me to the pages <a href="d3js/">graph</a></p>
-          <p id = "codeBlock">
-            Show the <a href="#" onclick="showMeTheCode();return false;">code</a>
-          </p>
-          <pre id="codeSnippet"></pre>
-        </body>
-      </html>
-    
+    function showMeTheGeneratorCode() {
+      // Load the code snippet from a file and display it in the <pre> tag
+      readFile("py-generator.py", function (content) {
+        var preTag = document.getElementById("generator-codeSnippet");
+        var codeTag = document.getElementById("generator-codeBlock");
+        preTag.textContent = content;
+        if (showing) {
+          preTag.style.display = "none";
+          showing = false;
+          codeTag.innerHTML = 'Show me the generator <a href="#" onclick="showMeTheGeneratorCode();return false;">code</a>';
+        } else {
+          preTag.style.display = "block";
+          showing = true;
+          codeTag.innerHTML = 'Hide the generator <a href="#" onclick="showMeTheGeneratorCode();return false;">code</a>';
+        }
+      });
+    }
+
+    function showMeTheCrawlerCode() {
+      // Load the code snippet from a file and display it in the <pre> tag
+      readFile("py-crawler.py", function (content) {
+        var preTag = document.getElementById("crawler-codeSnippet");
+        var codeTag = document.getElementById("crawler-codeBlock");
+        preTag.textContent = content;
+        if (showing) {
+          preTag.style.display = "none";
+          showing = false;
+          codeTag.innerHTML = 'Show me the crawler <a href="#" onclick="showMeTheCrawlerCode();return false;">code</a>';
+        } else {
+          preTag.style.display = "block";
+          showing = true;
+          codeTag.innerHTML = 'Hide the crawler <a href="#" onclick="showMeTheCrawlerCode();return false;">code</a>';
+        }
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Redirect me</h1>
+  <p>Redirect me to the pages <a href="pages/">index</a></p>
+  <p>Redirect me to the pages <a href="d3js/">graph</a></p>
+  <p id="generator-codeBlock">
+    Show me the generator <a href="#" onclick="showMeTheGeneratorCode();return false;">code</a>
+  </p>
+  <pre id="generator-codeSnippet"></pre>
+  <p id="crawler-codeBlock">
+    Show me the crawler <a href="#" onclick="showMeTheCrawlerCode();return false;">code</a>
+  </p>
+  <pre id="crawler-codeSnippet"></pre>
+</body>
+
+</html>
