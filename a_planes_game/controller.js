@@ -182,8 +182,19 @@ class Drawer {
         }
     }
     drawPlanes(myImgs,myPlanes) {
-        for (let i = 0; i < myPlanes.length; i++) {
-            image(myImgs[0], myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100, 15, 15);
+        for (let i = 0; i < myPlanes.length; i++) {/*
+            push();
+            translate(myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100);
+            rotate(
+                atan2(
+                    myPlanes[i].route.arrival.city.pos.y - myPlanes[i].route.departure.city.pos.y,
+                    myPlanes[i].route.arrival.city.pos.x - myPlanes[i].route.departure.city.pos.x
+                )
+            );
+            console.log(myPlanes[i])
+            image(myImgs[myPlanes[i].level], 0, 0, 20, 20);
+            pop();*/
+            image(myImgs[myPlanes[i].level], myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100, 20, 20);
         }
     }
 }

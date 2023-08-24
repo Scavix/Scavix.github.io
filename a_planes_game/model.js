@@ -22,7 +22,7 @@ class Airplane{
         this.level=level;
         this.maxPassengers=maxPassengers;
         this.passengers=0;
-        this.speed=0.05;
+        this.speed=speed;
         this.timer = 101;
     }
 }
