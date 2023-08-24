@@ -13,13 +13,16 @@ class Airport{
 }
 
 class Airplane{
-    constructor(name,pos,isFlying,whereStanding,route,model){
+    constructor(name,pos,isFlying,whereStanding,route,level,speed,maxPassengers){
         this.name=name;
         this.pos=pos;
         this.isFlying=isFlying;
         this.whereStanding=whereStanding;
         this.route=route;
-        this.model=model;
+        this.level=level;
+        this.maxPassengers=maxPassengers;
+        this.passengers=0;
+        this.speed=0.05;
         this.timer = 101;
     }
 }
