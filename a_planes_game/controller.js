@@ -1,14 +1,20 @@
 class Controller {
-    constructor(backgroundImg, planesImgs, backgroundColor) {
+    constructor(backgroundImg, planesImgs, cityImgs, backgroundColor) {
         this.backgroundImg = backgroundImg;
         this.planesImgs = planesImgs;
         this.myDrawer = new Drawer();
         this.myLoader = new Loader();
+        this.cityImgs = cityImgs;
         this.planes = [];
         this.nodes = [];
         this.cities = [];
         this.init();
         this.backgroundColor = backgroundColor;
+
+        /*this.isDragging = false;
+        this.draggedFrom = null;
+        this.draggedTo = null;
+        this.mouseStart = createVector(0, 0);*/
     }
     init() {
         this.cities = this.myLoader.loadCities();
@@ -19,9 +25,10 @@ class Controller {
     draw() {
         background(this.backgroundColor);
         background(this.backgroundImg);
-        this.myDrawer.drawCities(this.cities);
         this.myDrawer.drawNodes(this.nodes);
+        this.myDrawer.drawCities(this.cities, this.cityImgs);
         this.myDrawer.drawPlanes(this.planesImgs,this.planes);
+        //this.myDrawer.drawDrag(this.draggedFrom);
     }
     move() {
         for (let i = 0; i < this.planes.length; i++) {
@@ -158,7 +165,7 @@ class Loader {
 class Drawer {
     constructor() {
     }
-    drawCities(myCities) {
+    drawCities(myCities,cityImgs) {
         noStroke();
         for (let i = 0; i < myCities.length; i++) {
             if (dist(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, mouseX, mouseY) < 15) {
@@ -169,6 +176,7 @@ class Drawer {
                 fill('blue');
                 circle(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, 15);
             }
+            //image(cityImgs, myCities[i].pos.x * width / 100 - 15/2, myCities[i].pos.y * height / 100 - 15/2, 15,15);
         }
     }
     showLabel(city) {
@@ -182,20 +190,22 @@ class Drawer {
         }
     }
     drawPlanes(myImgs,myPlanes) {
-        for (let i = 0; i < myPlanes.length; i++) {/*
+        fill('red');
+        for (let i = 0; i < myPlanes.length; i++) {
             push();
+            //translate(myPlanes[i].pos.x * width / 100 - 10, myPlanes[i].pos.y * height / 100 - 10);
             translate(myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100);
-            rotate(
-                atan2(
-                    myPlanes[i].route.arrival.city.pos.y - myPlanes[i].route.departure.city.pos.y,
-                    myPlanes[i].route.arrival.city.pos.x - myPlanes[i].route.departure.city.pos.x
-                )
-            );
-            console.log(myPlanes[i])
-            image(myImgs[myPlanes[i].level], 0, 0, 20, 20);
-            pop();*/
-            image(myImgs[myPlanes[i].level], myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100, 20, 20);
+            rotate(myPlanes[i].route.getAngle());
+            //image(myImgs[0], -10, -10, 20, 20);
+            circle(0,0,10);
+            pop();
         }
     }
+    /*drawDrag(from) {
+        if (from) {
+            stroke('red');
+            line(from.pos.x * width / 100, from.pos.y * height / 100, mouseX, mouseY * height / 100);
+        }
+    }*/
 }
 
