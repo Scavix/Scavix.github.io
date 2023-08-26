@@ -17,9 +17,42 @@ function setup() {
   let cnv = createCanvas(windowWidth * .95, windowWidth / 2.3);
   cnv.parent('sketch-holder');
   controller = new Controller(img, imgs, city, '#ADD8E6');
-  controller.planes.push(new Airplane("R18", new Position(controller.cities[0].pos.x, controller.cities[0].pos.y), true, controller.cities[0], new Route(controller.getAirport(controller.cities[0].name), controller.getAirport(controller.cities[1].name)), 1, 0.05, 50));
-  controller.planes.push(new Airplane("R19", new Position(controller.cities[0].pos.x, controller.cities[0].pos.y), true, controller.cities[0], new Route(controller.getAirport(controller.cities[0].name), controller.getAirport(controller.cities[2].name)), 2, 0.05, 50));
-  controller.planes.push(new Airplane("R20", new Position(controller.cities[1].pos.x, controller.cities[1].pos.y), true, controller.cities[1], new Route(controller.getAirport(controller.cities[1].name), controller.getAirport(controller.cities[3].name)), 3, 0.05, 50));
+  controller.planes.push(
+    new Airplane(
+      "R18",
+      new Position(controller.cities[0].pos.x, controller.cities[0].pos.y),
+      true,
+      controller.cities[0],
+      new Route(controller.getAirport(controller.cities[0].name),
+        controller.getAirport(controller.cities[1].name)),
+      1, 0.05, 50));
+  controller.planes.push(
+    new Airplane(
+      "R19",
+      new Position(controller.cities[0].pos.x, controller.cities[0].pos.y),
+      true,
+      controller.cities[0],
+      new Route(controller.getAirport(controller.cities[0].name),
+        controller.getAirport(controller.cities[7].name)),
+      2, 0.05, 50));
+  controller.planes.push(
+    new Airplane(
+      "R20",
+      new Position(controller.cities[1].pos.x, controller.cities[1].pos.y),
+      true,
+      controller.cities[1],
+      new Route(controller.getAirport(controller.cities[1].name),
+        controller.getAirport(controller.cities[6].name)),
+      3, 0.05, 50));
+  controller.planes.push(
+    new Airplane(
+      "R21",
+      new Position(controller.cities[6].pos.x, controller.cities[6].pos.y),
+      true,
+      controller.cities[1],
+      new Route(controller.getAirport(controller.cities[6].name),
+        controller.getAirport(controller.cities[4].name)),
+      4, 0.05, 50));
 }
 
 function draw() {
@@ -31,38 +64,46 @@ function windowResized() {
   resizeCanvas(windowWidth * .95, windowWidth / 2.3);
 }
 
-/*function mouseClicked() {
-  console.log("mouseClicked");
+function mousePressed() {
+  console.log("mousePressed", mouseX, mouseY);
   for (let i = 0; i < controller.cities.length; i++) {
-    if (dist(mouseX, mouseY, controller.city[i].pos.x * width / 100, controller.city[i].pos.y * height / 100) < 10) {
+    if (dist(mouseX, mouseY, controller.cities[i].pos.x * width / 100, controller.cities[i].pos.y * height / 100) < 20) {
       controller.isDragging = true;
-      controller.draggedFrom = controller.city[i];
-      controller.mouseStart.set(mouseX, mouseY);
-      console.log("ok");
+      controller.draggedFrom = controller.cities[i];
       break;
     }
   }
 }
 
 function mouseDragged() {
-  if (controller.isDragging && controller.draggedFrom) {
-    controller.draggedFrom.pos.x += (mouseX - controller.mouseStart.x) / (width / 100);
-    controller.draggedFrom.pos.y += (mouseY - controller.mouseStart.y) / (height / 100);
-    controller.mouseStart.set(mouseX, mouseY);
+  console.log("mouseDragged", mouseX, mouseY);
+  if (controller.isDragging) {
+    for (let i = 0; i < controller.cities.length; i++) {
+      if (dist(mouseX, mouseY, controller.cities[i].pos.x * width / 100, controller.cities[i].pos.y * height / 100) < 20) {
+        document.getElementById("route-cost").innerHTML = parseInt(dist(controller.draggedFrom.pos.x * width / 100, controller.draggedFrom.pos.y * height / 100, controller.cities[i].pos.x * width / 100, controller.cities[i].pos.y * height / 100));
+        return;
+      }
+    }
+    document.getElementById("route-cost").innerHTML = parseInt(dist(controller.draggedFrom.pos.x * width / 100, controller.draggedFrom.pos.y * height / 100, mouseX, mouseY));
+  }
+  else{
+    document.getElementById("route-cost").innerHTML = 0;
   }
 }
 
 function mouseReleased() {
+  console.log("mouseReleased", mouseX, mouseY);
   for (let i = 0; i < controller.cities.length; i++) {
-    if (dist(mouseX, mouseY, controller.city[i].pos.x * width / 100, controller.city[i].pos.y * height / 100) < 10) {
-      controller.isDragging = true;
-      controller.draggedTo = controller.city[i];
-      controller.mouseStart.set(mouseX, mouseY);
+    if ((dist(mouseX, mouseY, controller.cities[i].pos.x * width / 100, controller.cities[i].pos.y * height / 100) < 20) && (controller.coins >= parseInt(document.getElementById("route-cost").innerHTML))) {
+      controller.isDragging = false;
+      controller.draggedTo = controller.cities[i];
+      controller.addRoute(controller.draggedFrom, controller.draggedTo);
+      controller.coins -= parseInt(document.getElementById("route-cost").innerHTML);
       break;
     }
   }
   controller.isDragging = false;
-}*/
+}
 
 function addPlane() {
   if (controller.coins >= document.getElementById("plane-cost").innerHTML) {
@@ -89,7 +130,6 @@ function upgradePlane() {
 }
 
 function mouseClicked() {
-  console.log("mouseClicked");
   for (let i = 0; i < controller.planes.length; i++) {
     if (dist(mouseX, mouseY, controller.planes[i].pos.x * width / 100, controller.planes[i].pos.y * height / 100) < 20) {
       controller.planes.map(plane => plane.selected = false);

@@ -48,7 +48,6 @@ class Route{
         this.arrival=arrival;
     }
     getAngle(){
-        //return atan2(this.city2.y - this.city1.y, this.city2.x - this.city1.x);
         return atan2(this.arrival.city.pos.y - this.departure.city.pos.y, this.arrival.city.pos.x - this.departure.city.pos.x);
     }
 }

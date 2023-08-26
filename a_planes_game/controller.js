@@ -14,10 +14,9 @@ class Controller {
         this.coins = 100;
         this.speedMultiplier = 1;
         this.sizeMultiplier = 1;
-        /*this.isDragging = false;
+
+        this.isDragging = false;
         this.draggedFrom = null;
-        this.draggedTo = null;
-        this.mouseStart = createVector(0, 0);*/
     }
     init() {
         this.cities = this.myLoader.loadCities();
@@ -33,7 +32,7 @@ class Controller {
         this.myDrawer.drawPlanes(this.planesImgs, this.planes, this.translateMultiplier(this.sizeMultiplier));
         this.io.updateCoins(this.coins);
         this.io.updatePopulation(this.planes.map(plane => plane.maxPassengers*plane.level).reduce((a, b) => a + b, 0));
-        //this.myDrawer.drawDrag(this.draggedFrom);
+        this.myDrawer.drawDrag(this.draggedFrom);
     }
     move() {
         for (let i = 0; i < this.planes.length; i++) {
@@ -124,6 +123,19 @@ class Controller {
             default:
                 return 1;
         }
+    }
+    addRoute(from, to) {
+        if(from.name == to.name) return;
+        let tmp1, tmp2;
+        for (let i = 0; i < this.airports.length; i++) {
+            if (this.airports[i].city.name == from.name) {
+                tmp1 = this.airports[i];
+            }
+            if (this.airports[i].city.name == to.name) {
+                tmp2 = this.airports[i];
+            }
+        }
+        this.nodes.push(new Node(tmp1.city, tmp2.city));
     }
 }
 
@@ -230,12 +242,12 @@ class Drawer {
             pop();
         }
     }
-    /*drawDrag(from) {
-        if (from) {
+    drawDrag(from) {
+        if (from && controller.isDragging) {
             stroke('red');
-            line(from.pos.x * width / 100, from.pos.y * height / 100, mouseX, mouseY * height / 100);
+            line(from.pos.x * width / 100, from.pos.y * height / 100, mouseX, mouseY);
         }
-    }*/
+    }
 }
 
 class IO {

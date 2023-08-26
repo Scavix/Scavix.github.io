@@ -34,6 +34,16 @@
       "city": "Brasilia",
       "x": 36,
       "y": 70
+    },
+    {
+      "city": "Moscow",
+      "x": 59,
+      "y": 18
+    },
+    {
+      "city": "New Delhi",
+      "x": 70,
+      "y": 37
     }
   ],
   "nodes": [
@@ -43,6 +53,14 @@
     },
     {
       "a": "London",
+      "b": "Moscow"
+    },
+    {
+      "a": "New Delhi",
+      "b": "Moscow"
+    },
+    {
+      "a": "New Delhi",
       "b": "Tokyo"
     },
     {
@@ -63,23 +81,7 @@
     },
     {
       "a": "Rome",
-      "b": "Canberra"
-    },
-    {
-      "a": "Rome",
       "b": "London"
-    },
-    {
-      "a": "Rome",
-      "b": "Washington D.C."
-    },
-    {
-      "a": "Rome",
-      "b": "Tokyo"
-    },
-    {
-      "a": "Rome",
-      "b": "Ottawa"
     },
     {
       "a": "Canberra",
