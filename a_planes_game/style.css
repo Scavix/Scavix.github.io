@@ -20,10 +20,14 @@ button:hover {
 }
 
 .footer {
-  left: 0;
-  bottom: 0;
   width: 100%;
   text-align: center;
+  background-color: #86cce4;
+  color: white;
+  padding: 0.5em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
 #sketch-holder-container {
@@ -31,4 +35,44 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#stats {
+  top: 0;
+  left: 0;
+  padding: 0.5em;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-size: 1em;
+}
+
+#header {
+  position: absolute;
+  top: 0;
+  margin-top: 0;
+  right: 5%;
+  height: 1%;
+  text-align: center;
+	text-transform: uppercase;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+	padding-bottom: 0;
+}
+
+hr{
+  margin-top: -4%;
+  width: 90%;
+  right: 5%;
+  position: absolute;
+  border-bottom: .8% solid #4c38a5;
+}
+
+#plane-details{
+  top: 0;
+  margin-top: 0;
+  margin-left: 5%;
+  left: 5%;
+  height: 1%;
+  text-align: left;
+  text-transform: uppercase;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  padding-bottom: 0;
 }

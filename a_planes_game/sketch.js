@@ -63,3 +63,55 @@ function mouseReleased() {
   }
   controller.isDragging = false;
 }*/
+
+function addPlane() {
+  if(controller.coins >= document.getElementById("plane-cost").innerHTML){
+    controller.coins -= document.getElementById("plane-cost").innerHTML;
+    controller.planes.push(new Airplane("R" + str(controller.planes.length + 1), new Position(controller.cities[0].pos.x, controller.cities[0].pos.y), true, controller.cities[0], new Route(controller.getAirport(controller.cities[0].name), controller.getAirport(controller.cities[1].name)), 1, 0.05, 50));
+    document.getElementById("plane-cost").innerHTML = parseInt(document.getElementById("plane-cost").innerHTML) * 2;
+  }
+  controller.planes.map(plane => plane.selected = false);
+}
+
+function upgradePlane(){
+  for (let i = 0; i < controller.planes.length; i++) {
+    if(controller.planes[i].selected){
+      if(controller.coins >= document.getElementById("upgrade-cost").innerHTML){
+        controller.coins -= document.getElementById("upgrade-cost").innerHTML;
+        controller.planes[i].level++;
+        document.getElementById("upgrade-cost").innerHTML = controller.planes[i].level * 100;
+        controller.planes[i].passengers = controller.planes[i].level * 50;
+        controller.planes.map(plane => plane.selected = false);
+      }
+      break;
+    }
+  }
+}
+
+function mouseClicked() {
+  console.log("mouseClicked");
+  for (let i = 0; i < controller.planes.length; i++) {
+    if (dist(mouseX, mouseY, controller.planes[i].pos.x * width / 100, controller.planes[i].pos.y * height / 100) < 20) {
+      controller.planes.map(plane => plane.selected = false);
+      controller.planes[i].selected = true;
+      document.getElementById("upgrade").disabled = false;
+      document.getElementById("upgrade-cost").innerHTML = controller.planes[i].level * 100;
+      document.getElementById("plane-name").innerHTML = "Plane: " + controller.planes[i].name;
+      document.getElementById("plane-speed").innerHTML = "Speed: " + controller.planes[i].speed * controller.planes[i].level;
+      document.getElementById("plane-level").innerHTML = "Level: " + controller.planes[i].level;
+      document.getElementById("plane-capacity").innerHTML = "Capacity: " + controller.planes[i].passengers;
+      return;
+    }
+  }
+  document.getElementById("upgrade").disabled = true;
+  document.getElementById("upgrade-cost").innerHTML = 0;
+  document.getElementById("plane-name").innerHTML = "Plane: -";
+      document.getElementById("plane-speed").innerHTML = "Speed: -";
+      document.getElementById("plane-level").innerHTML = "Level: -";
+      document.getElementById("plane-capacity").innerHTML = "Capacity: -";
+      controller.planes.map(plane => plane.selected = false);
+}
+
+function updateSpeedMultiplier(){
+  controller.speedMultiplier = document.getElementById("speed-slider").value;
+}

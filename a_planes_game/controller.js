@@ -10,7 +10,9 @@ class Controller {
         this.cities = [];
         this.init();
         this.backgroundColor = backgroundColor;
-
+        this.io = new IO();
+        this.coins = 100;
+        this.speedMultiplier = 1;
         /*this.isDragging = false;
         this.draggedFrom = null;
         this.draggedTo = null;
@@ -27,7 +29,9 @@ class Controller {
         background(this.backgroundImg);
         this.myDrawer.drawNodes(this.nodes);
         this.myDrawer.drawCities(this.cities, this.cityImgs);
-        this.myDrawer.drawPlanes(this.planesImgs,this.planes);
+        this.myDrawer.drawPlanes(this.planesImgs, this.planes);
+        this.io.updateCoins(this.coins);
+        this.io.updatePopulation(this.planes.map(plane => plane.maxPassengers*plane.level).reduce((a, b) => a + b, 0));
         //this.myDrawer.drawDrag(this.draggedFrom);
     }
     move() {
@@ -44,13 +48,16 @@ class Controller {
                 if (this.planes[i].route.departure.city.pos.y > this.planes[i].route.arrival.city.pos.y) {
                     yDir = -1;
                 } else { yDir = 1; }
-                this.planes[i].pos.x += xDir * this.planes[i].speed * this.planes[i].level * abs(Math.cos(angle));
-                this.planes[i].pos.y += yDir * this.planes[i].speed * this.planes[i].level * abs(Math.sin(angle));
-                if (dist(this.planes[i].pos.x, this.planes[i].pos.y, this.planes[i].route.arrival.city.pos.x, this.planes[i].route.arrival.city.pos.y) < this.planes[i].speed * 2) {
+                this.planes[i].pos.x += xDir * (this.planes[i].speed * this.translateMultiplier(this.speedMultiplier)) * this.planes[i].level * abs(Math.cos(angle));
+                this.planes[i].pos.y += yDir * (this.planes[i].speed * this.translateMultiplier(this.speedMultiplier)) * this.planes[i].level * abs(Math.sin(angle));
+                if (dist(this.planes[i].pos.x, this.planes[i].pos.y, this.planes[i].route.arrival.city.pos.x, this.planes[i].route.arrival.city.pos.y) < (this.planes[i].speed*this.translateMultiplier(this.speedMultiplier)) * 2) {
                     this.planes[i].isFlying = false;
                     this.planes[i].pos.x = this.planes[i].route.arrival.city.pos.x;
                     this.planes[i].pos.y = this.planes[i].route.arrival.city.pos.y;
                     this.planes[i].whereStanding = this.getAirport(this.planes[i].route.arrival.city.name);
+                    // TODO
+                    //this.coins += this.planes[i].passengers;
+                    this.coins += this.planes[i].maxPassengers * this.planes[i].level;
                 }
             }
             else {
@@ -100,6 +107,22 @@ class Controller {
             }
         }
         return new Route(tmp1, tmp2);
+    }
+    translateMultiplier(multiplier) {
+        switch (multiplier) {
+            case "1":
+                return 0.5;
+            case "2":
+                return 0.75;
+            case "3":
+                return 1;
+            case "4":
+                return 1.5;
+            case "5":
+                return 2;
+            default:
+                return 1;
+        }
     }
 }
 
@@ -165,7 +188,7 @@ class Loader {
 class Drawer {
     constructor() {
     }
-    drawCities(myCities,cityImgs) {
+    drawCities(myCities, cityImgs) {
         noStroke();
         for (let i = 0; i < myCities.length; i++) {
             if (dist(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, mouseX, mouseY) < 15) {
@@ -189,15 +212,20 @@ class Drawer {
             line(myNodes[i].a.pos.x * width / 100, myNodes[i].a.pos.y * height / 100, myNodes[i].b.pos.x * width / 100, myNodes[i].b.pos.y * height / 100);
         }
     }
-    drawPlanes(myImgs,myPlanes) {
-        fill('red');
+    drawPlanes(myImgs, myPlanes) {
         for (let i = 0; i < myPlanes.length; i++) {
+            if (myPlanes[i].selected) {
+                fill('white');
+                noStroke();
+            } else {
+                fill('brown');
+            }
             push();
             //translate(myPlanes[i].pos.x * width / 100 - 10, myPlanes[i].pos.y * height / 100 - 10);
             translate(myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100);
             rotate(myPlanes[i].route.getAngle());
             //image(myImgs[0], -10, -10, 20, 20);
-            circle(0,0,10);
+            circle(0, 0, 10);
             pop();
         }
     }
@@ -209,3 +237,13 @@ class Drawer {
     }*/
 }
 
+class IO {
+    constructor() {
+    }
+    updateCoins(coins) {
+        document.getElementById("coins").innerHTML = coins;
+    }
+    updatePopulation(people) {
+        document.getElementById("people-travelling").innerHTML = people;
+    }
+}

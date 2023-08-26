@@ -24,6 +24,7 @@ class Airplane{
         this.passengers=0;
         this.speed=speed;
         this.timer = 101;
+        this.selected = false;
     }
 }
 
