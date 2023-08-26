@@ -13,6 +13,7 @@ class Controller {
         this.io = new IO();
         this.coins = 100;
         this.speedMultiplier = 1;
+        this.sizeMultiplier = 1;
         /*this.isDragging = false;
         this.draggedFrom = null;
         this.draggedTo = null;
@@ -28,8 +29,8 @@ class Controller {
         background(this.backgroundColor);
         background(this.backgroundImg);
         this.myDrawer.drawNodes(this.nodes);
-        this.myDrawer.drawCities(this.cities, this.cityImgs);
-        this.myDrawer.drawPlanes(this.planesImgs, this.planes);
+        this.myDrawer.drawCities(this.cities, this.cityImgs, this.translateMultiplier(this.sizeMultiplier));
+        this.myDrawer.drawPlanes(this.planesImgs, this.planes, this.translateMultiplier(this.sizeMultiplier));
         this.io.updateCoins(this.coins);
         this.io.updatePopulation(this.planes.map(plane => plane.maxPassengers*plane.level).reduce((a, b) => a + b, 0));
         //this.myDrawer.drawDrag(this.draggedFrom);
@@ -188,16 +189,16 @@ class Loader {
 class Drawer {
     constructor() {
     }
-    drawCities(myCities, cityImgs) {
+    drawCities(myCities, cityImgs, sizeMultiplier) {
         noStroke();
         for (let i = 0; i < myCities.length; i++) {
             if (dist(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, mouseX, mouseY) < 15) {
                 fill('green');
-                circle(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, 15);
+                circle(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, 15*sizeMultiplier);
                 this.showLabel(myCities[i]);
             } else {
                 fill('blue');
-                circle(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, 15);
+                circle(myCities[i].pos.x * width / 100, myCities[i].pos.y * height / 100, 15*sizeMultiplier);
             }
             //image(cityImgs, myCities[i].pos.x * width / 100 - 15/2, myCities[i].pos.y * height / 100 - 15/2, 15,15);
         }
@@ -212,7 +213,7 @@ class Drawer {
             line(myNodes[i].a.pos.x * width / 100, myNodes[i].a.pos.y * height / 100, myNodes[i].b.pos.x * width / 100, myNodes[i].b.pos.y * height / 100);
         }
     }
-    drawPlanes(myImgs, myPlanes) {
+    drawPlanes(myImgs, myPlanes, sizeMultiplier) {
         for (let i = 0; i < myPlanes.length; i++) {
             if (myPlanes[i].selected) {
                 fill('white');
@@ -225,7 +226,7 @@ class Drawer {
             translate(myPlanes[i].pos.x * width / 100, myPlanes[i].pos.y * height / 100);
             rotate(myPlanes[i].route.getAngle());
             //image(myImgs[0], -10, -10, 20, 20);
-            circle(0, 0, 10);
+            circle(0, 0, 10*sizeMultiplier);
             pop();
         }
     }
