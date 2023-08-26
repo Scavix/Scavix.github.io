@@ -20,12 +20,8 @@ button:hover {
 }
 
 .footer {
-  width: 100%;
   text-align: center;
-  background-color: #86cce4;
-  color: white;
-  padding: 0.5em;
-  position: fixed;
+  padding-top: 0.5em;
   bottom: 0;
   left: 0;
 }
@@ -69,10 +65,11 @@ hr{
   top: 0;
   margin-top: 0;
   margin-left: 5%;
-  left: 5%;
+  left: 10%;
   height: 1%;
   text-align: left;
   text-transform: uppercase;
   font-family:Georgia, 'Times New Roman', Times, serif;
-  padding-bottom: 0;
+  padding-bottom: 1%;
+  padding-top: 1%;
 }
