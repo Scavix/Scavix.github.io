@@ -6,17 +6,9 @@
     />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       function showPhotos(folder) {
-        /*document.getElementById("image-container").hidden = false;
-        var photos = document.querySelectorAll(".photo-gallery img");
-        for (var i = 0; i < photos.length; i++) {
-          if (photos[i].src.indexOf(folder) != -1) {
-            photos[i].style.display = "block";
-          } else {
-            photos[i].style.display = "none";
-          }
-        }*/
         if (folder == "12_04_2023") {
           document.title = "My photos from 12th April 2023";
           document.getElementById("anHeader").innerHTML =
@@ -67,16 +59,39 @@
           document.getElementById("anHeader").innerHTML =
             "My photos from 1st August 2023";
         }
+        if (folder == "11_08_2023") {
+          document.title = "My photos from 11th August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 11th August 2023";
+        }
+        if (folder == "12_08_2023") {
+          document.title = "My photos from 12 August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 12th August 2023";
+        }
+        if (folder == "14_08_2023") {
+          document.title = "My photos from 14th August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 14th August 2023";
+        }
+        if (folder == "25_08_2023") {
+          document.title = "My photos from 25th August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 25th August 2023";
+        }
+        if (folder == "26_08_2023") {
+          document.title = "My photos from 26th August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 26th August 2023";
+        }
       }
-      function myF() {
-        document.getElementById("myB1").click();
-      }
+
+      window.onresize = function(){ location.reload(); }
     </script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
 
   <body>
-    <!-- <body onload="myF()"> -->
     <div class="one">
       <h1 id="anHeader">My photos from</h1>
     </div>
@@ -85,15 +100,26 @@
       <button id="myB1">12/04/2023</button>
       <button id="myB2">14/04/2023</button>
       <button id="myB3">18/04/2023</button>
-      <button id="myB4">09/05/2023</button>
-      <button id="myB5">23/05/2023</button>
     </div>
     <div class="container">
+      <button id="myB4">09/05/2023</button>
+      <button id="myB5">23/05/2023</button>
       <button id="myB6">20/06/2023</button>
+    </div>
+    <div class="container">
       <button id="myB7">04/07/2023</button>
       <button id="myB8">21/07/2023</button>
       <button id="myB9">30/07/2023</button>
+    </div>
+    <div class="container">
       <button id="myB10">01/08/2023</button>
+      <button id="myB11">11/08/2023</button>
+      <button id="myB12">12/08/2023</button>
+    </div>
+    <div class="container">
+      <button id="myB13">14/08/2023</button>
+      <button id="myB14">25/08/2023</button>
+      <button id="myB15">26/08/2023</button>
     </div>
 
     <br />
@@ -357,6 +383,121 @@
                         "photos/01_08_2023/DSCN0297.JPG",
                         "photos/01_08_2023/DSCN0298.JPG"];
 
+                    var folder11Images = [
+                    "photos/11_08_2023/IMG_20230811_204440.jpg",
+                    "photos/11_08_2023/IMG_20230811_205040.jpg",
+                    "photos/11_08_2023/IMG_20230811_205138.jpg",
+                    "photos/11_08_2023/IMG_20230811_205336.jpg",
+                    "photos/11_08_2023/IMG_20230811_205408.jpg",
+                    "photos/11_08_2023/DSCN0299.jpg",
+                    "photos/11_08_2023/DSCN0306.jpg",
+                    "photos/11_08_2023/DSCN0308.jpg",
+                    "photos/11_08_2023/DSCN0309.jpg",
+                    "photos/11_08_2023/DSCN0310.jpg",
+                    "photos/11_08_2023/DSCN0311.jpg",
+                    "photos/11_08_2023/DSCN0314.jpg",
+                    "photos/11_08_2023/DSCN0315.jpg"];
+                    
+                    var folder12Images = [
+                    "photos/12_08_2023/IMG_20230812_181743.jpg",
+                    "photos/12_08_2023/IMG_20230812_181803.jpg",
+                    "photos/12_08_2023/IMG_20230812_182259.jpg",
+                    "photos/12_08_2023/DSCN0316.jpg",
+                    "photos/12_08_2023/DSCN0317.jpg",
+                    "photos/12_08_2023/DSCN0318.jpg",
+                    "photos/12_08_2023/DSCN0319.jpg",
+                    "photos/12_08_2023/DSCN0320.jpg",];
+
+                    var folder13Images = [
+                    "photos/14_08_2023/IMG_20230814_192050.jpg",
+                    "photos/14_08_2023/IMG_20230814_192431.jpg",
+                    "photos/14_08_2023/IMG_20230814_192443.jpg",
+                    "photos/14_08_2023/IMG_20230814_192539.jpg",
+                    "photos/14_08_2023/IMG_20230814_192543.jpg",
+                    "photos/14_08_2023/IMG_20230814_192556.jpg",
+                    "photos/14_08_2023/IMG_20230814_192713.jpg",
+                    "photos/14_08_2023/IMG_20230814_192719.jpg",
+                    "photos/14_08_2023/IMG_20230814_192722.jpg",
+                    "photos/14_08_2023/IMG_20230814_194646.jpg",
+                    "photos/14_08_2023/IMG_20230814_194651.jpg",
+                    "photos/14_08_2023/IMG_20230814_194933.jpg",
+                    "photos/14_08_2023/IMG_20230814_194938.jpg",
+                    "photos/14_08_2023/DSCN0324.jpg",
+                    "photos/14_08_2023/DSCN0325.jpg",
+                    "photos/14_08_2023/DSCN0326.jpg",
+                    "photos/14_08_2023/DSCN0327.jpg",
+                    "photos/14_08_2023/DSCN0328.jpg",
+                    "photos/14_08_2023/DSCN0329.jpg",
+                    "photos/14_08_2023/DSCN0330.jpg",
+                    "photos/14_08_2023/DSCN0331.jpg",
+                    "photos/14_08_2023/DSCN0332.jpg"];
+
+                    var folder14Images = [
+                    "photos/25_08_2023/IMG_20230825_205043.jpg",
+                    "photos/25_08_2023/IMG_20230825_205053.jpg",
+                    "photos/25_08_2023/IMG_20230825_205058.jpg",
+                    "photos/25_08_2023/IMG_20230825_205108.jpg",
+                    "photos/25_08_2023/IMG_20230825_205744.jpg",
+                    "photos/25_08_2023/IMG_20230825_205747.jpg",
+                    "photos/25_08_2023/IMG_20230825_205753.jpg",
+                    "photos/25_08_2023/IMG_20230825_205803.jpg",
+                    "photos/25_08_2023/IMG_20230825_205953.jpg",
+                    "photos/25_08_2023/IMG_20230825_210049.jpg",
+                    "photos/14_08_2023/DSCN0333.jpg",
+                    "photos/14_08_2023/DSCN0334.jpg",
+                    "photos/14_08_2023/DSCN0335.jpg",
+                    "photos/14_08_2023/DSCN0336.jpg",
+                    "photos/14_08_2023/DSCN0337.jpg",
+                    "photos/14_08_2023/DSCN0338.jpg",
+                    "photos/14_08_2023/DSCN0339.jpg",
+                    "photos/14_08_2023/DSCN0340.jpg",
+                    "photos/14_08_2023/DSCN0341.jpg",
+                    "photos/14_08_2023/DSCN0342.jpg",
+                    "photos/14_08_2023/DSCN0343.jpg",
+                    "photos/14_08_2023/DSCN0344.jpg",
+                    "photos/14_08_2023/DSCN0345.jpg",
+                    "photos/14_08_2023/DSCN0346.jpg",
+                    "photos/14_08_2023/DSCN0349.jpg",
+                    "photos/14_08_2023/DSCN0350.jpg",
+                    "photos/14_08_2023/DSCN0351.jpg",
+                    "photos/14_08_2023/DSCN0352.jpg",
+                    "photos/14_08_2023/DSCN0353.jpg",
+                    "photos/14_08_2023/DSCN0354.jpg",
+                    "photos/14_08_2023/DSCN0355.jpg",
+                    "photos/14_08_2023/DSCN0356.jpg",
+                    "photos/14_08_2023/DSCN0357.jpg",
+                    "photos/14_08_2023/DSCN0358.jpg",
+                    "photos/14_08_2023/DSCN0359.jpg",
+                    "photos/14_08_2023/DSCN0360.jpg",
+                    "photos/14_08_2023/DSCN0361.jpg",
+                    "photos/14_08_2023/DSCN0362.jpg",
+                    "photos/14_08_2023/DSCN0363.jpg"];
+
+                    var folder15Images = [
+                    "photos/26_08_2023/IMG_20230826_183330.jpg",
+                    "photos/26_08_2023/IMG_20230826_183346.jpg",
+                    "photos/26_08_2023/IMG_20230826_183356.jpg",
+                    "photos/26_08_2023/IMG_20230826_183453.jpg",
+                    "photos/26_08_2023/IMG_20230826_183527.jpg",
+                    "photos/26_08_2023/IMG_20230826_183612.jpg",
+                    "photos/26_08_2023/IMG_20230826_183620.jpg",
+                    "photos/26_08_2023/IMG_20230826_183713.jpg",
+                    "photos/26_08_2023/IMG_20230826_183807.jpg",
+                    "photos/26_08_2023/IMG_20230826_183830.jpg",
+                    "photos/26_08_2023/IMG_20230826_183850.jpg",
+                    "photos/26_08_2023/IMG_20230826_183901_1.jpg",
+                    "photos/26_08_2023/IMG_20230826_183911.jpg",
+                    "photos/26_08_2023/IMG_20230826_184139.jpg",
+                    "photos/26_08_2023/IMG_20230826_184215.jpg",
+                    "photos/26_08_2023/IMG_20230826_184309.jpg",
+                    "photos/26_08_2023/IMG_20230826_184326.jpg",
+                    "photos/26_08_2023/IMG_20230826_184342.jpg",
+                    "photos/26_08_2023/IMG_20230826_184352.jpg",
+                    "photos/26_08_2023/IMG_20230826_184401.jpg",
+                    "photos/26_08_2023/IMG_20230826_185023.jpg",
+                    "photos/26_08_2023/IMG_20230826_185051.jpg",
+                    "photos/26_08_2023/IMG_20230826_185059.jpg"];
+                    
                     var imagesDiv = document.getElementById('images');
 
                     document.getElementById('myB1').addEventListener('click', function () {
@@ -397,6 +538,26 @@
 
                     document.getElementById('myB10').addEventListener('click', function () {
                         loadImages(folder10Images, "01_08_2023");
+                    });
+
+                    document.getElementById('myB11').addEventListener('click', function () {
+                        loadImages(folder11Images, "11_08_2023");
+                    });
+
+                    document.getElementById('myB12').addEventListener('click', function () {
+                        loadImages(folder12Images, "12_08_2023");
+                    });
+
+                    document.getElementById('myB13').addEventListener('click', function () {
+                        loadImages(folder13Images, "14_08_2023");
+                    });
+
+                    document.getElementById('myB14').addEventListener('click', function () {
+                        loadImages(folder14Images, "25_08_2023");
+                    });
+
+                    document.getElementById('myB15').addEventListener('click', function () {
+                        loadImages(folder15Images, "26_08_2023");
                     });
 
                     function loadImages(imageArray,folderName) {
