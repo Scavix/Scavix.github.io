@@ -84,6 +84,11 @@
           document.getElementById("anHeader").innerHTML =
             "My photos from 26th August 2023";
         }
+        if (folder == "29_08_2023") {
+          document.title = "My photos from 29th August 2023";
+          document.getElementById("anHeader").innerHTML =
+            "My photos from 29th August 2023";
+        }
       }
 
       window.onresize = function(){ location.reload(); }
@@ -100,18 +105,16 @@
       <button id="myB1">12/04/2023</button>
       <button id="myB2">14/04/2023</button>
       <button id="myB3">18/04/2023</button>
+      <button id="myB4">09/05/2023</button>
     </div>
     <div class="container">
-      <button id="myB4">09/05/2023</button>
       <button id="myB5">23/05/2023</button>
       <button id="myB6">20/06/2023</button>
-    </div>
-    <div class="container">
       <button id="myB7">04/07/2023</button>
       <button id="myB8">21/07/2023</button>
-      <button id="myB9">30/07/2023</button>
     </div>
     <div class="container">
+      <button id="myB9">30/07/2023</button>
       <button id="myB10">01/08/2023</button>
       <button id="myB11">11/08/2023</button>
       <button id="myB12">12/08/2023</button>
@@ -120,6 +123,7 @@
       <button id="myB13">14/08/2023</button>
       <button id="myB14">25/08/2023</button>
       <button id="myB15">26/08/2023</button>
+      <button id="myB16">28/08/2023</button>
     </div>
 
     <br />
@@ -496,7 +500,28 @@
                     "photos/26_08_2023/IMG_20230826_184401.jpg",
                     "photos/26_08_2023/IMG_20230826_185023.jpg",
                     "photos/26_08_2023/IMG_20230826_185051.jpg",
-                    "photos/26_08_2023/IMG_20230826_185059.jpg"];
+                    "photos/26_08_2023/IMG_20230826_185059.jpg",
+                    "photos/26_08_2023/DSCN0364.jpg",
+                    "photos/26_08_2023/DSCN0365.jpg",
+                    "photos/26_08_2023/DSCN0366.jpg"];
+
+                    var folder16Images = [
+                    "photos/29_08_2023/IMG_20230829_151121.jpg",
+                    "photos/29_08_2023/IMG_20230829_151134.jpg",
+                    "photos/29_08_2023/IMG_20230829_151722.jpg",
+                    "photos/29_08_2023/IMG_20230829_151729.jpg",
+                    "photos/29_08_2023/IMG_20230829_153446.jpg",
+                    "photos/29_08_2023/IMG_20230829_153632.jpg",
+                    "photos/29_08_2023/IMG_20230829_154751.jpg",
+                    "photos/29_08_2023/IMG_20230829_154821.jpg",
+                    "photos/29_08_2023/IMG_20230829_154949.jpg",
+                    "photos/29_08_2023/IMG_20230829_155705.jpg",
+                    "photos/29_08_2023/DSCN0367.jpg",
+                    "photos/29_08_2023/DSCN0368.jpg",
+                    "photos/29_08_2023/DSCN0369.jpg",
+                    "photos/29_08_2023/DSCN0370.jpg",
+                    "photos/29_08_2023/DSCN0371.jpg",
+                    "photos/29_08_2023/DSCN0372.jpg"];
                     
                     var imagesDiv = document.getElementById('images');
 
@@ -558,6 +583,10 @@
 
                     document.getElementById('myB15').addEventListener('click', function () {
                         loadImages(folder15Images, "26_08_2023");
+                    });
+
+                    document.getElementById('myB16').addEventListener('click', function () {
+                        loadImages(folder16Images, "29_08_2023");
                     });
 
                     function loadImages(imageArray,folderName) {
