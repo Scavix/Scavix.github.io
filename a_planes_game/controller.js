@@ -228,7 +228,7 @@ class Drawer {
     drawPlanes(myImgs, myPlanes, sizeMultiplier) {
         for (let i = 0; i < myPlanes.length; i++) {
             if (myPlanes[i].selected) {
-                fill('white');
+                fill('green');
                 noStroke();
             } else {
                 fill('brown');

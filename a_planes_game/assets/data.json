@@ -44,6 +44,46 @@
       "city": "New Delhi",
       "x": 70,
       "y": 37
+    },
+    {
+      "city": "Buenos Aires",
+      "x": 34,
+      "y": 85
+    },
+    {
+      "city": "Beijing",
+      "x": 80,
+      "y": 29
+    },
+    {
+      "city": "Cape Town",
+      "x": 54,
+      "y": 84
+    },
+    {
+      "city": "Kinshasa",
+      "x": 54,
+      "y": 61
+    },
+    {
+      "city": "Mexico City",
+      "x": 21.5,
+      "y": 43
+    },
+    {
+      "city": "Singapore",
+      "x": 79,
+      "y": 57
+    },
+    {
+      "city": "Ankara",
+      "x": 58,
+      "y": 29
+    },
+    {
+      "city": "Riyadh",
+      "x": 62,
+      "y": 40.5
     }
   ],
   "nodes": [
