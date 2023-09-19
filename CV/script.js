@@ -53,10 +53,10 @@ var nodes = new vis.DataSet([
   
   { id: 45, label: "Courses", group: 10 },
   { id: 34, label: "Applied Data Science Lab", group: 10 },
-  { id: 36, label: "Quantum Computing", group: 10 },
+  { id: 36, label: "Quantum Computing QubitxQubit", group: 10 },
   { id: 37, label: "Haskell", group: 10 },
   { id: 38, label: "Toefl", group: 10 },
-  { id: 39, label: "Applied Data Science Lab", group: 10 },
+  { id: 39, label: "Quantum Computing QWorld", group: 10 },
   { id: 40, label: "Quantum Winter", group: 10 },
   { id: 41, label: "Quantum Spring Challenge", group: 10 },
   { id: 42, label: "Introductionto Video Games Creation", group: 10 },

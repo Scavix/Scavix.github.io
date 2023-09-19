@@ -309,8 +309,8 @@ var items = new vis.DataSet([
   },
 
   {
-    id: "Quantum",
-    content: "Quantum Computing",
+    id: "QuantumQubitxQubit",
+    content: "Quantum Computing QubitxQubit",
     start: "2022-09",
     end: "2023-05",
     group: "Other",
@@ -397,6 +397,13 @@ var items = new vis.DataSet([
     content: "Haskell",
     start: "2023-02",
     end: "2023-12",
+    group: "Other",
+  },
+  {
+    id: "QuantumQWorld",
+    content: "Quantum Computing QWorld",
+    start: "2023-09",
+    end: "2023-06",
     group: "Other",
   },
 ]);

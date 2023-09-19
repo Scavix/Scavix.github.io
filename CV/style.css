@@ -123,7 +123,7 @@
 .two {
   position: absolute;
   top: 1%;
-  right: 20%;
+  right: 15%;
 }
 
 
@@ -163,5 +163,48 @@
 }
 
 .buttonPortfolio:active {
+  opacity: 0.5;
+}
+
+
+
+
+
+.buttonCV {
+  background: #6f4dcc;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  position: absolute;
+  top: 1%;
+  left: 40%;
+}
+
+.buttonCV:hover,
+.buttonCV:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.buttonCV:active {
   opacity: 0.5;
 }
