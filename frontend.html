@@ -66,11 +66,12 @@
     <h1 id="pageTitle">URL List</h1>
 
     <div id="buttons">
-        <button id="button1">Computer Science</button>
         <button id="button2">Mathematics</button>
+        <button id="button1">Computer Science</button>
+        <button id="button5">Computer Science Utilities</button>
         <button id="button3">Generic</button>
         <button id="button4">Science</button>
-        <button id="button5">All</button>
+        <button id="button6">All</button>
     </div>
 
     <ul id="url-list"></ul>
@@ -88,11 +89,13 @@
         const button3 = document.getElementById('button3');
         const button4 = document.getElementById('button4');
         const button5 = document.getElementById('button5');
+        const button6 = document.getElementById('button6');
         button1.addEventListener('click', () => scrapeWebsite(myUrls[0]));
         button2.addEventListener('click', () => scrapeWebsite(myUrls[1]));
         button3.addEventListener('click', () => scrapeWebsite(myUrls[2]));
         button4.addEventListener('click', () => scrapeWebsite(myUrls[3]));
-        button5.addEventListener('click', () => scrapeAllWebsites());
+        button5.addEventListener('click', () => scrapeWebsite(myUrls[4]));
+        button6.addEventListener('click', () => scrapeAllWebsites());
         function scrapeWebsite(websiteUrl) {
             fetch(websiteUrl)
                 .then(response => response.text())
