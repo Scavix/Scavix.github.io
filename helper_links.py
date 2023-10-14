@@ -17,7 +17,7 @@ def main():
         pass
     layout = [  [sg.Text('Enter URL'), sg.InputText(key='-URL-', default_text='insert URL here')],
                 [sg.Multiline(expand_x=True, expand_y=True, key='-OUTPUT-', default_text=outstr)],
-                [sg.Button('Add'), sg.Button('Generate Source'), sg.Button('Exit and Save'), sg.Button('Exit')]]
+                [sg.Button('Add'), sg.Button('Generate Source'), sg.Button('Build Script'), sg.Button('Exit and Save'), sg.Button('Exit')]]
 
     window = sg.Window('Url generate', layout, element_justification='c', finalize=True, size=(600, 200))
 
@@ -27,12 +27,22 @@ def main():
             if event == sg.WIN_CLOSED or event == 'Exit and Save':
                 break
             if event == 'Exit':
-                os.remove("cache.tmp")
+                if os.path.isfile("cache.tmp"):
+                    os.remove("cache.tmp")
                 break
             elif event == 'Generate Source':
                 response = requests.get("https://scavix.github.io/helper_links.py")
                 if response.status_code == 200:
                     f = open("helper_links.py", "w")
+                    f.write(response.text)
+                    f.close()
+                    sg.popup("Done")
+                else:
+                    sg.popup("Web site does not exist or is not reachable")
+            elif event == 'Build Script':
+                response = requests.get("https://scavix.github.io/helper_links_build_script.bat")
+                if response.status_code == 200:
+                    f = open("helper_links_build_script.bat", "w")
                     f.write(response.text)
                     f.close()
                     sg.popup("Done")
