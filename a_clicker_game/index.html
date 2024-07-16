@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A random clicker game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        #click-area {
+            font-size: 24px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .upgrade, #prestigeButton {
+            margin: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+        #prestigeButton {
+            background-color: #ffd700;
+        }
+        #statistics {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clicker Game with Statistics</h1>
+    <p>Points: <span id="points">0</span></p>
+    <p>Prestige Points: <span id="prestigePoints">0</span></p>
+    <div id="click-area">Click me!</div>
+    
+    <div id="upgrades">
+        <div class="upgrade" id="clickUpgrade">
+            Upgrade Click Value (Cost: <span id="clickUpgradeCost">10</span>)
+        </div>
+        <div class="upgrade" id="autoClickUpgrade">
+            Buy Auto-Clicker (Cost: <span id="autoClickUpgradeCost">50</span>)
+        </div>
+    </div>
+
+    <div id="prestigeButton">Prestige (Requires <span id="prestigeCost">1000</span> points)</div>
+
+    <div id="statistics">
+        <h2>Statistics</h2>
+        <p>Lifetime Clicks: <span id="lifetimeClicks">0</span></p>
+        <p>Total Points Earned: <span id="totalPointsEarned">0</span></p>
+        <p>Points per Second: <span id="pointsPerSecond">0</span></p>
+        <p>Points per Minute: <span id="pointsPerMinute">0</span></p>
+        <p>Number of Prestiges: <span id="numberOfPrestiges">0</span></p>
+        <p>Highest Points: <span id="highestPoints">0</span></p>
+        <p>Total Click Upgrades: <span id="totalClickUpgrades">0</span></p>
+        <p>Total Auto-Clickers: <span id="totalAutoClickers">0</span></p>
+    </div>
+
+    <script>
+        let points = 0;
+        let clickValue = 1;
+        let clickUpgradeCost = 10;
+        let autoClickUpgradeCost = 50;
+        let autoClickersCount = 0;
+        let prestigePoints = 0;
+        let prestigeCost = 1000;
+
+        let lifetimeClicks = 0;
+        let totalPointsEarned = 0;
+        let numberOfPrestiges = 0;
+        let highestPoints = 0;
+        let totalClickUpgrades = 0;
+        let totalAutoClickers = 0;
+        let pointsLastSecond = 0;
+        let pointsLastMinute = 0;
+
+        const pointsDisplay = document.getElementById('points');
+        const prestigePointsDisplay = document.getElementById('prestigePoints');
+        const clickArea = document.getElementById('click-area');
+        const clickUpgrade = document.getElementById('clickUpgrade');
+        const autoClickUpgrade = document.getElementById('autoClickUpgrade');
+        const prestigeButton = document.getElementById('prestigeButton');
+        const prestigeCostDisplay = document.getElementById('prestigeCost');
+
+        function updatePoints(amount) {
+            points += amount;
+            totalPointsEarned += amount;
+            pointsLastSecond += amount;
+            pointsLastMinute += amount;
+            if (points > highestPoints) {
+                highestPoints = points;
+            }
+            pointsDisplay.textContent = Math.floor(points);
+            updateStatistics();
+        }
+
+        function updatePrestigePoints() {
+            prestigePointsDisplay.textContent = prestigePoints;
+        }
+
+        function updatePrestigeCost() {
+            prestigeCostDisplay.textContent = prestigeCost.toLocaleString();
+        }
+
+        function updateStatistics() {
+            document.getElementById('lifetimeClicks').textContent = lifetimeClicks.toLocaleString();
+            document.getElementById('totalPointsEarned').textContent = Math.floor(totalPointsEarned).toLocaleString();
+            document.getElementById('numberOfPrestiges').textContent = numberOfPrestiges;
+            document.getElementById('highestPoints').textContent = Math.floor(highestPoints).toLocaleString();
+            document.getElementById('totalClickUpgrades').textContent = totalClickUpgrades;
+            document.getElementById('totalAutoClickers').textContent = totalAutoClickers;
+        }
+
+        clickArea.addEventListener('click', () => {
+            lifetimeClicks++;
+            updatePoints(clickValue * (1 + prestigePoints * 0.1));
+        });
+
+        clickUpgrade.addEventListener('click', () => {
+            if (points >= clickUpgradeCost) {
+                points -= clickUpgradeCost;
+                clickValue++;
+                totalClickUpgrades++;
+                clickUpgradeCost = Math.round(clickUpgradeCost * 1.5);
+                updatePoints(0);
+                document.getElementById('clickUpgradeCost').textContent = clickUpgradeCost;
+                updateStatistics();
+            }
+        });
+
+        autoClickUpgrade.addEventListener('click', () => {
+            if (points >= autoClickUpgradeCost) {
+                points -= autoClickUpgradeCost;
+                autoClickersCount++;
+                totalAutoClickers++;
+                autoClickUpgradeCost = Math.round(autoClickUpgradeCost * 1.5);
+                updatePoints(0);
+                document.getElementById('autoClickUpgradeCost').textContent = autoClickUpgradeCost;
+                updateStatistics();
+            }
+        });
+
+        prestigeButton.addEventListener('click', () => {
+            if (points >= prestigeCost) {
+                const newPrestigePoints = Math.floor(Math.sqrt(points / 1000));
+                prestigePoints += newPrestigePoints;
+                numberOfPrestiges++;
+                points = 0;
+                clickValue = 1;
+                clickUpgradeCost = 10;
+                autoClickUpgradeCost = 50;
+                autoClickersCount = 0;
+                prestigeCost = Math.round(prestigeCost * 1.5);
+                updatePoints(0);
+                updatePrestigePoints();
+                updatePrestigeCost();
+                document.getElementById('clickUpgradeCost').textContent = clickUpgradeCost;
+                document.getElementById('autoClickUpgradeCost').textContent = autoClickUpgradeCost;
+                updateStatistics();
+            }
+        });
+
+        setInterval(() => {
+            updatePoints(autoClickersCount * clickValue * (1 + prestigePoints * 0.1));
+        }, 1000);
+
+        setInterval(() => {
+            document.getElementById('pointsPerSecond').textContent = Math.floor(pointsLastSecond).toLocaleString();
+            pointsLastSecond = 0;
+        }, 1000);
+
+        setInterval(() => {
+            document.getElementById('pointsPerMinute').textContent = Math.floor(pointsLastMinute).toLocaleString();
+            pointsLastMinute = 0;
+        }, 60000);
+
+        updatePrestigeCost();
+        updateStatistics();
+    </script>
+</body>
+</html>
