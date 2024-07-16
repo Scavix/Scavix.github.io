@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Ratings Comparison</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f0f0f0;
+            }
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            .chart-container {
+                flex: 1 1 45%;
+                min-width: 300px;
+                background-color: white;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .list-and-details-container {
+                display: flex;
+                flex: 1 1 100%;
+                gap: 20px;
+            }
+            .list-container, .details-container {
+                flex: 1;
+                height: 400px;
+                overflow-y: auto;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                padding: 15px;
+            }
+            .filter-container {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+            #filterInput, #genreSelect {
+                flex: 1;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            button {
+                padding: 5px 10px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            .movie-title {
+                cursor: pointer;
+                padding: 8px;
+                border-bottom: 1px solid #eee;
+            }
+            .movie-title:hover {
+                background-color: #f0f0f0;
+            }
+            .movie-title.active {
+                background-color: #e0e0e0;
+            }
+            #movieDetails h2 {
+                margin-top: 0;
+                color: #333;
+            }
+            #movieDetails p {
+                margin: 10px 0;
+                line-height: 1.6;
+            }
+            .rating {
+                font-weight: bold;
+                color: #4CAF50;
+            }
+            .genres {
+                font-style: italic;
+                color: #666;
+            }
+            .imdb-link {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 5px 10px;
+                background-color: #f3ce13;
+                color: #000000;
+                text-decoration: none;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            .imdb-link:hover {
+                background-color: #ffd700;
+            }
+            .movie-title-year {
+                font-size: 0.8em;
+                color: #666;
+                margin-left: 10px;
+            }
+            .detail-label {
+                font-weight: bold;
+                color: #333;
+            }
+        </style>
+</head>
+<body>
+    <h1>Movie Ratings Comparison</h1>
+    <div class="container">
+        <div class="chart-container">
+            <canvas id="imdbHistogram"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="personalHistogram"></canvas>
+        </div>
+        <div class="list-and-details-container">
+            <div class="list-container">
+                <div class="filter-container">
+                    <input type="text" id="filterInput" placeholder="Filter movies...">
+                    <select id="genreSelect">
+                        <option value="">All Genres</option>
+                    </select>
+                    <button id="sortAlphaButton">Sort A-Z</button>
+                    <button id="sortRatingButton">Sort by Rating</button>
+                </div>
+                <div id="movieList"></div>
+            </div>
+            <div class="details-container" id="movieDetails">
+                <h2>Movie Details</h2>
+                <p>Click on a movie to see details.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let allMovies = [];
+        let imdbChart, personalChart;
+        let isSortedAlpha = false;
+        let isSortedRating = false;
+
+        function createHistogram(movies, chartId, ratingType, color) {
+            const ratings = movies.map(movie => parseFloat(movie[ratingType]));
+            const bins = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            const frequencies = new Array(bins.length - 1).fill(0);
+
+            ratings.forEach(rating => {
+                const binIndex = Math.floor(rating);
+                frequencies[binIndex]++;
+            });
+
+            const ctx = document.getElementById(chartId).getContext('2d');
+            return new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: bins.slice(0, -1).map(bin => `${bin.toFixed(1)}-${(bin + 0.9).toFixed(1)}`),
+                    datasets: [{
+                        label: 'Number of Movies',
+                        data: frequencies,
+                        backgroundColor: color,
+                        borderColor: color.replace('0.6', '1'),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Movies'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Rating Range'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Distribution of ${ratingType === 'imdbRating' ? 'IMDb' : 'personalRating'} Ratings`
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateMovieList(movies) {
+            const movieList = document.getElementById('movieList');
+            movieList.innerHTML = movies.map(movie => 
+                `<div class="movie-title" data-id="${movie.id}">${movie.title}
+                    <span class="movie-title-year">(${movie.year})</span></div>`
+            ).join('');
+
+            movieList.querySelectorAll('.movie-title').forEach(movieElement => {
+                movieElement.addEventListener('click', () => {
+                    document.querySelectorAll('.movie-title').forEach(el => el.classList.remove('active'));
+                    movieElement.classList.add('active');
+                    showMovieDetails(movieElement.dataset.id);
+                });
+            });
+        }
+
+        function showMovieDetails(movieId) {
+            const movie = allMovies.find(m => m.id === movieId);
+            if (movie) {
+                const detailsContainer = document.getElementById('movieDetails');
+                detailsContainer.innerHTML = `
+                    <h2>
+                        ${movie.title}
+                        <span class="movie-title-year">(${movie.year})</span>
+                    </h2>
+                    <p><span class="rating">IMDb Rating:</span> ${movie.imdbRating}</p>
+                    <p><span class="rating">Personal Rating:</span> ${movie.personalRating}</p>
+                    <p><span class="genres">Genres:</span> ${movie.genres || 'No genre'}</p>
+                    <p><span class="detail-label">Release Year:</span> ${movie.year}</p>
+                    <a href="https://www.imdb.com/title/${movie.imdbId}/" target="_blank" class="imdb-link">View on IMDb</a>
+                `;
+            }
+        }
+
+        function filterAndSortMovies() {
+            const filterValue = document.getElementById('filterInput').value.toLowerCase();
+            const selectedGenre = document.getElementById('genreSelect').value.toLowerCase();
+            
+            let filteredMovies = allMovies.filter(movie => 
+                movie.title.toLowerCase().includes(filterValue) &&
+                (selectedGenre === '' || (movie.genres && movie.genres.toLowerCase().includes(selectedGenre)))
+            );
+
+            if (isSortedAlpha) {
+                filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (isSortedRating) {
+                filteredMovies.sort((a, b) => parseFloat(b.personalRating) - parseFloat(a.personalRating));
+            }
+
+            updateMovieList(filteredMovies);
+            updateHistograms(filteredMovies);
+        }
+
+        function updateHistograms(movies) {
+            imdbChart.data.datasets[0].data = calculateFrequencies(movies, 'imdbRating');
+            personalChart.data.datasets[0].data = calculateFrequencies(movies, 'personalRating');
+            imdbChart.update();
+            personalChart.update();
+        }
+
+        function calculateFrequencies(movies, ratingType) {
+            const frequencies = new Array(10).fill(0);
+            movies.forEach(movie => {
+                const binIndex = Math.floor(parseFloat(movie[ratingType]));
+                frequencies[binIndex]++;
+            });
+            return frequencies;
+        }
+
+        function populateGenreSelect(movies) {
+            const genres = new Set();
+            movies.forEach(movie => {
+                if (movie.genres) {
+                    movie.genres.split(', ').forEach(genre => genres.add(genre.trim()));
+                }
+            });
+            
+            const genreSelect = document.getElementById('genreSelect');
+            genres.forEach(genre => {
+                const option = document.createElement('option');
+                option.value = genre;
+                option.textContent = genre;
+                genreSelect.appendChild(option);
+            });
+        }
+
+        Papa.parse('movie.csv', {
+            download: true,
+            header: true,
+            complete: function(results) {
+                allMovies = results.data.map((movie, index) => ({...movie, id: index.toString()}));
+                imdbChart = createHistogram(allMovies, 'imdbHistogram', 'imdbRating', 'rgba(75, 192, 192, 0.6)');
+                personalChart = createHistogram(allMovies, 'personalHistogram', 'personalRating', 'rgba(255, 99, 132, 0.6)');
+                updateMovieList(allMovies);
+                populateGenreSelect(allMovies);
+                
+                document.getElementById('filterInput').addEventListener('input', filterAndSortMovies);
+                document.getElementById('genreSelect').addEventListener('change', filterAndSortMovies);
+                document.getElementById('sortAlphaButton').addEventListener('click', () => {
+                    isSortedAlpha = !isSortedAlpha;
+                    isSortedRating = false;
+                    filterAndSortMovies();
+                });
+                document.getElementById('sortRatingButton').addEventListener('click', () => {
+                    isSortedRating = !isSortedRating;
+                    isSortedAlpha = false;
+                    filterAndSortMovies();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
