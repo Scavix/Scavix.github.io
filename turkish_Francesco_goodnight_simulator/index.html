@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesco's Turkish goodnight simulator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sentence {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sentence" id="sentence">Click the button to get Turkish Francesco's goodnight</div>
+        <button onclick="generateSentence()">Get a buonanotte</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <script>
+        function generateSentence() {
+            const sentences = [
+                "Seninle her an bir mucize",
+                "Gözlerinin parıltısı dünyamı aydınlatıyor",
+                "Güzelliğin kalbimi büyülüyor",
+                "Seninle olmak hayatımın en güzel kısmı",
+                "Gülüşün bana umut veriyor",
+                "Sana olan sevgim her geçen gün daha da büyüyor",
+                "Sen benim ruh eşimsin",
+                "Seninle her şey mümkün",
+                "Kalbim seninle attıkça mutluyum",
+                "Senin sevgin hayatımın en büyük hediyesi",
+                "Seninle her anı değerli kılıyorsun",
+                "Sen benim biricik aşkımsın",
+                "Seninle geçirdiğim her saniye bir hazine",
+                "Seninle olmak hayatımın en güzel macerası",
+                "Senin yanında kendimi tam ve mutlu hissediyorum",
+                "Kalbim seninle huzur buluyor",
+                "Senin sevgin hayatıma anlam katıyor",
+                "Her şeyde senin izlerini görmek bana mutluluk veriyor",
+                "Seninle yaşamak bir rüya gibi",
+                "Senin sevgine layık olmaya çalışmak, beni daha iyi bir insan yapıyor",
+            ];
+            const randomIndex = Math.floor(Math.random() * sentences.length);
+            document.getElementById('sentence').innerHTML = "İyi geceler. " + sentences[randomIndex];
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+</html>
