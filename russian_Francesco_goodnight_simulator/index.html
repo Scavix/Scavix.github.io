@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesco's Russian goodnight simulator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sentence {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sentence" id="sentence">Click the button to get Russian Francesco's goodnight</div>
+        <button onclick="generateSentence()">Get a buonanotte</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <script>
+        function generateSentence() {
+            const sentences = [
+                "Ты моя самая любимая и дорогая.",
+                "Ты - смысл моей жизни.",
+                "Каждую минуту я думаю о тебе.",
+                "Ты делаешь меня самым счастливым человеком на свете.",
+                "Я не могу представить свою жизнь без тебя.",
+                "Ты - самое лучшее, что когда-либо случалось со мной.",
+                "Ты красива как звезда.",
+                "Твоя улыбка освещает мой день.",
+                "Я люблю тебя больше, чем слова могут выразить.",
+                "Ты мое счастье и моя радость.",
+                "Ты - моя вдохновляющая муза.",
+                "Я горжусь тем, что ты моя.",
+                "С тобой я чувствую себя в безопасности и любимым.",
+                "Ты - моя лучшая подруга и любовь всей моей жизни.",
+                "Мир становится лучше с тобой рядом.",
+                "Ты делаешь каждый момент особенным.",
+                "Твоя доброта и нежность вдохновляют меня.",
+                "Ты - моя половинка, которую я искал всю жизнь.",
+                "Твоя красота внутри и снаружи поражает меня.",
+                "Я благодарен судьбе за то, что встретил тебя.",
+            ];
+            const randomIndex = Math.floor(Math.random() * sentences.length);
+            document.getElementById('sentence').innerHTML = "Спокойной ночи. " + sentences[randomIndex];
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+</html>
