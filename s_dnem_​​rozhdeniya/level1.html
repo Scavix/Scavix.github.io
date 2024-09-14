@@ -77,7 +77,7 @@
 
 <div class="container">
     <h2>Birthday Quiz!</h2>
-    <img src="your-illustration.png" alt="Birthday Illustration" id="illustration"> <!-- Placeholder for your drawing -->
+    <img src="index2.jpg" alt="Birthday Illustration" id="illustration"> <!-- Placeholder for your drawing -->
 
     <div class="question" id="question"></div>
 
@@ -93,19 +93,19 @@
 <script>
     const quizData = [
         {
-            question: "What is your favorite color?",
-            options: ["Red", "Blue", "Green", "Yellow"],
-            correct: "Blue"
+            question: "Which is not Mads Mikkelsen favorite color?",
+            options: ["Red", "Bottle Green", "Black", "Orange"],
+            correct: "Black"
         },
         {
-            question: "Which city was our first trip together?",
-            options: ["Paris", "New York", "Tokyo", "London"],
-            correct: "Paris"
+            question: "How old is Ryan Gosling?",
+            options: ["43", "39", "47", "49"],
+            correct: "43"
         },
         {
-            question: "Which dessert do you like the most?",
-            options: ["Cake", "Ice Cream", "Cookies", "Brownies"],
-            correct: "Ice Cream"
+            question: "In which tv series Henry Cavill had a nude scene?",
+            options: ["The Tudors", "The Witcher", "The Inspector Lynley Mysteries", "Midsomer Murders"],
+            correct: "The Tudors"
         }
     ];
 
@@ -135,7 +135,7 @@
 
         if (!selectedOption) {
             error.textContent = "Please select an answer!";
-            result.textContent = ""; // Clear previous result
+            result.textContent = "";
             return;
         }
 
