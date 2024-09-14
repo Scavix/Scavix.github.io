@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .question {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .feedback {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .feedback.correct {
+            color: green;
+        }
+        .feedback.incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="piazza.jpg" alt="Quiz Image" id="quizImage">
+    <div class="question" id="question">What is shown in this image?</div>
+    <ul class="options">
+        <li><input type="radio" name="option" value="option1" id="option1"><label for="option1" id="label1">Option 1</label></li>
+        <li><input type="radio" name="option" value="option2" id="option2"><label for="option2" id="label2">Option 2</label></li>
+        <li><input type="radio" name="option" value="option3" id="option3"><label for="option3" id="label3">Option 3</label></li>
+        <li><input type="radio" name="option" value="option4" id="option4"><label for="option4" id="label4">Option 4</label></li>
+    </ul>
+    <button onclick="submitAnswer()">Submit Answer</button>
+    <div class="feedback" id="feedback"></div>
+</div>
+
+<script>
+    const quizData = {
+        imageUrl: 'piazza.jpg',
+        question: 'What is shown in this image?',
+        options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        correctAnswer: 'Option 2'
+    };
+
+    function setupQuiz() {
+        document.getElementById('quizImage').src = quizData.imageUrl;
+        document.getElementById('question').textContent = quizData.question;
+        quizData.options.forEach((option, index) => {
+            document.getElementById('label' + (index + 1)).textContent = option;
+        });
+    }
+
+    function submitAnswer() {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        const feedback = document.getElementById('feedback');
+
+        if (selectedOption) {
+            const answer = selectedOption.nextElementSibling.textContent;
+            if (answer === quizData.correctAnswer) {
+                feedback.textContent = "Correct! 🎉";
+                feedback.className = "feedback correct";
+                setTimeout(() => {
+                    window.location.href = "level7.html";
+                }, 2000);
+            } else {
+                feedback.textContent = "Incorrect. Try again.";
+                feedback.className = "feedback incorrect";
+            }
+        } else {
+            feedback.textContent = "Please select an answer.";
+            feedback.className = "feedback incorrect";
+        }
+    }
+
+    setupQuiz();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Game - Enter Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        #illustration {
+            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Damn, you're doing great my lil one!</h2>
+    <p>You have to do something a bit different now.</p>
+    <p>Copy my telegram bio and go back to the first page I shared with you.</p>
+    <p>Use my bio as the password.</p>
+    <button onclick="checkPassword()">Submit</button>
+</div>
+
+<script>
+    function checkPassword() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
