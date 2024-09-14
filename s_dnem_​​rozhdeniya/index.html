@@ -46,8 +46,8 @@
         }
         #illustration {
             margin: 20px 0;
-            max-width: 100%;
-            height: auto;
+            max-width: 50%;
+            width: auto;
         }
     </style>
 </head>
@@ -55,7 +55,7 @@
 
 <div class="container">
     <h2>Enter the Secret Password</h2>
-    <img src="your-illustration.png" alt="Birthday Illustration" id="illustration"> <!-- Placeholder for your drawing -->
+    <img src="index.jpg" alt="Birthday Illustration" id="illustration"> <!-- Placeholder for your drawing -->
 
     <input type="password" id="password" placeholder="Enter password" required>
     <br>
@@ -68,7 +68,7 @@
         const passwordInput = document.getElementById('password').value;
         const errorMessage = document.getElementById('error-message');
         
-        const correctPassword = "happybirthday123";
+        const correctPassword = "Buon Compleanno!";
         const tgpass = "4e(/CURVA%%i23too5\"4t£ASa1pSDuFe2n\"e8NICKb£uo5ilgo7vui8A!\"SDt2)CIAO!\"$";
 
         if (passwordInput === correctPassword) {
