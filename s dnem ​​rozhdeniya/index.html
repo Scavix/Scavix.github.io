@@ -44,12 +44,19 @@
             color: red;
             margin-top: 10px;
         }
+        #illustration {
+            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Enter the Secret Password</h2>
+    <img src="your-illustration.png" alt="Birthday Illustration" id="illustration"> <!-- Placeholder for your drawing -->
+
     <input type="password" id="password" placeholder="Enter password" required>
     <br>
     <button onclick="checkPassword()">Submit</button>

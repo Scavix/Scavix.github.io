@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Game - Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"]:checked + label {
+            background-color: #007BFF;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            color: green;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            margin-top: 20px;
+        }
+        #illustration {
+            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Birthday Quiz!</h2>
+    <img src="your-illustration.png" alt="Birthday Illustration" id="illustration"> <!-- Placeholder for your drawing -->
+
+    <div class="question" id="question"></div>
+
+    <div class="options" id="options">
+        <!-- Options will be dynamically generated here -->
+    </div>
+
+    <button onclick="submitAnswer()">Submit Answer</button>
+    <p id="result" class="result"></p>
+    <p id="error" class="error"></p>
+</div>
+
+<script>
+    // Array of questions and answers
+    const quizData = [
+        {
+            question: "What is your favorite color?",
+            options: ["Red", "Blue", "Green", "Yellow"],
+            correct: "Blue"
+        },
+        {
+            question: "Which city was our first trip together?",
+            options: ["Paris", "New York", "Tokyo", "London"],
+            correct: "Paris"
+        },
+        {
+            question: "Which dessert do you like the most?",
+            options: ["Cake", "Ice Cream", "Cookies", "Brownies"],
+            correct: "Ice Cream"
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+
+    // Display the first question
+    function loadQuestion() {
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const currentQuestion = quizData[currentQuestionIndex];
+
+        // Set the question text
+        questionElement.innerHTML = `<p>Question: ${currentQuestion.question}</p>`;
+
+        // Clear previous options
+        optionsElement.innerHTML = "";
+
+        // Generate options dynamically
+        currentQuestion.options.forEach((option, index) => {
+            optionsElement.innerHTML += `
+                <input type="radio" id="option${index}" name="quiz" value="${option}">
+                <label for="option${index}">${option}</label>
+            `;
+        });
+    }
+
+    // Check the selected answer
+    function submitAnswer() {
+        const selectedOption = document.querySelector('input[name="quiz"]:checked');
+        const result = document.getElementById('result');
+        const error = document.getElementById('error');
+
+        // Make sure the user selected an option
+        if (!selectedOption) {
+            error.textContent = "Please select an answer!";
+            result.textContent = ""; // Clear previous result
+            return;
+        }
+
+        // Check if the selected option is correct
+        const currentQuestion = quizData[currentQuestionIndex];
+        if (selectedOption.value === currentQuestion.correct) {
+            result.textContent = "Correct! 🎉";
+            error.textContent = ""; // Clear error message
+
+            // Move to the next question or next level
+            setTimeout(function() {
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < quizData.length) {
+                    // Load next question
+                    loadQuestion();
+                    result.textContent = ""; // Clear result for next question
+                } else {
+                    // Redirect to next level (Level 2 - Minigame)
+                    window.location.href = "level2.html";
+                }
+            }, 1500);
+        } else {
+            result.textContent = ""; // Clear result
+            error.textContent = "Oops! Wrong answer, try again.";
+        }
+    }
+
+    // Load the first question when the page loads
+    window.onload = loadQuestion;
+</script>
+
+</body>
+</html>

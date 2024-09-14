@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Game - Minigame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            background-color: #ffffff;
+            border: 2px solid #000;
+        }
+        .game-over {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+        .victory {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="gameCanvas" width="400" height="600"></canvas>
+<div class="game-over" id="gameOverText">Game Over! Try Again.</div>
+<div class="victory" id="victoryText">You Win! 🎉 Moving to the next level...</div>
+
+<script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let player = {
+        x: 180,
+        y: 550,
+        width: 40,
+        height: 40,
+        dx: 0,
+        speed: 5,
+        color: "blue"
+    };
+
+    let obstacles = [];
+    let gameOver = false;
+    let gameWin = false;
+    let gameDuration = 15000; // 15 seconds to win
+    let startTime = Date.now();
+
+    // Controls the player with the arrow keys
+    function movePlayer() {
+        player.x += player.dx;
+
+        // Prevent the player from going out of bounds
+        if (player.x < 0) {
+            player.x = 0;
+        } else if (player.x + player.width > canvas.width) {
+            player.x = canvas.width - player.width;
+        }
+    }
+
+    function drawPlayer() {
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    // Handle the movement of obstacles
+    function createObstacle() {
+        const size = Math.random() * (50 - 20) + 20;
+        const xPos = Math.random() * (canvas.width - size);
+        obstacles.push({
+            x: xPos,
+            y: 0,
+            width: size,
+            height: size,
+            color: "red",
+            speed: Math.random() * (3 - 1) + 1
+        });
+    }
+
+    function drawObstacles() {
+        obstacles.forEach(obstacle => {
+            ctx.fillStyle = obstacle.color;
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        });
+    }
+
+    function updateObstacles() {
+        obstacles.forEach(obstacle => {
+            obstacle.y += obstacle.speed;
+
+            // Check for collision with the player
+            if (
+                player.x < obstacle.x + obstacle.width &&
+                player.x + player.width > obstacle.x &&
+                player.y < obstacle.y + obstacle.height &&
+                player.y + player.height > obstacle.y
+            ) {
+                gameOver = true;
+            }
+
+            // Remove obstacles that move off-screen
+            if (obstacle.y > canvas.height) {
+                obstacles.shift();
+            }
+        });
+    }
+
+    // Display game over message
+    function displayGameOver() {
+        document.getElementById("gameOverText").style.display = "block";
+        setTimeout(function() {
+            location.reload(); // Restart the game after 2 seconds
+        }, 2000);
+    }
+
+    // Display victory message
+    function displayVictory() {
+        document.getElementById("victoryText").style.display = "block";
+        setTimeout(function() {
+            window.location.href = "level3.html"; // Move to the next level
+        }, 2000);
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function update() {
+        clearCanvas();
+        movePlayer();
+        drawPlayer();
+        updateObstacles();
+        drawObstacles();
+
+        const currentTime = Date.now();
+
+        // Check if game time is up
+        if (currentTime - startTime >= gameDuration) {
+            gameWin = true;
+        }
+
+        if (gameOver) {
+            displayGameOver();
+        } else if (gameWin) {
+            displayVictory();
+        } else {
+            requestAnimationFrame(update);
+        }
+    }
+
+    // Keyboard event listeners
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+            player.dx = player.speed;
+        } else if (e.key === "ArrowLeft") {
+            player.dx = -player.speed;
+        }
+    });
+
+    document.addEventListener("keyup", (e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+            player.dx = 0;
+        }
+    });
+
+    // Start the game loop
+    setInterval(createObstacle, 1000);
+    update();
+</script>
+
+</body>
+</html>
