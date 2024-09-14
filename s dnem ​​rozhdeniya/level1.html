@@ -91,7 +91,6 @@
 </div>
 
 <script>
-    // Array of questions and answers
     const quizData = [
         {
             question: "What is your favorite color?",
@@ -112,19 +111,15 @@
 
     let currentQuestionIndex = 0;
 
-    // Display the first question
     function loadQuestion() {
         const questionElement = document.getElementById('question');
         const optionsElement = document.getElementById('options');
         const currentQuestion = quizData[currentQuestionIndex];
 
-        // Set the question text
         questionElement.innerHTML = `<p>Question: ${currentQuestion.question}</p>`;
 
-        // Clear previous options
         optionsElement.innerHTML = "";
 
-        // Generate options dynamically
         currentQuestion.options.forEach((option, index) => {
             optionsElement.innerHTML += `
                 <input type="radio" id="option${index}" name="quiz" value="${option}">
@@ -133,45 +128,38 @@
         });
     }
 
-    // Check the selected answer
     function submitAnswer() {
         const selectedOption = document.querySelector('input[name="quiz"]:checked');
         const result = document.getElementById('result');
         const error = document.getElementById('error');
 
-        // Make sure the user selected an option
         if (!selectedOption) {
             error.textContent = "Please select an answer!";
             result.textContent = ""; // Clear previous result
             return;
         }
 
-        // Check if the selected option is correct
         const currentQuestion = quizData[currentQuestionIndex];
         if (selectedOption.value === currentQuestion.correct) {
             result.textContent = "Correct! 🎉";
-            error.textContent = ""; // Clear error message
-
-            // Move to the next question or next level
+            error.textContent = "";
+            
             setTimeout(function() {
                 currentQuestionIndex++;
 
                 if (currentQuestionIndex < quizData.length) {
-                    // Load next question
                     loadQuestion();
-                    result.textContent = ""; // Clear result for next question
+                    result.textContent = "";
                 } else {
-                    // Redirect to next level (Level 2 - Minigame)
                     window.location.href = "level2.html";
                 }
             }, 1500);
         } else {
-            result.textContent = ""; // Clear result
+            result.textContent = "";
             error.textContent = "Oops! Wrong answer, try again.";
         }
     }
 
-    // Load the first question when the page loads
     window.onload = loadQuestion;
 </script>
 

@@ -1,185 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Game - Minigame</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labyrinth Chase Game</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        canvas {
-            background-color: #ffffff;
-            border: 2px solid #000;
-        }
-        .game-over {
-            display: none;
-            font-size: 24px;
-            font-weight: bold;
-            color: red;
-        }
-        .victory {
-            display: none;
-            font-size: 24px;
-            font-weight: bold;
-            color: green;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      canvas {
+        background-color: #ffffff;
+        border: 2px solid #000;
+      }
+      .game-over,
+      .victory {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .game-over {
+        color: red;
+      }
+      .victory {
+        color: green;
+      }
+      .controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .control-btn {
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        font-size: 24px;
+        font-weight: bold;
+        background-color: #ddd;
+        border: 1px solid #333;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .score {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+        <h2>4 coins to win</h2>
+    </div>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <div class="score" id="scoreText">Score: 0</div>
+    <div class="game-over" id="gameOverText">Game Over! You were caught!</div>
+    <div class="victory" id="victoryText">
+      Victory! You collected all coins! 🎉
+    </div>
 
-<canvas id="gameCanvas" width="400" height="600"></canvas>
-<div class="game-over" id="gameOverText">Game Over! Try Again.</div>
-<div class="victory" id="victoryText">You Win! 🎉 Moving to the next level...</div>
+    <div class="controls">
+      <button class="control-btn" id="up">⬆️</button>
+    </div>
+    <div class="controls">
+      <button class="control-btn" id="left">⬅️</button>
+      <button class="control-btn" id="down">⬇️</button>
+      <button class="control-btn" id="right">➡️</button>
+    </div>
 
-<script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
 
-    let player = {
-        x: 180,
-        y: 550,
-        width: 40,
-        height: 40,
-        dx: 0,
-        speed: 5,
-        color: "blue"
-    };
+      const TILE_SIZE = 40;
+      const rows = 15;
+      const cols = 15;
+      const SCORE_TO_WIN = 4;
 
-    let obstacles = [];
-    let gameOver = false;
-    let gameWin = false;
-    let gameDuration = 15000; // 15 seconds to win
-    let startTime = Date.now();
+      const playerImg = new Image();
+      playerImg.src = "player.png";
 
-    // Controls the player with the arrow keys
-    function movePlayer() {
-        player.x += player.dx;
+      const enemyImg = new Image();
+      enemyImg.src = "enemy.png";
 
-        // Prevent the player from going out of bounds
-        if (player.x < 0) {
-            player.x = 0;
-        } else if (player.x + player.width > canvas.width) {
-            player.x = canvas.width - player.width;
+      const coinImg = new Image();
+      coinImg.src = "coin.png";
+
+      const wallImg = new Image();
+      wallImg.src = "wall.png";
+
+      const maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+        [1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1],
+        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1],
+        [1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      ];
+
+      let player = { x: 1, y: 1 };
+      let enemy = { x: 13, y: 9 };
+      const exit = { x: 13, y: 1 };
+
+      let coins = [];
+      let score = 0;
+      let frameCount = 0;
+      let enemySpeed = 30;
+
+      function generateCoinPosition() {
+        let x, y;
+        do {
+          x = Math.floor(Math.random() * cols);
+          y = Math.floor(Math.random() * rows);
+        } while (maze[y][x] === 1 || coins.some((c) => c.x === x && c.y === y));
+        return { x, y };
+      }
+
+      coins.push(generateCoinPosition());
+
+      function bfs(start, target) {
+        const directions = [
+          { dx: 0, dy: -1 },
+          { dx: 0, dy: 1 },
+          { dx: -1, dy: 0 },
+          { dx: 1, dy: 0 },
+        ];
+
+        const queue = [start];
+        const visited = new Set();
+        visited.add(`${start.x},${start.y}`);
+
+        const cameFrom = {};
+
+        while (queue.length > 0) {
+          const { x, y } = queue.shift();
+
+          if (x === target.x && y === target.y) {
+            const path = [];
+            let current = target;
+
+            while (current) {
+              path.unshift(current);
+              current = cameFrom[`${current.x},${current.y}`];
+            }
+            return path[1];
+          }
+
+          for (let { dx, dy } of directions) {
+            const newX = x + dx;
+            const newY = y + dy;
+
+            if (canMove(newX, newY) && !visited.has(`${newX},${newY}`)) {
+              queue.push({ x: newX, y: newY });
+              visited.add(`${newX},${newY}`);
+              cameFrom[`${newX},${newY}`] = { x, y };
+            }
+          }
         }
-    }
+        return null;
+      }
 
-    function drawPlayer() {
-        ctx.fillStyle = player.color;
-        ctx.fillRect(player.x, player.y, player.width, player.height);
-    }
+      const movement = { dx: 0, dy: 0 };
 
-    // Handle the movement of obstacles
-    function createObstacle() {
-        const size = Math.random() * (50 - 20) + 20;
-        const xPos = Math.random() * (canvas.width - size);
-        obstacles.push({
-            x: xPos,
-            y: 0,
-            width: size,
-            height: size,
-            color: "red",
-            speed: Math.random() * (3 - 1) + 1
-        });
-    }
+      document
+        .getElementById("up")
+        .addEventListener("click", () => (movement.dy = -1));
+      document
+        .getElementById("down")
+        .addEventListener("click", () => (movement.dy = 1));
+      document
+        .getElementById("left")
+        .addEventListener("click", () => (movement.dx = -1));
+      document
+        .getElementById("right")
+        .addEventListener("click", () => (movement.dx = 1));
 
-    function drawObstacles() {
-        obstacles.forEach(obstacle => {
-            ctx.fillStyle = obstacle.color;
-            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-        });
-    }
+      function movePlayer() {
+        const newX = player.x + movement.dx;
+        const newY = player.y + movement.dy;
 
-    function updateObstacles() {
-        obstacles.forEach(obstacle => {
-            obstacle.y += obstacle.speed;
+        if (canMove(newX, newY)) {
+          player.x = newX;
+          player.y = newY;
+        }
+        movement.dx = 0;
+        movement.dy = 0;
+      }
 
-            // Check for collision with the player
-            if (
-                player.x < obstacle.x + obstacle.width &&
-                player.x + player.width > obstacle.x &&
-                player.y < obstacle.y + obstacle.height &&
-                player.y + player.height > obstacle.y
-            ) {
-                gameOver = true;
+      const keys = {
+        ArrowUp: { dx: 0, dy: -1 },
+        ArrowDown: { dx: 0, dy: 1 },
+        ArrowLeft: { dx: -1, dy: 0 },
+        ArrowRight: { dx: 1, dy: 0 },
+      };
+
+      document.addEventListener("keydown", (e) => {
+        if (keys[e.key]) {
+          const { dx, dy } = keys[e.key];
+          const newX = player.x + dx;
+          const newY = player.y + dy;
+
+          if (canMove(newX, newY)) {
+            player.x = newX;
+            player.y = newY;
+          }
+        }
+      });
+
+      function canMove(x, y) {
+        return maze[y] && maze[y][x] === 0;
+      }
+
+      function moveEnemy() {
+        const nextStep = bfs(enemy, player);
+        if (nextStep) {
+          enemy.x = nextStep.x;
+          enemy.y = nextStep.y;
+        }
+      }
+
+      function checkCoinCollection() {
+        for (let i = 0; i < coins.length; i++) {
+          if (player.x === coins[i].x && player.y === coins[i].y) {
+            score++;
+            enemySpeed -= 5;
+            document.getElementById(
+              "scoreText"
+            ).textContent = `Score: ${score}`;
+            coins[i] = generateCoinPosition(); 
+            if (score >= SCORE_TO_WIN) {
+              document.getElementById("victoryText").style.display = "block";
+              setTimeout(() => (window.location.href = "level3.html"), 2000);
             }
+            break;
+          }
+        }
+      }
 
-            // Remove obstacles that move off-screen
-            if (obstacle.y > canvas.height) {
-                obstacles.shift();
+      function checkCollision() {
+        if (player.x === enemy.x && player.y === enemy.y) {
+          document.getElementById("gameOverText").style.display = "block";
+          cancelAnimationFrame(gameLoop);
+          setTimeout(() => (window.location.href = "level2.html"), 2000);
+        }
+      }
+
+      /*function drawMaze() {
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
+            if (maze[row][col] === 1) {
+              ctx.fillStyle = "#000";
+              ctx.fillRect(
+                col * TILE_SIZE,
+                row * TILE_SIZE,
+                TILE_SIZE,
+                TILE_SIZE
+              );
+            } else {
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(
+                col * TILE_SIZE,
+                row * TILE_SIZE,
+                TILE_SIZE,
+                TILE_SIZE
+              );
             }
+          }
+        }
+      }*/
+
+      function drawMaze() {
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
+            if (maze[row][col] === 1) {
+              ctx.drawImage(
+                wallImg,
+                col * TILE_SIZE,
+                row * TILE_SIZE,
+                TILE_SIZE,
+                TILE_SIZE
+              );
+            }
+          }
+        }
+      }
+
+      function drawCharacters() {
+        ctx.drawImage(
+          playerImg,
+          player.x * TILE_SIZE,
+          player.y * TILE_SIZE,
+          TILE_SIZE,
+          TILE_SIZE
+        );
+        ctx.drawImage(
+          enemyImg,
+          enemy.x * TILE_SIZE,
+          enemy.y * TILE_SIZE,
+          TILE_SIZE,
+          TILE_SIZE
+        );
+
+        coins.forEach((coin) => {
+          ctx.drawImage(
+            coinImg,
+            coin.x * TILE_SIZE,
+            coin.y * TILE_SIZE,
+            TILE_SIZE,
+            TILE_SIZE
+          );
         });
-    }
+      }
 
-    // Display game over message
-    function displayGameOver() {
-        document.getElementById("gameOverText").style.display = "block";
-        setTimeout(function() {
-            location.reload(); // Restart the game after 2 seconds
-        }, 2000);
-    }
-
-    // Display victory message
-    function displayVictory() {
-        document.getElementById("victoryText").style.display = "block";
-        setTimeout(function() {
-            window.location.href = "level3.html"; // Move to the next level
-        }, 2000);
-    }
-
-    function clearCanvas() {
+      function gameLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function update() {
-        clearCanvas();
+        drawMaze();
+        drawCharacters();
         movePlayer();
-        drawPlayer();
-        updateObstacles();
-        drawObstacles();
+        frameCount++;
+        if (frameCount % enemySpeed === 0) moveEnemy();
+        checkCoinCollection();
+        checkCollision();
+        requestAnimationFrame(gameLoop);
+      }
 
-        const currentTime = Date.now();
-
-        // Check if game time is up
-        if (currentTime - startTime >= gameDuration) {
-            gameWin = true;
-        }
-
-        if (gameOver) {
-            displayGameOver();
-        } else if (gameWin) {
-            displayVictory();
-        } else {
-            requestAnimationFrame(update);
-        }
-    }
-
-    // Keyboard event listeners
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight") {
-            player.dx = player.speed;
-        } else if (e.key === "ArrowLeft") {
-            player.dx = -player.speed;
-        }
-    });
-
-    document.addEventListener("keyup", (e) => {
-        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-            player.dx = 0;
-        }
-    });
-
-    // Start the game loop
-    setInterval(createObstacle, 1000);
-    update();
-</script>
-
-</body>
+      playerImg.onload = () =>
+        (enemyImg.onload = () =>
+          (coinImg.onload = () => requestAnimationFrame(gameLoop)));
+    </script>
+  </body>
 </html>

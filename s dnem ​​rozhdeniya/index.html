@@ -68,12 +68,10 @@
         const passwordInput = document.getElementById('password').value;
         const errorMessage = document.getElementById('error-message');
         
-        // Set the correct password here
-        const correctPassword = "happybirthday123"; // Change this to your desired password
+        const correctPassword = "happybirthday123";
 
         if (passwordInput === correctPassword) {
-            // Redirect to the next level (Level 1 - Quiz)
-            window.location.href = "level1.html"; // You need to create level1.html next
+            window.location.href = "level1.html";
         } else {
             errorMessage.textContent = "Wrong password! Try again.";
         }
