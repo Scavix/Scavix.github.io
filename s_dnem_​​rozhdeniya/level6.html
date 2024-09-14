@@ -59,12 +59,12 @@
 
 <div class="container">
     <img src="piazza.jpg" alt="Quiz Image" id="quizImage">
-    <div class="question" id="question">What is shown in this image?</div>
+    <div class="question" id="question">How many people can you see with sunglasses (even tho there is no sun)?</div>
     <ul class="options">
-        <li><input type="radio" name="option" value="option1" id="option1"><label for="option1" id="label1">Option 1</label></li>
-        <li><input type="radio" name="option" value="option2" id="option2"><label for="option2" id="label2">Option 2</label></li>
-        <li><input type="radio" name="option" value="option3" id="option3"><label for="option3" id="label3">Option 3</label></li>
-        <li><input type="radio" name="option" value="option4" id="option4"><label for="option4" id="label4">Option 4</label></li>
+        <li><input type="radio" name="option" value="0" id="option1"><label for="option1" id="label1">0</label></li>
+        <li><input type="radio" name="option" value="1" id="option2"><label for="option2" id="label2">1</label></li>
+        <li><input type="radio" name="option" value="2" id="option3"><label for="option3" id="label3">2</label></li>
+        <li><input type="radio" name="option" value="3" id="option4"><label for="option4" id="label4">3</label></li>
     </ul>
     <button onclick="submitAnswer()">Submit Answer</button>
     <div class="feedback" id="feedback"></div>
@@ -73,9 +73,9 @@
 <script>
     const quizData = {
         imageUrl: 'piazza.jpg',
-        question: 'What is shown in this image?',
-        options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-        correctAnswer: 'Option 2'
+        question: 'How many people can you see with sunglasses (even tho there is no sun)?',
+        options: ['0', '1', '2', '3'],
+        correctAnswer: '2'
     };
 
     function setupQuiz() {

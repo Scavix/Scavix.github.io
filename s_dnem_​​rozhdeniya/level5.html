@@ -59,12 +59,12 @@
 
 <div class="container">
     <img src="nettuno.jpg" alt="Quiz Image" id="quizImage">
-    <div class="question" id="question">What is shown in this image?</div>
+    <div class="question" id="question">How many boobs are on this statue?</div>
     <ul class="options">
-        <li><input type="radio" name="option" value="option1" id="option1"><label for="option1" id="label1">Option 1</label></li>
-        <li><input type="radio" name="option" value="option2" id="option2"><label for="option2" id="label2">Option 2</label></li>
-        <li><input type="radio" name="option" value="option3" id="option3"><label for="option3" id="label3">Option 3</label></li>
-        <li><input type="radio" name="option" value="option4" id="option4"><label for="option4" id="label4">Option 4</label></li>
+        <li><input type="radio" name="option" value="6" id="option1"><label for="option1" id="label1">6</label></li>
+        <li><input type="radio" name="option" value="7" id="option2"><label for="option2" id="label2">7</label></li>
+        <li><input type="radio" name="option" value="8" id="option3"><label for="option3" id="label3">8</label></li>
+        <li><input type="radio" name="option" value="9" id="option4"><label for="option4" id="label4">9</label></li>
     </ul>
     <button onclick="submitAnswer()">Submit Answer</button>
     <div class="feedback" id="feedback"></div>
@@ -73,9 +73,9 @@
 <script>
     const quizData = {
         imageUrl: 'nettuno.jpg',
-        question: 'What is shown in this image?',
-        options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-        correctAnswer: 'Option 2'
+        question: 'How many boobs are on this statue?',
+        options: ['6', '7', '8', '9'],
+        correctAnswer: '9'
     };
 
     function setupQuiz() {
