@@ -70,7 +70,7 @@ function exportLinks() {
 function importLinks() {
   const fileInput = document.createElement("input");
   fileInput.type = "file";
-  fileInput.accept = ".json";
+  fileInput.accept = ".json,.txt";
 
   fileInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
@@ -78,10 +78,18 @@ function importLinks() {
 
     reader.onload = () => {
       try {
-        links = JSON.parse(reader.result);
-        renderLinks();
+        if (file.name.endsWith('.json')) {
+          links = JSON.parse(reader.result);
+          renderLinks();
+        } else if (file.name.endsWith('.txt')) {
+          links = JSON.parse(helper(reader.result));
+          console.log(links);
+          renderLinks();
+        } else {
+          throw new Error("Unsupported file type");
+        }
       } catch (error) {
-        console.error("Error parsing JSON:", error);
+        console.error("Error processing file:", error);
       }
     };
 
@@ -89,6 +97,16 @@ function importLinks() {
   });
 
   fileInput.click();
+}
+
+function helper(content) {
+  const urls = content.split('\n').filter(url => url.trim() !== '');
+  const jsonArray = urls.map(url => {
+    const trimmedUrl = url.trim();
+    const name = trimmedUrl.replace(/^https?:\/\//, '').split('/')[0];
+    return { name, url: trimmedUrl };
+  });
+  return JSON.stringify(jsonArray);
 }
 
 addLinkButton.addEventListener("click", addLink);
